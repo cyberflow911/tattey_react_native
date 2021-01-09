@@ -72,6 +72,33 @@ const Notification = (time,title,message) => {
       // repeatType: "day", // (optional) Repeating interval. Check 'Repeating Notifications' section for more info.
       date: new Date(time)
     });
+    
+    PushNotificationIOS.setNotificationCategories([
+          {
+            id: 'userAction',
+            actions: [
+              {id: 'open', title: 'Open', options: {foreground: true}},
+              {
+                id: 'ignore',
+                title: 'Desruptive',
+                options: {foreground: true, destructive: true},
+              },
+              {
+                id: 'text',
+                title: 'Text Input',
+                options: {foreground: true},
+                textInput: {buttonTitle: 'Send'},
+              },
+            ],
+          },
+        ]);
+    
+    
+    PushNotificationIOS.scheduleLocalNotification({
+        alertBody:message,
+        fireDate:new Date(time).toISOString(),
+        
+    });
 }
 
 export default Notification;
