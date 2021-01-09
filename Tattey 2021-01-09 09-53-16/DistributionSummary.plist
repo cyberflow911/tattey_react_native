@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Tattey Booking.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>67077BDD9B104B6A82C015C93E1672A1E1EBD7D4</string>
+				<key>dateExpires</key>
+				<string>09/01/22</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>54D6M3975P.com.tattey-app</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>54D6M3975P</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>Tattey Booking.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>338f7d87-e1eb-4157-92e8-223d43b8a087</string>
+				<key>name</key>
+				<string>Ios Development</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>54D6M3975P</string>
+				<key>name</key>
+				<string>Deshawn Morris</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

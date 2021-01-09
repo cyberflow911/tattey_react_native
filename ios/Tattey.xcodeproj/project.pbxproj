@@ -46,7 +46,7 @@
 		00E356F21AD99517003FC87E /* TatteyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TatteyTests.m; sourceTree = "<group>"; };
 		074DD06E25A9B423006A7D42 /* Tattey.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Tattey.entitlements; path = Tattey/Tattey.entitlements; sourceTree = "<group>"; };
 		09183FD646C642549E6AF882 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* Tattey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tattey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* Tattey Booking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tattey Booking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Tattey/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Tattey/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Tattey/Images.xcassets; sourceTree = "<group>"; };
@@ -216,7 +216,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* Tattey.app */,
+				13B07F961A680F5B00A75B9A /* Tattey Booking.app */,
 				00E356EE1AD99517003FC87E /* TatteyTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* Tattey-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* Tattey-tvOSTests.xctest */,
@@ -280,7 +280,7 @@
 			);
 			name = Tattey;
 			productName = Tattey;
-			productReference = 13B07F961A680F5B00A75B9A /* Tattey.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* Tattey Booking.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* Tattey-tvOS */ = {
@@ -335,7 +335,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 54D6M3975P;
 						LastSwiftMigration = 1120;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -761,7 +763,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tattey/Tattey.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 54D6M3975P;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Tattey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -770,8 +775,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Tattey;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tattey-app";
+				PRODUCT_NAME = "Tattey Booking";
+				PROVISIONING_PROFILE_SPECIFIER = "Ios Development";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -785,7 +791,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Tattey/Tattey.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 54D6M3975P;
 				INFOPLIST_FILE = Tattey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -793,8 +802,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = Tattey;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tattey-app";
+				PRODUCT_NAME = "Tattey Booking";
+				PROVISIONING_PROFILE_SPECIFIER = "Ios Development";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
