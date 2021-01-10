@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View,SafeAreaView, TouchableWithoutFeedback,ScrollView,Platform,StatusBar,Modal,TextInput,Image,ActivityIndicator,Dimensions,FlatList,Alert } from 'react-native'; 
 import config from '../../config'
-import Icon from 'react-native-vector-icons/dist/Feather';
-import CardView from 'react-native-cardview'
+import Icon from 'react-native-vector-icons/dist/Feather'; 
 
 const LOGO = require('../../assets/img/logo_black.png')
 const windowWidth = Dimensions.get('window').width;
@@ -22,9 +21,20 @@ class Appointments extends React.Component {
     name:"",
     phone:"",
     status:"",
-    isVisible:false
+    isVisible:false, 
+    loading:true,
 
 }
+
+
+    display_no_appointmentMessage=()=>{
+        if(this.props.rowCount==0)
+        {
+            this.setState({loading:false});
+        }
+        console.log("called 2");
+    }
+    
     cancelAppointment=(id,date,time,status) =>{
         this.setState({item:{id:id,date:date,time:time,status:"canceling",loader:"notloading"}})
         console.log("called")
@@ -101,18 +111,41 @@ class Appointments extends React.Component {
                 </View>
 
         </TouchableWithoutFeedback>  
-           
+        componentDidMount() {
+            setTimeout(() =>{
+            if(this.props.appointments && !this.props.appointments.length)
+            {
+                setTimeout(this.display_no_appointmentMessage,5000);   
+
+            }
+            else
+            {
+                this.setState({loading:false})
+            }
+            console.log("called");
+            },3000);
+        }
+        renderEmptyComponent=()=>{
+            return(
+
+                <View style={{color: "#721c24",
+                        backgroundColor:"#f8d7da",
+                        borderColor: "#f5c6cb",
+                        borderWidth:2,fontSize:15,flex:0.5,flexDirection:"column",paddingLeft:10,paddingRight:10,marginTop:10,paddingTop:5,paddingBottom:5,textAlign:"center",justifyContent:"center",alignItems: "center",margin:30}}>
+                    <Text style={{fontSize:15}}>No Appointments Available</Text>
+                </View>
+            );
+        }
     render() {
         return (
             <SafeAreaView style={styles.AndroidSafeArea} >
-                {this.props.appointments && !this.props.appointments.length?(
-                    <View>
+                {(this.state.loading)?(
+                    <View style={{flex:1, flexDirection:"column",alignItems: "center",justifyContent: "center"}}>
                     <ActivityIndicator
-                        style={{ position: "absolute", top: windowHeight / 2-50, left: windowWidth / 2 }}
+                        style={{ flex:0.8, flexDirection:"column",}}
                         size="large"
                         color="red"
-                    /> 
-                    <Text style={{ position: "absolute", top: windowHeight / 2-20, left: windowWidth / 2-10,color: "red"}}>Please wait...</Text>
+                    />  
                 </View>
                 
                 ):(
@@ -123,6 +156,7 @@ class Appointments extends React.Component {
                         data={this.props.appointments}
                         renderItem={({item}) =>(this.CustomRow(item))}
                         keyExtractor={item => item.id}
+                        ListEmptyComponent={this.renderEmptyComponent}
                     />
                 </View>
                 )}

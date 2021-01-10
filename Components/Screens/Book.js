@@ -8,6 +8,8 @@ import CardView from 'react-native-cardview'
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Isao } from 'react-native-textinput-effects';
 import DefaultPreference from 'react-native-default-preference';
+import Icon from 'react-native-vector-icons/dist/Feather'; 
+
 const LOGO = require('../../assets/img/logo_black.png')
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -245,14 +247,13 @@ componentDidMount() {
         return (
             <SafeAreaView style={styles.AndroidSafeArea}  >
                 {this.state.isBooking ? (
-                    <View>
-                        <ActivityIndicator
-                            style={{ position: "absolute", top: windowHeight / 2-50, left: windowWidth / 2 }}
-                            size="large"
-                            color="red" 
-                        /> 
-                        <Text style={{ position: "absolute", top: windowHeight / 2-20, left: windowWidth / 2-10,color: "red"}}>Please wait...</Text>
-                    </View> 
+                    <View style={{flex:1, flexDirection:"column",alignItems: "center",justifyContent: "center"}}>
+                    <ActivityIndicator
+                        style={{ flex:0.8, flexDirection:"column",}}
+                        size="large"
+                        color="red"
+                    />  
+                </View>
                 ) : (
                         <ScrollView  >
                             <View style={{ ...styles.nameHeader,  marginTop: 0 }}>
@@ -278,10 +279,18 @@ componentDidMount() {
                                     onBackdropPress={this.closeModal}>
                      <ScrollView style={{backgroundColor:"#fff",paddingTop:25}}>
                                         <View style={styles.nameHeader}>
-                                        <Image 
-                                            style={{height:90,width:150}}
-                                            source={LOGO}
-                                        />
+                                        <View style={{flex:1,flexDirection: 'row'}}> 
+                                    <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}>
+                                    <Image 
+                                        style={{marginLeft:50,height:90,width:150}}
+                                        source={LOGO}
+                                            />  
+
+                                    </View>
+                                        
+                                    <Icon name="x-circle" size={20} color="red"  onPress={() =>this.setState({modalVisible:false})} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} />
+                                  
+                                </View>
                                             
                                             {this.state.errors.length > 0 && (
                                                 <View style={{color: "#721c24",

@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/dist/Feather';
 import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation'
+import SplashScreen from 'react-native-splash-screen';
 class App extends React.Component {
   
   state={
@@ -16,6 +17,7 @@ class App extends React.Component {
     appointments:[],
     activeTab:"book",
     appoint_date:[],
+    rowCount:0,
   }
 
   tabs = [
@@ -72,7 +74,8 @@ class App extends React.Component {
                     result.result.map(item=>{   
                        appoint_date.push(item.date)
                     });
-                    this.setState({appointments:result.result,appoint_date:appoint_date});
+                    this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount});
+                    this.hidesplash();
                   }
                  
                   //  appoint_date.push(result.result)
@@ -81,6 +84,10 @@ class App extends React.Component {
             .catch((error) => {
                console.error(error);
             });
+  }
+  hidesplash = ()=>{
+    console.log("hidesplash");
+    SplashScreen.hide()
   }
   saveUser=()=>{
     fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
@@ -103,6 +110,7 @@ class App extends React.Component {
                     DefaultPreference.get('user_id').then((value)=>{console.log("sp : "+value);})
                     DefaultPreference.set('isFirstTime',"false");
                     this.setState({user_id:user_id}); 
+                    this.hidesplash();
                }
             
             })
@@ -131,7 +139,7 @@ class App extends React.Component {
         this.getUser();
       } 
     });
-    
+    this.hidesplash()
   }
   // setBookState = (ref)=>{
   //   ref.setState({appointment:this.state.appoint_date})
@@ -146,7 +154,7 @@ class App extends React.Component {
         
  
             this.fetch_user_appointments();
-        return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} /> )
+        return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
     }
   }
   render() { 
