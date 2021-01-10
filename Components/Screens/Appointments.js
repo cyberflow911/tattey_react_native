@@ -26,7 +26,8 @@ class Appointments extends React.Component {
 
 }
     cancelAppointment=(id,date,time,status) =>{
-        this.setState({item:{id:id,date:date,time:time,status:status,loader:"loading"}})
+        this.setState({item:{id:id,date:date,time:time,status:"canceling",loader:"notloading"}})
+        console.log("called")
         fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
@@ -40,11 +41,12 @@ class Appointments extends React.Component {
             })
             .then((response) => response.json())
             .then(result=>{ 
-              // console.log(result)
-                if(result.msg=="success")
+              console.log(result)
+                if(result.msg=="sucesss")
                 {  
-                    this.setState({item:{id:id,date:date,time:time,status:"Cancelled",loader:"loading"}})
-                    this.props.functionApp()
+ 
+                    
+                    this.setState({item:{id:id,date:date,time:time,status:"Cancelled",loader:"notloading"}})
                 }
             })
             .catch((error) => {
@@ -70,16 +72,7 @@ class Appointments extends React.Component {
     showAppointmentDetails = (item) => { 
         this.setState({date: item.date, status: item.status,time:item.time,name:item.name,phone:item.m_number,service:item.service,comment:item.comment,isVisible:true})
     }
-      CustomRow = (item) => item.loader=="loading"?(
-        <View style={{marginTop:10,flex: 1,flexDirection: 'column',alignItems: 'center',justifyContent: 'center'}}>
-        <ActivityIndicator
-            style={{flex: 1,flexDirection: 'row'}}
-            size="large"
-            color="red"
-        /> 
-        <Text style={{ flex: 1,flexDirection: 'row', color: "red"}}>Processing request...</Text>
-    </View>
-      ):( 
+      CustomRow = (item) => 
         <TouchableWithoutFeedback onPress={() =>this.showAppointmentDetails(item)}>
                 <View style={styles.container}> 
                     <View style={styles.container_text}>
@@ -108,7 +101,7 @@ class Appointments extends React.Component {
                 </View>
 
         </TouchableWithoutFeedback>  
-           );
+           
     render() {
         return (
             <SafeAreaView style={styles.AndroidSafeArea} >

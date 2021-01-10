@@ -1,6 +1,6 @@
  
 import React from 'react';
-import { StyleSheet, Text, View,Platform } from 'react-native';
+import { StyleSheet, Text, View,Platform ,SafeAreaView} from 'react-native';
 import Book from './Components/Screens/Book'
 import DefaultPreference from 'react-native-default-preference';
 import config from './config'
@@ -144,23 +144,25 @@ class App extends React.Component {
         return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1}/>)
       case 'appoint':
         
-       
-                return (<Appointments appointments={this.state.appointments} functionApp={this.fetch_user_appointments} /> )
+ 
+            this.fetch_user_appointments();
+        return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} /> )
     }
   }
   render() { 
-    return (
-      <View style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-           {this.renderTabView(this.state.activeTab)} 
+    return ( 
+          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
+            {this.renderTabView(this.state.activeTab)} 
+          </View>
+          <BottomNavigation
+            activeTab={this.state.activeTab}
+            onTabPress={newTab => this.setState({ activeTab: newTab.key })}
+            renderTab={this.renderTab}
+            tabs={this.tabs}
+          />
         </View>
-        <BottomNavigation
-          activeTab={this.state.activeTab}
-          onTabPress={newTab => this.setState({ activeTab: newTab.key })}
-          renderTab={this.renderTab}
-          tabs={this.tabs}
-        />
-      </View>
+      
     );
   }
 } 
