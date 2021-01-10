@@ -145,7 +145,7 @@ class App extends React.Component {
       case 'appoint':
         
        
-        return (<Appointments appointments={this.state.appointments} /> )
+                return (<Appointments appointments={this.state.appointments} functionApp={this.fetch_user_appointments} /> )
     }
   }
   render() { 

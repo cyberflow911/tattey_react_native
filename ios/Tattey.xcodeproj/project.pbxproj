@@ -777,7 +777,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tattey-app";
 				PRODUCT_NAME = "Tattey Booking";
-				PROVISIONING_PROFILE_SPECIFIER = "Ios Development";
+				PROVISIONING_PROFILE_SPECIFIER = "multiple app iOS";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -804,7 +804,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tattey-app";
 				PRODUCT_NAME = "Tattey Booking";
-				PROVISIONING_PROFILE_SPECIFIER = "Ios Development";
+				PROVISIONING_PROFILE_SPECIFIER = "multiple app iOS";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

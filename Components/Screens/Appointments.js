@@ -44,6 +44,7 @@ class Appointments extends React.Component {
                 if(result.msg=="success")
                 {  
                     this.setState({item:{id:id,date:date,time:time,status:"Cancelled",loader:"loading"}})
+                    this.props.functionApp()
                 }
             })
             .catch((error) => {
