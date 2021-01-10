@@ -276,7 +276,7 @@ componentDidMount() {
                                     
                                     onSwipe={this.closeModal}
                                     onBackdropPress={this.closeModal}>
-                                    <ScrollView style={{backgroundColor:"#fff"}}>
+                     <ScrollView style={{backgroundColor:"#fff",paddingTop:25}}>
                                         <View style={styles.nameHeader}>
                                         <Image 
                                             style={{height:90,width:150}}
