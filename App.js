@@ -2,10 +2,10 @@
 import React from 'react';
 import { StyleSheet, Text, View,Platform ,SafeAreaView} from 'react-native';
 import Book from './Components/Screens/Book'
-import DefaultPreference from 'react-native-default-preference';
-import config from './config'
+import DefaultPreference from 'react-native-default-preference'; 
 import Appointments from './Components/Screens/Appointments'
 import Icon from 'react-native-vector-icons/dist/Feather';
+import Profile from './Components/Screens/profile';
 import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation'
@@ -18,6 +18,9 @@ class App extends React.Component {
     activeTab:"book",
     appoint_date:[],
     rowCount:0,
+    u_details:[],
+    imgs:[],
+    rowCountD:0
   }
 
   tabs = [
@@ -32,6 +35,13 @@ class App extends React.Component {
       key: 'appoint',
       icon: 'list',
       label: 'Appointments',
+      barColor: 'black',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    },
+    {
+      key: 'profile',
+      icon: 'user',
+      label: 'Profile',
       barColor: 'black',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
@@ -50,6 +60,30 @@ class App extends React.Component {
       renderIcon={this.renderIcon(tab.icon)}
     />
   )
+
+fetch_use_make=(user_id)=>{ 
+  fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type':'application/json' 
+              },
+              body: JSON.stringify({
+                makeUser:user_id 
+              })
+            })
+            .then((response) => response.json())
+            .then(result=>{ 
+              console.log(result)
+                if(result.msg=="success")
+                { 
+                  this.fetch_user_details(); 
+                }
+            })
+            .catch((error) => {
+               console.error(error);
+            });
+}
 
   fetch_user_appointments = ()=>{ 
     fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
@@ -75,9 +109,55 @@ class App extends React.Component {
                        appoint_date.push(item.date)
                     });
                     this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount});
-                    this.hidesplash();
+                    
                   }
-                 
+                  this.hidesplash();
+                  //  appoint_date.push(result.result)
+                }
+            })
+            .catch((error) => {
+               console.error(error);
+            });
+  }
+  
+  fetch_user_details = ()=>{
+    fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type':'application/json' 
+              },
+              body: JSON.stringify({
+                userDetails: true,
+                user_id:this.state.user_id     
+              })
+            })
+            .then((response) => response.json())
+            .then(result=>{ 
+              // console.log(result)
+                if(result.msg=="success")
+                {   
+                  if(result.rowCount!='0')
+                  {
+                    if(result.result.name==''||result.result.about==''||result.result.logo==''||result.result.link=='')
+                    {
+                        this.fetch_use_make(this.state.user_id);
+                    } 
+                     var imgs  = [];
+                     if(result.imgs && result.imgs.length>0)
+                     {
+                      imgs.push(...result.imgs);
+                      console.log("hidesplash")
+                     }
+                     
+                     imgs.push({id:"add",image:'',user_id:""});
+                    this.setState({u_details:result.result,imgs:imgs,rowCountD:result.rowCount});
+                  
+                  }else
+                  {
+                    this.fetch_use_make(this.state.user_id);
+                  }
+                 this.hidesplash();
                   //  appoint_date.push(result.result)
                 }
             })
@@ -86,7 +166,7 @@ class App extends React.Component {
             });
   }
   hidesplash = ()=>{
-    console.log("hidesplash");
+     
     SplashScreen.hide()
   }
   saveUser=()=>{
@@ -110,7 +190,9 @@ class App extends React.Component {
                     DefaultPreference.get('user_id').then((value)=>{console.log("sp : "+value);})
                     DefaultPreference.set('isFirstTime',"false");
                     this.setState({user_id:user_id}); 
-                    this.hidesplash();
+                    this.fetch_use_make(user_id);
+                    
+                    
                }
             
             })
@@ -123,6 +205,7 @@ class App extends React.Component {
     DefaultPreference.get('user_id').then((value)=>{
         this.setState({user_id:value});   
         this.fetch_user_appointments();
+        this.fetch_user_details();
     })
   }
 
@@ -139,11 +222,13 @@ class App extends React.Component {
         this.getUser();
       } 
     });
-    this.hidesplash()
+    
   }
-  // setBookState = (ref)=>{
-  //   ref.setState({appointment:this.state.appoint_date})
-  // }
+  
+
+
+
+  
   renderTabView=(tab)=>{
     switch(tab)
     {
@@ -155,12 +240,14 @@ class App extends React.Component {
  
             this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
+        case 'profile':
+          return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs}/>)
     }
   }
   render() { 
     return ( 
           <View style={{ flex: 1 }}>
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>  
             {this.renderTabView(this.state.activeTab)} 
           </View>
           <BottomNavigation

@@ -32,7 +32,7 @@ class Appointments extends React.Component {
         {
             this.setState({loading:false});
         }
-        console.log("called 2");
+      
     }
     
     cancelAppointment=(id,date,time,status) =>{
@@ -53,9 +53,7 @@ class Appointments extends React.Component {
             .then(result=>{ 
               console.log(result)
                 if(result.msg=="sucesss")
-                {  
- 
-                    
+                {   
                     this.setState({item:{id:id,date:date,time:time,status:"Cancelled",loader:"notloading"}})
                 }
             })
@@ -116,7 +114,6 @@ class Appointments extends React.Component {
             if(this.props.appointments && !this.props.appointments.length)
             {
                 setTimeout(this.display_no_appointmentMessage,5000);   
-
             }
             else
             {
@@ -177,10 +174,10 @@ class Appointments extends React.Component {
                             <View style={styles.nameHeader}>
                                 <View style={{flex:1,flexDirection: 'row'}}> 
                                     <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}>
-                                    <Image 
+                                    {/* <Image 
                                         style={{marginLeft:50,height:90,width:150}}
                                         source={LOGO}
-                                            />  
+                                            />   */}
 
                                     </View>
                                         
