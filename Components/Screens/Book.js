@@ -228,7 +228,7 @@ componentDidMount() {
       renderClalender =(appointment)=>{
          
          
-            return (                     
+            return (                   
                 <CalendarPicker
                 key={appointment.length}
                 style={{ margin: 10 }}
@@ -257,10 +257,7 @@ componentDidMount() {
                 ) : (
                         <ScrollView  >
                             <View style={{ ...styles.nameHeader,  marginTop: 0 }}>
-                                <Image 
-                                    style={{height:90,width:150}}
-                                    source={LOGO}
-                                />
+                                <Text style={{fontSize:25,fontWeight:"bold"}}>Booking</Text>
                                 <Text style={{ color: "red",   fontSize: 15 }}>Select A Date for Appointment</Text>
                             </View> 
                             {this.renderClalender(this.state.appointment)} 
@@ -281,10 +278,10 @@ componentDidMount() {
                                         <View style={styles.nameHeader}>
                                         <View style={{flex:1,flexDirection: 'row'}}> 
                                     <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}>
-                                    <Image 
+                                    {/* <Image 
                                         style={{marginLeft:50,height:90,width:150}}
                                         source={LOGO}
-                                            />  
+                                            />   */}
 
                                     </View>
                                         
