@@ -102,7 +102,7 @@ class profile extends React.Component {
                         <Header user={this.props.user} detail={this.props.detail} user_func={this.props.user_func}/> 
                         <Icon name="edit" size={20} color="red"  style={{textAlign:"center",marginLeft:80,zIndex:1000}} onPress={this.selectPhotoTapped.bind(this)} />
                     </View>
-                    <View style={{flex:0.4,flexDirection:"column",justifyContent:"center",alignItems:"center",marginTop:20}}>
+                    <View style={{flex:0.5,flexDirection:"column",justifyContent:"center",alignItems:"center",marginTop:20}}>
                         
                         <View style={{flex:1,flexDirection:"row",}}> 
                             <View style={{flex:0.9,flexDirection:"column",alignItems:"center" }}>
