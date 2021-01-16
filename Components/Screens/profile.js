@@ -130,7 +130,7 @@ class profile extends React.Component {
                         <View style={{flex:1,flexDirection:"column",}}>
                         <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  >
                             <View>
-                                     <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false}  value={"About"}/>
+                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} >About</Text>
                             </View>
                            
                         </TouchableWithoutFeedback>
@@ -138,7 +138,7 @@ class profile extends React.Component {
                         <View style={{flex:1,flexDirection:"column",color:"white"}}>
                         <TouchableWithoutFeedback onPress={()=>this.setState({mode:1})}  >
                             <View>
-                                    <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false}   value={"Gallery"}/>   
+                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}}    >Gallery</Text>   
                             </View>
                            
                         </TouchableWithoutFeedback>
