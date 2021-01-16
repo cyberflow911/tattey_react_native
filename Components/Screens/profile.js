@@ -128,17 +128,17 @@ class profile extends React.Component {
                     <View style={{flex:0.4,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                         
                         <View style={{flex:1,flexDirection:"column",}}>
-                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  >
+                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  style={{borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2}}  >
                             <View>
-                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} >About</Text>
+                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",marginRight:2}} >About</Text>
                             </View>
                            
                         </TouchableWithoutFeedback>
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white"}}>
-                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:1})}  >
+                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:1})} style={{borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2}}  >
                             <View>
-                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}}    >Gallery</Text>   
+                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",marginRight:2}}    >Gallery</Text>   
                             </View>
                            
                         </TouchableWithoutFeedback>
