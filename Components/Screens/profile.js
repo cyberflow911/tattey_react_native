@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Platform, StatusBar, Image,Modal, TouchableWithoutFeedback,TextInput, Button, ActivityIndicator, Dimensions,Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Platform, StatusBar, Image,Modal,TouchableWithoutFeedback,TextInput, Button, ActivityIndicator, Dimensions,Alert } from 'react-native';
 import Header from './Header';
 import Gallery from './Gallery';
 import config from '../../config';
@@ -7,6 +7,8 @@ import DetailModel from './detailModel';
 import Icon from 'react-native-vector-icons/dist/Feather';
 import ImagePicker from 'react-native-image-picker/lib/commonjs'
 import RNFetchBlob from 'rn-fetch-blob';    
+import Clipboard from '@react-native-community/clipboard';
+import Toast from 'react-native-simple-toast';
 class profile extends React.Component {
     state = {modalVisible:false,mode:1,ImageSource: null,
         user_id: this.props.user,
@@ -113,19 +115,32 @@ class profile extends React.Component {
                             <Text style={{color:"white",fontSize:20,color:"red"}}>Owner</Text>
                         </View> 
                         <View style={{flex:1,flexDirection:"column",marginTop:10,alignItems:"center"}}>
-                            <Text style={{color:"red"}}>{this.props.detail.link}</Text>
+                            <TouchableWithoutFeedback onPress={() =>{ 
+                                Clipboard.setString(this.props.detail.link)
+                                Toast.show('Copied to Clipboard', Toast.LONG);
+                            
+                            }}>
+                                <Text style={{color:"red"}}>{this.props.detail.link}</Text>
+                            </TouchableWithoutFeedback>
+                            
                         </View>
                     </View>
                     <View style={{flex:0.4,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                         
                         <View style={{flex:1,flexDirection:"column",}}>
                         <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  >
-                            <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false}  value={"About"}/>
-                            </TouchableWithoutFeedback>
+                            <View>
+                                     <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false}  value={"About"}/>
+                            </View>
+                           
+                        </TouchableWithoutFeedback>
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white"}}>
                         <TouchableWithoutFeedback onPress={()=>this.setState({mode:1})}  >
-                            <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false}   value={"Gallery"}/>
+                            <View>
+                                    <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false}   value={"Gallery"}/>   
+                            </View>
+                           
                         </TouchableWithoutFeedback>
                         </View> 
                     </View>
