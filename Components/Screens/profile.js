@@ -119,10 +119,10 @@ class profile extends React.Component {
                     <View style={{flex:0.4,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                         
                         <View style={{flex:1,flexDirection:"column",}}>
-                            <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} onPress={()=>this.setState({mode:2})}>About</Text>
+                            <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false} onPress={()=>this.setState({mode:2})} value={"About"}/>
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white"}}>
-                            <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginLeft:2}}  onPress={()=>this.setState({mode:1})}>Gallery</Text>
+                        <TextInput style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}} editable={false} onPress={()=>this.setState({mode:2})} value={"Gallery"}/>
                         </View> 
                     </View>
                     
