@@ -83,7 +83,7 @@ class profile extends React.Component {
         switch(mode)
         {
             case 1:
-                return  (<Gallery user={this.props.user} imgs={this.props.imgs} user_func={this.props.user_func}/>);
+                return  (<Gallery user={this.props.user} imgs={this.props.imgs} user_func={this.props.user_func} name={this.props.detail.name}/>);
             case 2: 
                 return (<View style={{flex:1,flexDirection:"row"}}>
                             <View style={{flex:0.9,flexDirection:"column" }}>
@@ -104,7 +104,7 @@ class profile extends React.Component {
                         <Header user={this.props.user} detail={this.props.detail} user_func={this.props.user_func}/> 
                         {/* <Icon name="edit" size={20} color="red"  style={{textAlign:"center",marginLeft:80,zIndex:1000}} onPress={this.selectPhotoTapped.bind(this)} /> */}
                     </View>
-                    <View style={{flex:0.5,flexDirection:"column",justifyContent:"center",alignItems:"center",marginTop:20}}>
+                    <View style={{flex:0.5,flexDirection:"column",justifyContent:"center",alignItems:"center",marginTop:30}}>
                         
                         <View style={{flex:1,flexDirection:"row",}}> 
                             <View style={{flex:0.9,flexDirection:"column",alignItems:"center" }}>
@@ -112,7 +112,7 @@ class profile extends React.Component {
                             </View> 
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white",marginTop:15}}>
-                            <Text style={{color:"white",fontSize:20,color:"red"}}>Owner</Text>
+                            <Text style={{color:"white",fontSize:20,color:"red"}}>{this.props.detail.role}</Text>
                         </View> 
                         <View style={{flex:1,flexDirection:"column",marginTop:10,alignItems:"center"}}>
                             <TouchableWithoutFeedback onPress={() =>{ 
@@ -128,17 +128,16 @@ class profile extends React.Component {
                     <View style={{flex:0.4,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
                         
                         <View style={{flex:1,flexDirection:"column",}}>
-                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  style={{borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2}}  >
+                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  >
                             <View>
-                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",marginRight:2}} >About</Text>
-                            </View>
-                           
+                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==2?"red":"grey", borderBottomWidth: 2,marginRight:2}} >About</Text>
+                            </View> 
                         </TouchableWithoutFeedback>
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white"}}>
-                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:1})} style={{borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2}}  >
+                        <TouchableWithoutFeedback onPress={()=>this.setState({mode:1})}  >
                             <View>
-                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",marginRight:2}}    >Gallery</Text>   
+                                    <Text style={{color:"white",fontSize:20,color:"white",textAlign:"center",borderBottomColor: this.state.mode==1?"red":"grey", borderBottomWidth: 2,marginRight:2}}    >Gallery</Text>   
                             </View>
                            
                         </TouchableWithoutFeedback>
@@ -148,7 +147,7 @@ class profile extends React.Component {
                     <View style={{flex:1,flexDirection:"column"}}>
                        {this.renderinnerTab(this.state.mode)}
                     </View>
-                    <DetailModel modalVisible={this.state.modalVisible} closeModal={this.closeModal} user={this.props.user} user_func={this.props.user_func} name={this.props.detail.name} about={this.props.detail.about}/>
+                    <DetailModel modalVisible={this.state.modalVisible} closeModal={this.closeModal} user={this.props.user} user_func={this.props.user_func} name={this.props.detail.name} about={this.props.detail.about} role={this.props.detail.role}/>
                </View>
                
               

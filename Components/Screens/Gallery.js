@@ -8,7 +8,7 @@ class Gallery extends React.Component {
     state ={ 
         
         ImageSource: null, 
-        user_id: this.props.user,
+        user_id: this.props.name,
         data:null
       }
       renderItem = (image)=> {

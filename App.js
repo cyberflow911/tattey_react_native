@@ -20,7 +20,8 @@ class App extends React.Component {
     rowCount:0,
     u_details:[],
     imgs:[],
-    rowCountD:0
+    rowCountD:0,
+    name:null,
   }
 
   tabs = [
@@ -85,7 +86,7 @@ fetch_use_make=(user_id)=>{
             });
 }
 
-  fetch_user_appointments = ()=>{ 
+  fetch_user_appointments = ()=>{
     fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
@@ -94,7 +95,7 @@ fetch_use_make=(user_id)=>{
               },
               body: JSON.stringify({
                 userAppointments: true,
-                user_id:this.state.user_id     
+                user_id:this.state.name     
               })
             })
             .then((response) => response.json())
@@ -128,12 +129,12 @@ fetch_use_make=(user_id)=>{
                 'Content-Type':'application/json' 
               },
               body: JSON.stringify({
-                userDetails: true,
-                user_id:this.state.user_id     
+                userDetails: true, 
+                user_id:this.state.user_id,
               })
             })
             .then((response) => response.json())
-            .then(result=>{ 
+            .then(result=>{
               // console.log(result)
                 if(result.msg=="success")
                 {   
@@ -142,7 +143,7 @@ fetch_use_make=(user_id)=>{
                     if(result.result.name==''||result.result.about==''||result.result.logo==''||result.result.link=='')
                     {
                         this.fetch_use_make(this.state.user_id);
-                    } 
+                    }
                      var imgs  = [];
                      if(result.imgs && result.imgs.length>0)
                      {
@@ -151,8 +152,9 @@ fetch_use_make=(user_id)=>{
                      }
                      
                      imgs.push({id:"add",image:'',user_id:""});
-                    this.setState({u_details:result.result,imgs:imgs,rowCountD:result.rowCount});
-                  
+                    this.setState({u_details:result.result,imgs:imgs,rowCountD:result.rowCount,name:result.result.name});
+                    
+                    this.fetch_user_appointments();
                   }else
                   {
                     this.fetch_use_make(this.state.user_id);
@@ -203,8 +205,7 @@ fetch_use_make=(user_id)=>{
   
   getUser=()=>{ 
     DefaultPreference.get('user_id').then((value)=>{
-        this.setState({user_id:value});   
-        this.fetch_user_appointments();
+        this.setState({user_id:value});    
         this.fetch_user_details();
     })
   }
@@ -235,9 +236,7 @@ fetch_use_make=(user_id)=>{
       case 'book':
 
         return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1}/>)
-      case 'appoint':
-        
- 
+      case 'appoint': 
             this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
         case 'profile':

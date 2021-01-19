@@ -3,38 +3,66 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, Platform, StatusBar, 
 import config from '../../config'
 import Icon from 'react-native-vector-icons/dist/Feather';  
 import { Isao } from 'react-native-textinput-effects';
-
+import RNFetchBlob from 'rn-fetch-blob';
 class DetailModel extends React.Component {
-    state = { name:this.props.name,about:this.props.about }
+    state = { name:this.props.name,about:this.props.about,role:this.props.role }
 
 
     saveDetail = () => {
         console.log(this.state.name,this.state.about);
-        fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ 
-                userName: this.state.name,
-                about: this.state.about, 
-                temp_id: this.props.user, 
-            })
-        })
-            .then((response) =>{ 
-                return response.json()})
-            .then(result => { 
-                console.log(result)
-                if (Object.values(result)[0] === ("success")) {
-                        this.props.user_func()
-                        this.props.closeModal()
-                }
 
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
+            Authorization: "Bearer access-token",
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+          }, [ 
+            { name: 'userName', data: this.state.name },
+            { name: 'temp_id', data: this.props.user },
+            { name: 'role', data: this.state.role },
+            { name: 'about', data: this.state.about },
+
+          ]).then((resp) => {
+            console.log(resp);
+            var tempMSG = JSON.parse(resp.data);
+            
+            if (tempMSG.msg === "success") { 
+                this.setState({error:""});
+                this.props.user_func()
+                this.props.closeModal()
+               
+            } else if(tempMSG.msg === "usernameError")
+                {
+                        this.setState({error:"User Name Not Available"});
+                }
+             
+          }).catch((err) => {
+            console.log(err)
+          })
+
+
+        // fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+        //     method: 'POST',
+        //     headers: {
+        //         Accept: 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({ 
+        //         userName: this.state.name,
+        //         about: this.state.about, 
+        //         temp_id: this.props.user,
+        //         role: this.state.role 
+        //     })
+        // })
+        //     .then((response) =>{ 
+        //         return response.json()})
+        //     .then(result => { 
+                 
+                
+
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
     }
     render() {
         return (
@@ -54,8 +82,7 @@ class DetailModel extends React.Component {
                 <ScrollView style={{backgroundColor:"#fff"}}>
                     <View style={styles.nameHeader}>
                     <View style={{flex:1,flexDirection: 'row'}}> 
-                <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}>
-                
+                <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}> 
 
                 </View>
                     
@@ -120,6 +147,57 @@ class DetailModel extends React.Component {
                                                 // this is applied as passive border and label color
                                                 passiveColor={'#dadada'}
                                             />
+                                         
+                
+                                    </View>
+                                     
+                                </View>    
+                        </View>    
+                        
+                    </View>
+                    <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                        {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Phone </Text></View>     */}
+                        <View style={{flex:1,flexDirection: "column"}}>
+                                <View style={{flex:1,flexDirection: "row"}}>
+                                    <View style={{flex:1,flexDirection: "column"}}>
+
+                                            <Isao
+                                                label={'Role'}
+                                                // this is applied as active border and label color
+                                                activeColor={'#da7071'}
+                                                // active border height
+                                                borderHeight={2}
+                                                multiline={true}
+                                                style={{textAlignVertical: 'top'}}
+                                                inputPadding={16}
+                                                defaultValue={this.state.role}
+                                                onChangeText={(text)=>{this.setState({role: text})}}
+                                                labelHeight={24}
+                                                // this is applied as passive border and label color
+                                                passiveColor={'#dadada'}
+                                            />
+                                         
+                
+                                    </View>
+                                     
+                                </View>    
+                        </View>    
+                        
+                    </View>
+                     <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                        {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Phone </Text></View>     */}
+                        <View style={{flex:1,flexDirection: "column"}}>
+                                <View style={{flex:1,flexDirection: "row"}}>
+                                    <View style={{flex:1,flexDirection: "column"}}>
+                                        {this.state.error?(
+                                            <View style={{color: "#721c24",
+                                                backgroundColor:"#f8d7da",
+                                                borderColor: "#f5c6cb",
+                                                borderWidth:2,fontSize:15,flex:1,flexDirection:"column",paddingLeft:10,paddingRight:10,marginTop:10,paddingTop:5,paddingBottom:5}}>
+                                                <Text style={{fontSize:15}}>{this.state.error}</Text>
+                                            </View> 
+                                        ):(null)}
+                                    
                                          
                 
                                     </View>
