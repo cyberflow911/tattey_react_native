@@ -10,7 +10,7 @@ class Header extends React.Component {
   state = {
     ImageSource: null,
     user_id: this.props.user,
-    data: null
+    data: null,
   }
   selectPhotoTapped() {
     const options = {

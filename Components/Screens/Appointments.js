@@ -31,13 +31,11 @@ class Appointments extends React.Component {
         if(this.props.rowCount==0)
         {
             this.setState({loading:false});
-        }
-      
+        } 
     }
     
-    cancelAppointment=(id,date,time,status) =>{
-        this.setState({item:{id:id,date:date,time:time,status:"canceling",loader:"notloading"}})
-        console.log("called")
+    cancelAppointment=(id,date,time,status) =>{ 
+        console.log(id)
         fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
@@ -46,15 +44,17 @@ class Appointments extends React.Component {
               },
               body: JSON.stringify({
                 cancelAppointment: true,
-                appoint_id:id     
+                appoint_id:id 
               })
             })
             .then((response) => response.json())
             .then(result=>{ 
-              console.log(result)
+             
                 if(result.msg=="sucesss")
                 {   
+                    console.log(result)
                     this.setState({item:{id:id,date:date,time:time,status:"Cancelled",loader:"notloading"}})
+                    this.props.functionAppointments();
                 }
             })
             .catch((error) => {
@@ -84,13 +84,12 @@ class Appointments extends React.Component {
         <TouchableWithoutFeedback onPress={() =>this.showAppointmentDetails(item)}>
                 <View style={styles.container}> 
                     <View style={styles.container_text}>
-                        <View style={{flex: 1,flexDirection: 'row',}}> 
+                        <View style={{flex: 1,flexDirection: 'row'}}> 
                             <Text style={styles.heading}>
                                  {item.name} 
                             </Text>
                             <Icon style={{flex:0.1 }} size={20} color="red" name="x-circle" onPress={()=>{this.cancelAppointmentAlert(item.id,item.date,item.time,item.status)}}/> 
-                        </View>
-                        
+                        </View> 
                         <View style={{flex:1,flexDirection: 'row'}}>
                             <Text style={styles.title}>
                                 Date : {item.date}
@@ -98,10 +97,9 @@ class Appointments extends React.Component {
                             <Text style={{marginRight:10,flexDirection:"column",flex:1,color:"white",textAlign:"right"}}>
                                 Status : {item.status}
                             </Text>
-                        </View>
-                        
+                        </View> 
                         <Text style={styles.description}>
-                        Time :  {item.time}
+                            Time :  {item.time}
                         </Text>
                     </View> 
                     <View> 
@@ -110,6 +108,7 @@ class Appointments extends React.Component {
 
         </TouchableWithoutFeedback>  
         componentDidMount() {
+            this.props.functionAppointments();
             setTimeout(() =>{
             if(this.props.appointments && !this.props.appointments.length)
             {

@@ -74,8 +74,7 @@ fetch_use_make=(user_id)=>{
               })
             })
             .then((response) => response.json())
-            .then(result=>{ 
-              console.log(result)
+            .then(result=>{  
                 if(result.msg=="success")
                 { 
                   this.fetch_user_details(); 
@@ -99,19 +98,21 @@ fetch_use_make=(user_id)=>{
               })
             })
             .then((response) => response.json())
-            .then(result=>{ 
-              // console.log(result)
+            .then(result=>{  
+              
                 if(result.msg=="success")
                 {   
+                  var appoint_date =[];
                   if(result.rowCount!='0')
                   {
-                    var appoint_date =[];
+                    
                     result.result.map(item=>{   
                        appoint_date.push(item.date)
                     });
+                  }
                     this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount});
                     
-                  }
+                  
                   this.hidesplash();
                   //  appoint_date.push(result.result)
                 }
@@ -152,14 +153,14 @@ fetch_use_make=(user_id)=>{
                      }
                      
                      imgs.push({id:"add",image:'',user_id:""});
-                    this.setState({u_details:result.result,imgs:imgs,rowCountD:result.rowCount,name:result.result.name});
-                    
+                    this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name});
+                     console.log(this.state.u_details);
                     this.fetch_user_appointments();
                   }else
                   {
                     this.fetch_use_make(this.state.user_id);
                   }
-                 this.hidesplash();
+                 
                   //  appoint_date.push(result.result)
                 }
             })
@@ -237,7 +238,7 @@ fetch_use_make=(user_id)=>{
 
         return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1}/>)
       case 'appoint': 
-            this.fetch_user_appointments();
+            // this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
         case 'profile':
           return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs}/>)

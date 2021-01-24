@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Platform, StatusBar, Image,Modal,TouchableWithoutFeedback,TextInput, Button, ActivityIndicator, Dimensions,Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Linking,ScrollView, Platform, StatusBar, Image,Modal,TouchableWithoutFeedback,TextInput, Button, ActivityIndicator, Dimensions,Alert } from 'react-native';
 import Header from './Header';
 import Gallery from './Gallery';
 import config from '../../config';
@@ -9,10 +9,18 @@ import ImagePicker from 'react-native-image-picker/lib/commonjs'
 import RNFetchBlob from 'rn-fetch-blob';    
 import Clipboard from '@react-native-community/clipboard';
 import Toast from 'react-native-simple-toast';
+import Upgrade from './Upgrade';
+
 class profile extends React.Component {
-    state = {modalVisible:false,mode:1,ImageSource: null,
+    state = {
+        modalVisible:false,
+        mode:1,
+        ImageSource: null,
         user_id: this.props.user,
-        data: null}
+        data: null,
+        pro:this.props.detail.pro,
+        error:null
+      }
 
     closeModal = ()=>{
         this.setState({modalVisible:false})
@@ -55,8 +63,7 @@ class profile extends React.Component {
           }
         });
       }
-    uploadImageToServer = () => {
-        console.log('header')
+    uploadImageToServer = () => { 
         RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
           Authorization: "Bearer access-token",
           Accept: 'application/json',
@@ -65,8 +72,7 @@ class profile extends React.Component {
           { name: 'image', filename: 'image.png', type: 'image/png', data: this.state.data },
           { name: 'userPic', data: this.state.user_id }
         ]).then((resp) => {
-          var tempMSG = JSON.parse(resp.data);
-          console.log(resp);
+          var tempMSG = JSON.parse(resp.data); 
           if (tempMSG.msg === "success") {
             Alert.alert("Image Uploaded Successfully");
             this.props.user_func();
@@ -96,9 +102,72 @@ class profile extends React.Component {
                 )
         }
     }
+    upgradeToPro = code=>
+    {
+
+
+      RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
+          Authorization: "Bearer access-token",
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        }, [
+          { name: 'token_verification',   data: "true" },
+          { name: 'user_id', data: this.state.user_id },
+          { name: 'token', data: code },
+        ]).then((resp) => {
+          console.log(resp);
+          var tempMSG = JSON.parse(resp.data);
+         
+          if (tempMSG.msg === "success") {
+            this.setState({pro:1,error:null})
+            Toast.show('App Activated! Please ReOpen Once', Toast.LONG); 
+            this.props.user_func();
+          } else {
+            this.setState({error:"Wrong or Used Activation Code"});
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+
+
+
+    //   fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+    //     method: 'POST',
+    //     headers: {
+    //         Accept: 'application/json',
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({
+    //       token_verification: true,
+    //       token:code,
+    //       user_id:this.props.user 
+    //     })
+    // })
+    //     .then((response) => response.json())
+    //     .then(result => { 
+    //         if (result.msg=="success") { 
+    //           
+               
+    //         }else
+    //         {
+    //          
+    //         }
+
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
+           
+          
+    }
+     
+
     render() {
         return (
            <SafeAreaView style={styles.AndroidSafeArea}>
+             {(this.state.pro=="0")?( 
+                  <Upgrade upgradeToPro={this.upgradeToPro} error={this.state.error}/>
+             ):(
                <View style={{flex:1,flexDirection:"column",backgroundColor:"#000" }}>
                     <View style={{flex:0.9,flexDirection:"column" }}>
                         <Header user={this.props.user} detail={this.props.detail} user_func={this.props.user_func}/> 
@@ -116,6 +185,7 @@ class profile extends React.Component {
                         </View> 
                         <View style={{flex:1,flexDirection:"column",marginTop:10,alignItems:"center"}}>
                             <TouchableWithoutFeedback onPress={() =>{ 
+                                Linking.openURL(this.props.detail.link);
                                 Clipboard.setString(this.props.detail.link)
                                 Toast.show('Copied to Clipboard', Toast.LONG);
                             
@@ -125,8 +195,7 @@ class profile extends React.Component {
                             
                         </View>
                     </View>
-                    <View style={{flex:0.4,flexDirection:"row",justifyContent:"center",alignItems:"center"}}>
-                        
+                    <View style={{flex:0.4,flexDirection:"row",justifyContent:"center",alignItems:"center"}}> 
                         <View style={{flex:1,flexDirection:"column",}}>
                         <TouchableWithoutFeedback onPress={()=>this.setState({mode:2})}  >
                             <View>
@@ -143,12 +212,13 @@ class profile extends React.Component {
                         </TouchableWithoutFeedback>
                         </View> 
                     </View>
-                    
                     <View style={{flex:1,flexDirection:"column"}}>
                        {this.renderinnerTab(this.state.mode)}
                     </View>
                     <DetailModel modalVisible={this.state.modalVisible} closeModal={this.closeModal} user={this.props.user} user_func={this.props.user_func} name={this.props.detail.name} about={this.props.detail.about} role={this.props.detail.role}/>
                </View>
+             )}
+               
                
               
            </SafeAreaView>

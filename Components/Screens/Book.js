@@ -85,10 +85,10 @@ componentDidMount() {
         {
             return {
                 style:{
-                  backgroundColor: '#0f0',
+                  backgroundColor: 'grey',
                 },
                 textStyle: {
-                  color: '#000',
+                  color: 'white',
                   fontWeight: 'bold',
                 }
               };
@@ -163,21 +163,14 @@ componentDidMount() {
                       );
                     // console.log(new Date(new Date(this.state.selectedStartDate).getDate()+` ${this.state.time}`).toLocaleDateString())
                     var d = new Date(this.state.selectedStartDate);
-                    var t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-1)+" 12:00 PM";
-                    console.log("t : "+t);
-                    var tt = moment(t, "YYYY-MM-DD HH:mm a"); 
-                    console.log("tt : ",tt);
-                    var formatted_oneDay = new Date(tt);
-                    console.log("",formatted_oneDay)
+                    var t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-1)+" 12:00 PM"; 
+                    var tt = moment(t, "YYYY-MM-DD HH:mm a");  
+                    var formatted_oneDay = new Date(tt); 
                     var times = this.state.time.split(":");
                     var hours  = times[0]-2;
-                    t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())+" "+`${hours}:${times[1]}`;    
-                    console.log("t : "+t);
-                      tt = moment(t, "YYYY-MM-DD HH:mm a"); 
-                    console.log("tt : "+tt);
-                    var formatted_2hour = new Date(tt);
-                    console.log("",formatted_2hour)
-                    console.log(formatted_oneDay + " : "+ formatted_2hour);
+                    t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())+" "+`${hours}:${times[1]}`;     
+                      tt = moment(t, "YYYY-MM-DD HH:mm a");  
+                    var formatted_2hour = new Date(tt); 
                     Notification(new Date().getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     Notification(formatted_oneDay.getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     // Notification(formatted_2hour.getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
