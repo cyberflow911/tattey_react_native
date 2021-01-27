@@ -36,7 +36,7 @@ class Appointments extends React.Component {
     
     cancelAppointment=(id,date,time,status) =>{ 
         console.log(id)
-        fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+        fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
@@ -64,7 +64,7 @@ class Appointments extends React.Component {
     cancelAppointmentAlert =(id,date,time,status)=>{
         Alert.alert(
             'Cancel Appointment',
-            `Do You Really Want to Cancel Your Appointment at Tattey Booked on ${date} at ${time}`,
+            `Do You Really Want to Cancel Your Appointment Booked on ${date} at ${time}`,
             [ 
               { text: 'Yes', onPress: () => {this.cancelAppointment(id,date,time,status)} },
               { text: 'No', onPress: () =>{}}

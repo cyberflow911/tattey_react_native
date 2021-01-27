@@ -64,7 +64,7 @@ class profile extends React.Component {
         });
       }
     uploadImageToServer = () => { 
-        RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
+        RNFetchBlob.fetch('POST', 'https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
           Authorization: "Bearer access-token",
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',
@@ -104,9 +104,7 @@ class profile extends React.Component {
     }
     upgradeToPro = code=>
     {
-
-
-      RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
+      RNFetchBlob.fetch('POST', 'https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
           Authorization: "Bearer access-token",
           Accept: 'application/json',
           'Content-Type': 'multipart/form-data',

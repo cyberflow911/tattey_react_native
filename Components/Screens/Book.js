@@ -130,7 +130,7 @@ componentDidMount() {
       }
     bookAppointment = () => {
         this.setState({ isBooking: true }) 
-        fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+        fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
@@ -155,7 +155,7 @@ componentDidMount() {
                     DefaultPreference.set('phone',this.state.phone);
                     Alert.alert(
                         'Tattoo Appointment Booked',
-                        `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`,
+                        `Appointment Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`,
                         [ 
                           { text: 'OK', onPress: () => console.log('OK Pressed') }
                         ],
@@ -171,8 +171,8 @@ componentDidMount() {
                     t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())+" "+`${hours}:${times[1]}`;     
                       tt = moment(t, "YYYY-MM-DD HH:mm a");  
                     var formatted_2hour = new Date(tt); 
-                    Notification(new Date().getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
-                    Notification(formatted_oneDay.getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
+                    Notification(new Date().getTime(), "Tatt Booking", `Appointment  Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
+                    Notification(formatted_oneDay.getTime(), "Tatt Booking", `Appointment Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     // Notification(formatted_2hour.getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     this.setState({ name:"",phone:"",time:"",service:"",comment:"",selectedStartDate:"",isBooking: false, modalVisible: false,counter:1,appointment:[] })
                     this.props.appoint_func() 

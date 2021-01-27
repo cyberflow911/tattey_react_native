@@ -63,7 +63,7 @@ class App extends React.Component {
   )
 
 fetch_use_make=(user_id)=>{ 
-  fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+  fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
@@ -86,7 +86,7 @@ fetch_use_make=(user_id)=>{
 }
 
   fetch_user_appointments = ()=>{
-    fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+    fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
@@ -123,7 +123,7 @@ fetch_use_make=(user_id)=>{
   }
   
   fetch_user_details = ()=>{
-    fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+    fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
                 Accept: 'application/json',
@@ -173,7 +173,7 @@ fetch_use_make=(user_id)=>{
     SplashScreen.hide()
   }
   saveUser=()=>{
-    fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
+    fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
                 Accept: 'application/json',

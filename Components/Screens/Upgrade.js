@@ -36,10 +36,10 @@ class Upgrade extends React.Component {
                      </View>
                      <Text style={{fontWeight:"bold",color: 'white',fontSize:15,marginTop:10}}>For More Information Visit :</Text>
                      <TouchableWithoutFeedback style={{marginBottom:20}} onPress={() =>{ 
-                                Clipboard.setString("https://www.tattey.com/")
-                                Linking.openURL("https://www.tattey.com/");
+                                Clipboard.setString("https://www.tattbooking.com/")
+                                Linking.openURL("https://www.tattbooking.com/");
                                 Toast.show('Copied to Clipboard', Toast.LONG);}}> 
-                                <Text style={{color:"red",marginBottom:20}}>https://www.tattey.com/</Text>
+                                <Text style={{color:"red",marginBottom:20}}>https://www.tattbooking.com/</Text>
                             </TouchableWithoutFeedback>
                 </View> 
                 
