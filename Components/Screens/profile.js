@@ -185,8 +185,7 @@ class profile extends React.Component {
                             <TouchableWithoutFeedback onPress={() =>{ 
                                 Linking.openURL(this.props.detail.link);
                                 Clipboard.setString(this.props.detail.link)
-                                Toast.show('Copied to Clipboard', Toast.LONG);
-                            
+                                Toast.show('Copied to Clipboard', Toast.LONG); 
                             }}>
                                 <Text style={{color:"red"}}>{this.props.detail.link}</Text>
                             </TouchableWithoutFeedback>
