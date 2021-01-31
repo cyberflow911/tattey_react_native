@@ -21,6 +21,7 @@ class App extends React.Component {
     u_details:[],
     imgs:[],
     rowCountD:0,
+    appMode:1,
     name:null,
   }
 
@@ -110,9 +111,7 @@ fetch_use_make=(user_id)=>{
                        appoint_date.push(item.date)
                     });
                   }
-                    this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount});
-                    
-                  
+                  this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount,appMode:result.appMode});        
                   this.hidesplash();
                   //  appoint_date.push(result.result)
                 }
@@ -153,8 +152,7 @@ fetch_use_make=(user_id)=>{
                      }
                      
                      imgs.push({id:"add",image:'',user_id:""});
-                    this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name});
-                     console.log(this.state.u_details);
+                    this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name}); 
                     this.fetch_user_appointments();
                   }else
                   {
@@ -241,7 +239,7 @@ fetch_use_make=(user_id)=>{
             // this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
         case 'profile':
-          return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs}/>)
+          return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs} appMode={this.state.appMode}/>)
     }
   }
   render() { 

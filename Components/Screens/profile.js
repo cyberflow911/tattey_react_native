@@ -19,7 +19,7 @@ class profile extends React.Component {
         user_id: this.props.user,
         data: null,
         pro:this.props.detail.pro,
-        error:null
+        error:null, 
       }
 
     closeModal = ()=>{
@@ -38,8 +38,7 @@ class profile extends React.Component {
           }
         };
     
-        ImagePicker.showImagePicker(options, (response) => {
-          console.log('Response = ', response);
+        ImagePicker.showImagePicker(options, (response) => { 
     
           if (response.didCancel) {
             console.log('User cancelled photo picker');
@@ -51,13 +50,10 @@ class profile extends React.Component {
             console.log('User tapped custom button: ', response.customButton);
           }
           else {
-            let source = { uri: response.uri };
-    
-            this.setState({
-    
+            let source = { uri: response.uri }; 
+            this.setState({ 
               ImageSource: source,
-              data: response.data
-    
+              data: response.data 
             });
             this.uploadImageToServer();
           }
@@ -112,8 +108,7 @@ class profile extends React.Component {
           { name: 'token_verification',   data: "true" },
           { name: 'user_id', data: this.state.user_id },
           { name: 'token', data: code },
-        ]).then((resp) => {
-          console.log(resp);
+        ]).then((resp) => { 
           var tempMSG = JSON.parse(resp.data);
          
           if (tempMSG.msg === "success") {
@@ -161,9 +156,10 @@ class profile extends React.Component {
      
 
     render() {
+      console.log(this.props.appMode);
         return (
            <SafeAreaView style={styles.AndroidSafeArea}>
-             {(this.state.pro=="0")?( 
+             {(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android"))?( 
                   <Upgrade upgradeToPro={this.upgradeToPro} error={this.state.error}/>
              ):(
                <View style={{flex:1,flexDirection:"column",backgroundColor:"#000" }}>

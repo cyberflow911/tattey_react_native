@@ -15,9 +15,10 @@ class Gallery extends React.Component {
 
           if(image.id =="add")
           {
-            return  (   <TouchableWithoutFeedback onPress={this.selectPhotoTapped.bind(this)} style={{ height: 90, flex:1/3,margin:3}} key={image.id} >
-            <Image source={IMG} style={{ height: 90, flex:1/3,margin:3,backgroundColor:"white"}} />
-       </TouchableWithoutFeedback>);
+            return  (   
+            <TouchableWithoutFeedback onPress={this.selectPhotoTapped.bind(this)} style={{ height: 90, flex:1/3,margin:3}} key={image.id} >
+              <Image source={IMG} style={{ height: 90, flex:1/3,margin:3,backgroundColor:"white"}} />
+            </TouchableWithoutFeedback>);
           }
 
           return  (    
@@ -36,8 +37,7 @@ class Gallery extends React.Component {
           }
         };
     
-        ImagePicker.showImagePicker(options, (response) => {
-          console.log('Response = ', response);
+        ImagePicker.showImagePicker(options, (response) => { 
     
           if (response.didCancel) {
             console.log('User cancelled photo picker');
@@ -72,8 +72,7 @@ class Gallery extends React.Component {
             { name: 'image', filename: 'image.png', type: 'image/png', data: this.state.data},     
             { name: 'galleryImage',data:this.state.user_id}
           ]).then((resp) => { 
-            var tempMSG = JSON.parse(resp.data);
-            console.log(resp);
+            var tempMSG = JSON.parse(resp.data); 
             if(tempMSG.msg ==="success")
             {
               Alert.alert("Image Uploaded Successfully");
@@ -94,8 +93,7 @@ class Gallery extends React.Component {
 
 
 
-    render() {
-      console.log(this.props.imgs)
+    render() { 
         return (
             <FlatList data={this.props.imgs} renderItem={({item})=>this.renderItem(item)}  keyExtractor={item => item.id} numColumns={3}/> 
         );
