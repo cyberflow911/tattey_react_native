@@ -237,6 +237,7 @@ componentDidMount() {
         var nextNoon = new Date();
         if (nextNoon.getHours() >= 12) nextNoon.setDate(nextNoon.getDate() + 1)
         nextNoon.setHours(12, 0, 0, 0)
+        console.log(nextNoon);
         return nextNoon;
       }
     render() {
