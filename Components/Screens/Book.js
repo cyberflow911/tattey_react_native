@@ -297,7 +297,7 @@ componentDidMount() {
                                         <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
                                             {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Phone </Text></View>     */}
                                             <View style={{flex:1,flexDirection: "column",marginTop:10}}>
-                                                    <View style={{flex:1,flexDirection: "row"}}>
+                                                    <View style={{flex:1,flexDirection: "column"}}>
 
                                                     {/* <View style={{flex:0.3,flexDirection: "column"}}>
                                                             <Text>
