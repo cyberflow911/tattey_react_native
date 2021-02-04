@@ -299,18 +299,18 @@ componentDidMount() {
                                             <View style={{flex:1,flexDirection: "column",marginTop:10}}>
                                                     <View style={{flex:1,flexDirection: "row"}}>
 
-                                                    <View style={{flex:0.3,flexDirection: "column"}}>
+                                                    {/* <View style={{flex:0.3,flexDirection: "column"}}>
                                                             <Text>
                                                                 Time
                                                             </Text>
-                                                        </View>
+                                                        </View> */}
                                                         <View style={{flex:0.6,flexDirection: "column"}}>
                                                             <Text>
                                                                 {this.state.time}
                                                             </Text>
                                                         </View>
 
-                                                        <View style={{flex:0.4,flexDirection: "column"}}>
+                                                        <View style={{flex:0.4,flexDirection: "column",justifyContent: "center",alignItems: "center"}}>
 
                                                                
                                                                 <TouchableOpacity
