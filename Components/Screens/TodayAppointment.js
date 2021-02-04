@@ -10,7 +10,7 @@ class TodayAppointment extends React.Component {
             <View style={{flex:1,flexDirection:"row",backgroundColor:"#444d56",margin:3}}>
                 <View style={{flex:0.1,flexDirection:"row",margin:10}}>
                     {/* time outer */}
-                    <Text style={{color:"grey"}}>{keys[0]}:00</Text>
+                    <Text style={{color:"white"}}>{keys[0]}:00</Text>
                 </View>
                 <View style={{flex:0.9,flexDirection:"column"}}>
                     
