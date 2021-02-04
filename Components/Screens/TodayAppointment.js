@@ -5,7 +5,7 @@ class TodayAppointment extends React.Component {
     state = {  }
     
     renderAppointmentHoulryContainer(item) { 
-        var keys = Object.keys(item); 
+        var keys = Object.keys(item);  
         return (     
             <View style={{flex:1,flexDirection:"row",backgroundColor:"#444d56",margin:3}}>
                 <View style={{flex:0.1,flexDirection:"row",margin:10}}>
@@ -26,7 +26,7 @@ class TodayAppointment extends React.Component {
 
     }
     renderSingleAppointment=(item)=>{
-        var color = ""; 
+        var color = "";  
         switch (item.status)
         {
             case"pending":
@@ -87,7 +87,7 @@ class TodayAppointment extends React.Component {
                 renderItem={({item}) =>(this.renderAppointmentHoulryContainer(item))}
                 keyExtractor={item => {
                     var keys = Object.keys(item);
-                    return item[keys[0]];  
+                    return keys[0];  
                 }}
                 // ListEmptyComponent={this.renderEmptyComponent}
             />

@@ -12,7 +12,7 @@ class Upgrade extends React.Component {
         return (
             <View style={{flex:1,flexDirection:"column",backgroundColor:"#111" }}>
                 <View style={{flex:0.25,flexDirection:"column",alignItems:"center"}}>
-                    <Image source={LOGO} style={{height:150,width:200}}/>
+                    <Image source={LOGO} style={{height:120,width:300}}/>
                 </View>
                 
                 <View style={{flex:1,flexDirection:"column",alignItems:"center",margin:10,backgroundColor:"#000"}}>
