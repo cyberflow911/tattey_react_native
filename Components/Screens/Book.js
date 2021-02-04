@@ -251,7 +251,7 @@ componentDidMount() {
                         <ScrollView  >
                             <View style={{ ...styles.nameHeader,  marginTop: 0 }}>
                                 <Text style={{fontSize:25,fontWeight:"bold",margin:10}}>Booking</Text>
-                                <Text style={{ color: "red",   fontSize: 15 }}>Select A Date for Appointment</Text>
+                                <Text style={{ color: "red",   fontSize: 15,margin:10 }}>Select A Date for Appointment</Text>
                             </View> 
                             {this.renderClalender(this.state.appointment)} 
                             <View>
