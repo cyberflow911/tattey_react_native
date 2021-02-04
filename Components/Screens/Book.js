@@ -312,11 +312,12 @@ componentDidMount() {
 
                                                         <View style={{flex:0.4,flexDirection: "column"}}>
 
-                                                                <Button 
-                                                                    onPress={() => this.setState({isDatePickerVisible:true})}
-                                                                    title="Select time"
-                                                                    color={config.app.color.secondaryColor}
-                                                                />
+                                                               
+                                                                <TouchableOpacity
+                                                                    style={{backgroundColor:"#000",color:"white",padding:10,borderRadius:5,marginTop:10}}
+                                                                    onPress={() => this.setState({isDatePickerVisible:true})}>
+                                                                        <Text style={{color:"white",margin:5}}>Select Time </Text>
+                                                                </TouchableOpacity>
                                                                 <DateTimePickerModal
                                                                     isVisible={this.state.isDatePickerVisible}
                                                                     mode="time"
