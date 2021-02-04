@@ -113,6 +113,7 @@ fetch_use_make=(user_id)=>{
                   }
                   this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount,appMode:result.appMode});        
                   this.hidesplash();
+                  // console.log(this.state.appointments)
                   //  appoint_date.push(result.result)
                 }
             })
@@ -234,7 +235,7 @@ fetch_use_make=(user_id)=>{
     {
       case 'book':
 
-        return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1}/>)
+        return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1} appointments_whole={this.state.appointments}/>)
       case 'appoint': 
             // this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
@@ -247,6 +248,7 @@ fetch_use_make=(user_id)=>{
           <View style={{ flex: 1 }}>
           <View style={{ flex: 1 }}>  
             {this.renderTabView(this.state.activeTab)} 
+          
           </View>
           <BottomNavigation
             activeTab={this.state.activeTab}

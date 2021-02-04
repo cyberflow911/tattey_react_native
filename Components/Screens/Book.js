@@ -9,6 +9,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Isao } from 'react-native-textinput-effects';
 import DefaultPreference from 'react-native-default-preference';
 import Icon from 'react-native-vector-icons/dist/Feather'; 
+import TodayAppointment from './TodayAppointment';
 
 const LOGO = require('../../assets/img/logo_black.png')
 const windowWidth = Dimensions.get('window').width;
@@ -26,6 +27,7 @@ class Book extends React.Component {
         isDatePickerVisible: false,
         isBooking: false,
         errors:[],
+        today_appointments:[],
         appointment:this.props.appointment,
         counter:this.props.counter
 
@@ -47,8 +49,10 @@ componentDidMount() {
         }
         
     })
+  
+    
 }
-    onDateChange(date) {
+    onDateChange=(date)=> {
         if(date<new Date())
         {
             Alert.alert(
@@ -62,12 +66,48 @@ componentDidMount() {
         }
         else
         {
+            console.log(date);
+           
             this.setState({
                 selectedStartDate: date,
-                modalVisible: true
+                modalVisible: true,
+                today_appointments: this.makeApointmentStructure(date)
             });
         }
         
+    }
+
+    makeApointmentStructure = (date) => {
+        console.log("called",date);
+           var d  = new Date(date); 
+           var new_date_string = d.getFullYear()+"-"+(this.makeTwoDigits(d.getMonth()+1))+"-"+this.makeTwoDigits(d.getDate()) 
+           var today_appointments =  this.props.appointments_whole.filter((item)=>{ 
+                return item.date==new_date_string; 
+            }) 
+            var arr={}; 
+            var temp_arr = [];
+            today_appointments.map((item)=>{ 
+                var hour  = item.time.split(":")[0];
+                if(!arr[hour])
+                {
+                   
+                    if(Object.keys(arr).length)
+                    {
+                        temp_arr.push(arr);
+                        arr={};
+                    }
+                    
+                    arr[hour] =[];     
+                } 
+                arr[hour].push(item); 
+                return arr;
+            }) 
+            if(Object.keys(arr).length)
+            {
+                temp_arr.push(arr);
+                arr={};
+            }
+           return temp_arr;
     }
     onDateChange = this.onDateChange.bind(this);
     closeModal = () => {
@@ -214,8 +254,10 @@ componentDidMount() {
           if(this.props.appointment.length >0 && (this.state.counter==1 || (this.props.appointment.length - prevState.appointment.length)>0))
           { 
             
-              this.setState({appointment:this.props.appointment,counter:2})
+              this.setState({appointment:this.props.appointment,counter:2,today_appointments: this.makeApointmentStructure(new Date())})
               this.renderClalender(this.state.appointment)
+            //   console.log("called",new Date("2021-02-05T19:29:51.298Z"))
+            //   this.makeApointmentStructure("2021-02-05T06:30:00.000Z");
           }
       }
       renderClalender =(appointment)=>{
@@ -226,20 +268,14 @@ componentDidMount() {
                 key={appointment.length}
                 style={{ margin: 10 }}
                 onDateChange={this.onDateChange}
-                // minDate={new Date()} 
+                minDate={new Date()}  
                 selectedDayColor={"red"}  
                 customDatesStyles={this.customDatesStylesCallback}  
             /> )
          
            
       }
-      setDefaultTime = ()=>{
-        var nextNoon = new Date();
-        if (nextNoon.getHours() >= 12) nextNoon.setDate(nextNoon.getDate() + 1)
-        nextNoon.setHours(12, 0, 0, 0)
-        console.log(nextNoon);
-        return nextNoon;
-      }
+       
     render() {
         const { selectedStartDate, time } = this.state;
         const startDate = selectedStartDate ? selectedStartDate.toString() : ''; 
@@ -261,6 +297,7 @@ componentDidMount() {
                                 <Text style={{ color: "red",   fontSize: 15,margin:10 }}>Select A Date for Appointment</Text>
                             </View> 
                             {this.renderClalender(this.state.appointment)} 
+                            <TodayAppointment appointment={this.state.today_appointments}/>
                             <View>
                                 <Modal
                                     style={styles.Model}
@@ -270,11 +307,10 @@ componentDidMount() {
                                     onRequestClose={this.closeModal} // Used to handle the Android Back Button
                                     backdropOpacity={0}
                                     swipeToClose={true}
-                                    // swipeDirection="left"
-                                    
+                                    // swipeDirection="left" 
                                     onSwipe={this.closeModal}
                                     onBackdropPress={this.closeModal}>
-                     <ScrollView style={{backgroundColor:"#fff",paddingTop:25}}>
+                                    <ScrollView style={{backgroundColor:"#fff",paddingTop:25}}>
                                         <View style={styles.nameHeader}>
                                         <View style={{flex:1,flexDirection: 'row'}}> 
                                     <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}>
@@ -325,8 +361,7 @@ componentDidMount() {
                                                                     isVisible={this.state.isDatePickerVisible}
                                                                     mode="time"
                                                                     onConfirm={this.handleConfirm}
-                                                                    onCancel={this.hideDatePicker}
-                                                                    date={this.setDefaultTime()}
+                                                                    onCancel={this.hideDatePicker} 
                                                                 /> 
                                                         </View>
                                                         <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center",marginTop:15,fontSize:20}}>
@@ -495,7 +530,8 @@ const styles = StyleSheet.create({
     AndroidSafeArea: {
         flex: 1,
         backgroundColor: config.app.color.primaryColor,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+      
     },
     Model: {
         height: 50,
