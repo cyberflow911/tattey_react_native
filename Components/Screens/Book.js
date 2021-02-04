@@ -233,6 +233,12 @@ componentDidMount() {
          
            
       }
+      setDefaultTime = ()=>{
+        var nextNoon = new Date();
+        if (nextNoon.getHours() >= 12) nextNoon.setDate(nextNoon.getDate() + 1)
+        nextNoon.setHours(12, 0, 0, 0)
+        return nextNoon;
+      }
     render() {
         const { selectedStartDate, time } = this.state;
         const startDate = selectedStartDate ? selectedStartDate.toString() : ''; 
@@ -319,7 +325,7 @@ componentDidMount() {
                                                                     mode="time"
                                                                     onConfirm={this.handleConfirm}
                                                                     onCancel={this.hideDatePicker}
-                                                                    date={new Date()}
+                                                                    date={this.setDefaultTime()}
                                                                 /> 
                                                         </View>
                                                         <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center",marginTop:15,fontSize:20}}>
