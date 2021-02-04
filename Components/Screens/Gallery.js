@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View,SafeAreaView, TouchableWithoutFeedback,ScrollView,Platform,StatusBar,Modal,TextInput,Image,ActivityIndicator,Dimensions,FlatList,Alert } from 'react-native';
 import ImagePicker from 'react-native-image-picker/lib/commonjs'
 import RNFetchBlob from 'rn-fetch-blob'; 
+import Icon from 'react-native-vector-icons/dist/Feather';
 const IMG = require('../../assets/img/add.png');
 
 class Gallery extends React.Component {
@@ -22,7 +23,11 @@ class Gallery extends React.Component {
           }
 
           return  (    
-              <Image source={{uri:image.image}} key={image.id} style={{ height: 90, flex:1/3,margin:3}}/> 
+            <View style={{flex:1/3,flexDirection: "row",margin:3}}>
+                <Image source={{uri:image.image}} key={image.id} style={{ height: 90, flex:1}}/> 
+                <Icon name="x-circle" size={20} color="red"  onPress={() =>this.deletePhotoAlert(image.id)} style={{flex:0.2,flexDirection: 'column',textAlign:"center"}} />
+            </View>
+              
           );
         
       }
@@ -36,7 +41,7 @@ class Gallery extends React.Component {
             skipBackup: true
           }
         };
-    
+        
         ImagePicker.showImagePicker(options, (response) => { 
     
           if (response.didCancel) {
@@ -90,10 +95,46 @@ class Gallery extends React.Component {
           })
     
       }
+      deletePhotoAlert = (id)=>{
+        Alert.alert(
+            'Delete Image',
+            `Do You Really Want to Delete Image`,
+            [ 
+              { text: 'Yes', onPress: () => {this.deleteImage(id)} },
+              { text: 'No', onPress: () =>{}}
+            ],
+            { cancelable: true }
+          );
+    }
+      deleteImage = (id) => { 
+        console.log('deleting',id)
+        RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
+          Authorization: "Bearer access-token",
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+        }, [
+            { name: 'delete_imageGallery',   data: "true"},     
+            { name: 'image_idGallery',data:id}
+          ]).then((resp) => { 
+            var tempMSG = JSON.parse(resp.data); 
+            console.log(tempMSG);
+            if(tempMSG.msg ==="success")
+            {
+              Alert.alert("Image Deleted Successfully");
+              this.props.user_func();
+            }else
+            {
+              Alert.alert(tempMSG.msg);
+            }    
+          }).catch((err) => {
+            console.log(err)
+          })
+    
+      }
 
 
 
-    render() { 
+    render() {  
         return (
             <FlatList data={this.props.imgs} renderItem={({item})=>this.renderItem(item)}  keyExtractor={item => item.id} numColumns={3}/> 
         );
