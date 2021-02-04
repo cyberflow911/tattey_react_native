@@ -319,6 +319,7 @@ componentDidMount() {
                                                                     mode="time"
                                                                     onConfirm={this.handleConfirm}
                                                                     onCancel={this.hideDatePicker}
+                                                                    date={new Date()}
                                                                 /> 
                                                         </View>
                                                         <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center",marginTop:15,fontSize:20}}>
