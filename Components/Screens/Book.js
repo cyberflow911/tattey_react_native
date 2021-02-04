@@ -304,11 +304,7 @@ componentDidMount() {
                                                                 Time
                                                             </Text>
                                                         </View> */}
-                                                        <View style={{flex:0.2,flexDirection: "column"}}>
-                                                            <Text>
-                                                                {this.state.time}
-                                                            </Text>
-                                                        </View>
+                                                        
 
                                                         <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center"}}>
 
@@ -325,7 +321,11 @@ componentDidMount() {
                                                                     onCancel={this.hideDatePicker}
                                                                 /> 
                                                         </View>
-                                                         
+                                                        <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center"}}>
+                                                            <Text>
+                                                                {this.state.time}
+                                                            </Text>
+                                                        </View>
                                                     </View>    
                                             </View>    
                                             
