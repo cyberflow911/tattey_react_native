@@ -51,17 +51,17 @@ class TodayAppointment extends React.Component {
                 </View>
                 <View style={{flex:1,flexDirection:"column",alignItems: "flex-end",justifyContent:"flex-end",marginRight:15}}>
                     {/* time inner */}
-                    <Text style={{color:"#fff"}}>{item.time}</Text>
+                    <Text style={{fontSize:13,color:"#fff"}}>{item.time}</Text>
                 </View> 
             </View>
                 <View style={{flex:1,flexDirection:"row",paddingBottom:5}}>
                     <View style={{flex:1,flexDirection:"row",marginLeft:10}}>
                         {/* sub name */}
-                        <Text style={{textAlign: "right",color:"#fff"}}>{item.service}</Text>
+                        <Text style={{textAlign: "right",color:"#fff",fontSize:12}}>{item.service}</Text>
                     </View>
                     <View style={{flex:1,flexDirection:"column",alignItems: "flex-end",justifyContent:"flex-end",marginRight:15}}>
                         {/* status  */}
-                        <Text style={{color: color,fontSize:11}}>{item.status}</Text>  
+                        <Text style={{color: color,fontSize:12}}>{item.status}</Text>  
                     </View>
 
                 </View>
