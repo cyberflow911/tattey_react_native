@@ -304,7 +304,7 @@ componentDidMount() {
                                                                 Time
                                                             </Text>
                                                         </View> */}
-                                                        <View style={{flex:1,flexDirection: "column"}}>
+                                                        <View style={{flex:0.2,flexDirection: "column"}}>
                                                             <Text>
                                                                 {this.state.time}
                                                             </Text>
