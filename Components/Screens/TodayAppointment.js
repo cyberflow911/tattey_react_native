@@ -47,7 +47,7 @@ class TodayAppointment extends React.Component {
             <View style={{flex:1,flexDirection:"row"}}>
                 <View style={{flex:1,flexDirection:"column",marginLeft:10}}>
                     {/* name */}
-                    <Text style={{fontSize:13,color:"#fff"}}>{item.name}</Text>
+                    <Text style={{fontSize:13,color:"#fff"}}>{this.capitalizeFirstLetter(item.name)}</Text>
                 </View>
                 <View style={{flex:1,flexDirection:"column",alignItems: "flex-end",justifyContent:"flex-end",marginRight:15}}>
                     {/* time inner */}
@@ -57,11 +57,11 @@ class TodayAppointment extends React.Component {
                 <View style={{flex:1,flexDirection:"row",paddingBottom:5}}>
                     <View style={{flex:1,flexDirection:"row",marginLeft:10}}>
                         {/* sub name */}
-                        <Text style={{textAlign: "right",color:"#fff",fontSize:12}}>{item.service}</Text>
+                        <Text style={{textAlign: "right",color:"#fff",fontSize:12}}>{this.capitalizeFirstLetter(item.service)}</Text>
                     </View>
                     <View style={{flex:1,flexDirection:"column",alignItems: "flex-end",justifyContent:"flex-end",marginRight:15}}>
                         {/* status  */}
-                        <Text style={{color: color,fontSize:12}}>{item.status}</Text>  
+                        <Text style={{color: color,fontSize:12}}>{this.capitalizeFirstLetter(item.status)}</Text>  
                     </View>
 
                 </View>
@@ -69,17 +69,16 @@ class TodayAppointment extends React.Component {
      )   
     }
 
-    // renderEmptyComponent=()=>{
-    //     return(
+     
+    capitalizeFirstLetter=(str)=> {
+        if(str)
+        {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        return str;
+        // 
+      }
 
-    //         <View style={{color: "#721c24",
-    //                 backgroundColor:"#f8d7da",
-    //                 borderColor: "#f5c6cb",
-    //                 borderWidth:2,fontSize:15,flex:0.5,flexDirection:"column",paddingLeft:10,paddingRight:10,marginTop:10,paddingTop:5,paddingBottom:5,textAlign:"center",justifyContent:"center",alignItems: "center",margin:30}}>
-    //             <Text style={{fontSize:15}}>No Appointments Available</Text>
-    //         </View>
-    //     );
-    // }
     render() {
         return (
             <FlatList 

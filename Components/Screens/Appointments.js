@@ -1,11 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View,SafeAreaView, TouchableWithoutFeedback,ScrollView,Platform,StatusBar,Modal,TextInput,Image,ActivityIndicator,Dimensions,FlatList,Alert } from 'react-native'; 
+import { StyleSheet, Text, View,SafeAreaView, TouchableOpacity,TouchableWithoutFeedback,ScrollView,Platform,StatusBar,Modal,TextInput,Image,ActivityIndicator,Dimensions,FlatList,Alert } from 'react-native'; 
 import config from '../../config'
+import RNFetchBlob from 'rn-fetch-blob'; 
 import Icon from 'react-native-vector-icons/dist/Feather'; 
 
-const LOGO = require('../../assets/img/logo_black.png')
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+ 
 
 class Appointments extends React.Component {
     state = { item:{
@@ -23,6 +22,7 @@ class Appointments extends React.Component {
     status:"",
     isVisible:false, 
     loading:true,
+    cur_appointment_id:null
 
 }
 
@@ -33,8 +33,15 @@ class Appointments extends React.Component {
             this.setState({loading:false});
         } 
     }
-    
-    cancelAppointment=(id,date,time,status) =>{ 
+    capitalizeFirstLetter=(str)=> {
+        if(str)
+        {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        return str;
+        // 
+      }
+    cancelAppointment=(id,date,time,status) =>{
         console.log(id)
         fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
@@ -78,7 +85,20 @@ class Appointments extends React.Component {
         })
     }
     showAppointmentDetails = (item) => { 
-        this.setState({date: item.date, status: item.status,time:item.time,name:item.name,phone:item.m_number,service:item.service,comment:item.comment,isVisible:true})
+        this.setState({date: item.date, status: item.status,time:item.time,name:item.name,phone:item.m_number,service:item.service,comment:item.comment,isVisible:true,cur_appointment_id:item.id})
+    }
+
+
+    renderStatusButton = (status)=>
+    {
+        switch(status)
+        {
+            case "pending":
+                return "Confirm Appointment";
+            case "confirmed":
+                return "Mark Pending";
+
+        }
     }
       CustomRow = (item) => 
         <TouchableWithoutFeedback onPress={() =>this.showAppointmentDetails(item)}>
@@ -86,7 +106,7 @@ class Appointments extends React.Component {
                     <View style={styles.container_text}>
                         <View style={{flex: 1,flexDirection: 'row'}}> 
                             <Text style={styles.heading}>
-                                 {item.name} 
+                                 {this.capitalizeFirstLetter(item.name)} 
                             </Text>
                             <Icon style={{flex:0.1 }} size={20} color="red" name="x-circle" onPress={()=>{this.cancelAppointmentAlert(item.id,item.date,item.time,item.status)}}/> 
                         </View> 
@@ -95,7 +115,7 @@ class Appointments extends React.Component {
                                 Date : {item.date}
                             </Text>
                             <Text style={{marginRight:10,flexDirection:"column",flex:1,color:"white",textAlign:"right"}}>
-                                Status : {item.status}
+                                Status : {this.capitalizeFirstLetter(item.status)}
                             </Text>
                         </View> 
                         <Text style={styles.description}>
@@ -131,6 +151,34 @@ class Appointments extends React.Component {
                     <Text style={{fontSize:15}}>No Appointments Available</Text>
                 </View>
             );
+        }
+        processAppointmentRequest = ()=>
+        {
+            console.log('processing',this.state.cur_appointment_id)
+            RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
+            Authorization: "Bearer access-token",
+            Accept: 'application/json',
+            'Content-Type': 'multipart/form-data',
+            }, [
+                { name: 'processAppointmentRequest',   data: "true"},     
+                { name: 'appointment_idProcess',data:this.state.cur_appointment_id},     
+                { name: 'appoint_status',data:this.state.status}
+            ]).then((resp) => { 
+                console.log(resp.data);
+                var tempMSG = JSON.parse(resp.data); 
+               
+                if(tempMSG.msg ==="success")
+                {
+                    Alert.alert("Request Processed Successfully");
+                    this.props.functionAppointments();
+                    this.setState({status: tempMSG.status})
+                }else
+                {
+                    Alert.alert(tempMSG.msg);
+                }    
+            }).catch((err) => {
+                console.log(err)
+            })
         }
     render() {
         return (
@@ -189,7 +237,7 @@ class Appointments extends React.Component {
                                                     backgroundColor:"#f8d7da",
                                                     borderColor: "#f5c6cb",
                                                     borderWidth:2,fontSize:15,flex:1,flexDirection:"column",paddingLeft:10,paddingRight:10,marginTop:10,paddingTop:5,paddingBottom:5}}>
-                                                    <Text style={{fontSize:15}}>{this.state.status}</Text>
+                                                    <Text style={{fontSize:15}}>{this.capitalizeFirstLetter(this.state.status)}</Text>
                                 </View>
                                 <Text style={{ marginLeft: 10, color: "#000", fontSize: 25,textAlign: "center",marginTop:20,fontWeight: "bold"}}>Appointment Details</Text>
                             </View> 
@@ -204,8 +252,8 @@ class Appointments extends React.Component {
 
                         </View>
                         <View style={{flex:1,flexDirection: 'row',margin:10}}>
-                                <Text   style={{flex:0.3,flexDirection: 'column',color: 'red',fontSize:18}}>Contact : </Text> 
-                                <Text style={{flex:0.7,flexDirection: 'column',fontSize:18}}>{this.state.name}</Text>
+                                <Text   style={{flex:0.25,flexDirection: 'column',color: 'red',fontSize:18}}>Contact : </Text> 
+                                <Text style={{flex:0.7,flexDirection: 'column',fontSize:18}}>{this.capitalizeFirstLetter(this.state.name)}</Text>
 
                         </View>
                         <View style={{flex:1,flexDirection: 'row',margin:10}}>
@@ -215,14 +263,21 @@ class Appointments extends React.Component {
                         </View>
                         <View style={{flex:1,flexDirection: 'row',margin:10}}>
                                 <Text   style={{flex:0.2,flexDirection: 'column',color: 'red',fontSize:18}}>Service : </Text> 
-                                <Text style={{flex:0.8,flexDirection: 'column',fontSize:18}}>{this.state.service}</Text>
+                                <Text style={{flex:0.8,flexDirection: 'column',fontSize:18}}>{this.capitalizeFirstLetter(this.state.service)}</Text>
 
                         </View> 
                         <View style={{flex:1,flexDirection: 'row',margin:10}}>
                                 <Text   style={{flex:0.3,flexDirection: 'column',color: 'red',fontSize:18}}>Comment : </Text> 
-                                <Text style={{flex:0.7,flexDirection: 'column',fontSize:18}}>{this.state.comment}</Text>
+                                <Text style={{flex:0.7,flexDirection: 'column',fontSize:18}}>{this.capitalizeFirstLetter(this.state.comment)}</Text>
 
-                        </View>     
+                        </View>    
+                        <View style={{flex:1,flexDirection: 'row',margin:10,alignItems: 'center',justifyContent: 'center'}}>
+                                <TouchableOpacity
+                                    style={{backgroundColor:"#000",color:"white",padding:10,borderRadius:5,marginTop:10}}
+                                    onPress={() => this.processAppointmentRequest()}>
+                                        <Text style={{color:"white",margin:5}}>{this.renderStatusButton(this.state.status)} </Text>
+                                </TouchableOpacity>
+                        </View> 
                             </ScrollView>
                         
 

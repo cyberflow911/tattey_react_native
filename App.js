@@ -95,7 +95,9 @@ fetch_use_make=(user_id)=>{
               },
               body: JSON.stringify({
                 userAppointments: true,
-                user_id:this.state.name     
+                user_id:this.state.name,
+                user_temp_id:this.state.user_id
+
               })
             })
             .then((response) => response.json())
@@ -132,6 +134,7 @@ fetch_use_make=(user_id)=>{
               body: JSON.stringify({
                 userDetails: true, 
                 user_id:this.state.user_id,
+               
               })
             })
             .then((response) => response.json())
@@ -235,7 +238,7 @@ fetch_use_make=(user_id)=>{
     {
       case 'book':
 
-        return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1} appointments_whole={this.state.appointments}/>)
+        return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1} appointments_whole={this.state.appointments} user_name={this.state.name} />)
       case 'appoint': 
             // this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )

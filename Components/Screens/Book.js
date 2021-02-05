@@ -182,7 +182,7 @@ componentDidMount() {
                 num: this.state.phone,
                 date: this.state.selectedStartDate,
                 time: this.state.time,
-                temp_user: this.props.user,
+                temp_user: this.props.user_name,
                 service: this.state.service,
                 comment: this.state.comment
             })
@@ -267,8 +267,7 @@ componentDidMount() {
                 <CalendarPicker
                 key={appointment.length}
                 style={{ margin: 10 }}
-                onDateChange={this.onDateChange}
-                minDate={new Date()}  
+                onDateChange={this.onDateChange} 
                 selectedDayColor={"red"}  
                 customDatesStyles={this.customDatesStylesCallback}  
             /> )
