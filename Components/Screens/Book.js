@@ -66,12 +66,12 @@ componentDidMount() {
         }
         else
         {
-            console.log(date);
+            console.log(this.props.appointments_whole);
            
             this.setState({
                 selectedStartDate: date,
                 modalVisible: true,
-                today_appointments: this.makeApointmentStructure(date)
+                today_appointments: this.props.appointments_whole?this.makeApointmentStructure(date):null
             });
         }
         
@@ -81,6 +81,7 @@ componentDidMount() {
         console.log("called",date);
            var d  = new Date(date); 
            var new_date_string = d.getFullYear()+"-"+(this.makeTwoDigits(d.getMonth()+1))+"-"+this.makeTwoDigits(d.getDate()) 
+            
            var today_appointments =  this.props.appointments_whole.filter((item)=>{ 
                 return item.date==new_date_string; 
             }) 
