@@ -24,7 +24,7 @@ class ViewImage extends React.Component {
                 onSwipe={this.props.closeModal}
                 onBackdropPress={this.props.closeModal}>
                     <View style={{flex: 1}}>
-                            <Image source={{uri:this.props.image}} style={{flex:1}}/>
+                            <Image source={{uri:this.props.image}} style={{flex:1,resizeMode: 'contain'}} />
                             <View style={{position: "absolute", right:10,top:40}}>
                             <Icon
                                 style={{flex: 0.1}}
