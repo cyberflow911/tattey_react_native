@@ -56,8 +56,7 @@ class Appointments extends React.Component {
     return str;
     //
   };
-  cancelAppointment = (id, date, time, status) => {
-    console.log(id);
+  cancelAppointment = (id, date, time, status) => { 
     fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
       method: 'POST',
       headers: {
@@ -71,8 +70,7 @@ class Appointments extends React.Component {
     })
       .then((response) => response.json())
       .then((result) => {
-        if (result.msg == 'sucesss') {
-          console.log(result);
+        if (result.msg == 'sucesss') { 
           this.setState({
             item: {
               id: id,
@@ -110,7 +108,7 @@ class Appointments extends React.Component {
       isVisible: false,
     });
   };
-  showAppointmentDetails = (item) => {
+  showAppointmentDetails = (item) => { 
     this.setState({
       date: item.date,
       status: item.status,
@@ -181,8 +179,7 @@ class Appointments extends React.Component {
         setTimeout(this.display_no_appointmentMessage, 5000);
       } else {
         this.setState({loading: false});
-      }
-      console.log('called');
+      } 
     }, 3000);
   }
   renderEmptyComponent = () => {
@@ -210,8 +207,7 @@ class Appointments extends React.Component {
       </View>
     );
   };
-  processAppointmentRequest = () => {
-    console.log('processing', this.state.cur_appointment_id);
+  processAppointmentRequest = () => { 
     RNFetchBlob.fetch(
       'POST',
       'https://www.tattey.com/tattey_app/appapis/appointment.php',
@@ -226,8 +222,7 @@ class Appointments extends React.Component {
         {name: 'appoint_status', data: this.state.status},
       ],
     )
-      .then((resp) => {
-        console.log(resp.data);
+      .then((resp) => { 
         var tempMSG = JSON.parse(resp.data);
 
         if (tempMSG.msg === 'success') {
@@ -484,7 +479,8 @@ class Appointments extends React.Component {
                     <EditAppointment 
                         closeFunction={this.closeEditModal} 
                         date={this.state.date} 
-                        name={this.state.name} 
+                        name={this.state.name}
+                        time={this.state.time} 
                         phone={this.state.phone} 
                         comment={this.state.comment} 
                         service={this.state.service}

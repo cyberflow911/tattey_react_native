@@ -29,20 +29,7 @@ class EditAppointment extends React.Component {
     datePickerMode:'',
     counter:1
   };
-    componentDidMount()
-    {
-      console.log("called did mount");
-    }
-    componentDidUpdate()
-    {
-        // if(this.props.appoint_id&&this.props.isVisible&&this.state.counter==1)
-        // {
-        //   console.log("updated")
-        //   this.setState({...this.props,counter:2})
-        // }
-        
-        console.log("function call updated")
-    }
+     
   handleConfirm = (date) => {
     switch(this.state.datePickerMode)
     {
@@ -153,7 +140,7 @@ isFormValid = () => {
 
   isFormEmpty = ({ time, date, name, phone }) => {
     return (
-      !time.length ||
+      !time ||
       !date  ||
       !name.length ||
       !phone.length
@@ -163,9 +150,7 @@ isFormValid = () => {
   errors.map((error, i) => <Text key={i} style={{fontSize:15}}>{error.message}</Text>);
 
 
-  render() {  
-    console.log("state",this.state) 
-    console.log("props",this.props)
+  render() {   
     return (
       <SafeAreaView style={styles.AndroidSafeArea}>
         <Modal
