@@ -124,7 +124,7 @@ fetch_use_make=(user_id)=>{
             });
   }
   
-  fetch_user_details = ()=>{
+  fetch_user_details = ()=>{ 
     fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
               headers: {
@@ -138,8 +138,7 @@ fetch_use_make=(user_id)=>{
               })
             })
             .then((response) => response.json())
-            .then(result=>{
-              // console.log(result)
+            .then(result=>{ 
                 if(result.msg=="success")
                 {   
                   if(result.rowCount!='0')

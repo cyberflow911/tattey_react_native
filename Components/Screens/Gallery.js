@@ -3,6 +3,7 @@ import { StyleSheet, Text, View,SafeAreaView, TouchableWithoutFeedback,ScrollVie
 import ImagePicker from 'react-native-image-picker/lib/commonjs'
 import RNFetchBlob from 'rn-fetch-blob'; 
 import Icon from 'react-native-vector-icons/dist/Feather';
+import ViewImage from './ViewImage'
 const IMG = require('../../assets/img/add.png');
 
 class Gallery extends React.Component {
@@ -10,7 +11,13 @@ class Gallery extends React.Component {
         
         ImageSource: null, 
         user_id: this.props.name,
-        data:null
+        data:null,
+        image:"",
+        imageModalVisible:false,
+
+      }
+      closeModal = () => {
+        this.setState({imageModalVisible:false})
       }
       renderItem = (image)=> {
 
@@ -23,11 +30,12 @@ class Gallery extends React.Component {
           }
 
           return  (    
-            <View style={{flex:1/3,flexDirection: "row",margin:3}}>
-                <Image source={{uri:image.image}} key={image.id} style={{ height: 90, flex:1}}/> 
-                <Icon name="x-circle" size={20} color="red"  onPress={() =>this.deletePhotoAlert(image.id)} style={{flex:0.2,flexDirection: 'column',textAlign:"center"}} />
-            </View>
-              
+            <TouchableWithoutFeedback onPress={() =>this.setState({image:image.image,imageModalVisible:true})} >
+              <View style={{flex:1/3,flexDirection: "row",margin:3}}>
+                  <Image source={{uri:image.image}} key={image.id} style={{ height: 90, flex:1}}/> 
+                  <Icon name="x-circle" size={20} color="red"  onPress={() =>this.deletePhotoAlert(image.id)} style={{flex:0.2,flexDirection: 'column',textAlign:"center"}} />
+              </View>
+            </TouchableWithoutFeedback>
           );
         
       }
@@ -136,7 +144,10 @@ class Gallery extends React.Component {
 
     render() {  
         return (
+          <>
             <FlatList data={this.props.imgs} renderItem={({item})=>this.renderItem(item)}  keyExtractor={item => item.id} numColumns={3}/> 
+            {this.state.imageModalVisible?(<ViewImage image={this.state.image} isVisible={this.state.imageModalVisible} closeModal={this.closeModal}/>):(null)  }
+          </>
         );
     }
 }

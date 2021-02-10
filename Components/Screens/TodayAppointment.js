@@ -1,28 +1,30 @@
 import React from 'react';
-import { FlatList,View,Text } from 'react-native';
+import { FlatList,View,Text,TouchableOpacity } from 'react-native';
 
 class TodayAppointment extends React.Component {
     state = {  }
     
-    renderAppointmentHoulryContainer(item) { 
+    renderAppointmentHoulryContainer(item) {
         var keys = Object.keys(item);  
-        return (     
-            <View style={{flex:1,flexDirection:"row",backgroundColor:"#444d56",margin:3}}>
-                <View style={{flex:0.1,flexDirection:"row",margin:10}}>
-                    {/* time outer */}
-                    <Text style={{color:"white"}}>{keys[0]}:00</Text>
-                </View>
-                <View style={{flex:0.9,flexDirection:"column"}}>
-                    
-                    <FlatList 
-                        data={item[keys[0]]}
-                        renderItem={({item}) =>(this.renderSingleAppointment(item))}
-                        keyExtractor={item => item.id} 
-                    />
-              
-              </View> 
-            </View>
-        );
+        
+                return (     
+                    <View style={{flex:1,flexDirection:"row",backgroundColor:"#444d56",margin:3}}>
+                        <View style={{flex:0.1,flexDirection:"row",margin:10}}>
+                            {/* time outer */}
+                            <Text style={{color:"white"}}>{keys[0]}:00</Text>
+                        </View>
+                        <View style={{flex:0.9,flexDirection:"column"}}>
+                            
+                            <FlatList 
+                                data={item[keys[0]]}
+                                renderItem={({item}) =>(this.renderSingleAppointment(item))}
+                                keyExtractor={item => item.id} 
+                            />
+                      
+                      </View> 
+                    </View>
+                );
+        
 
     }
     renderSingleAppointment=(item)=>{

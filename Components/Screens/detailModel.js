@@ -9,7 +9,7 @@ class DetailModel extends React.Component {
 
 
     saveDetail = () => {
-        console.log(this.state.name,this.state.about);
+        console.log(this.state.name,this.state.about,this.props.user,this.state.role);
 
         RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
             Authorization: "Bearer access-token",

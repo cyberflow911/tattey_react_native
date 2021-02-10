@@ -10,6 +10,7 @@ import { Isao } from 'react-native-textinput-effects';
 import DefaultPreference from 'react-native-default-preference';
 import Icon from 'react-native-vector-icons/dist/Feather'; 
 import TodayAppointment from './TodayAppointment';
+import Toast from 'react-native-simple-toast';
 
 const LOGO = require('../../assets/img/logo_black.png')
 const windowWidth = Dimensions.get('window').width;
@@ -29,9 +30,9 @@ class Book extends React.Component {
         errors:[],
         today_appointments:[],
         appointment:this.props.appointment,
-        counter:this.props.counter
-
+        counter:this.props.counter,  
     };
+
 componentDidMount() {
     if (Platform.OS === 'android') DefaultPreference.setName('NativeStorage');
     DefaultPreference.get('name').then((value)=>{
@@ -39,42 +40,50 @@ componentDidMount() {
         if(value!=null)
         {
             this.setState({name: value});
-        }
-        
+        } 
     })
     DefaultPreference.get('phone').then((value)=>{ 
         if(value!=null)
         {
             this.setState({phone: value});
-        }
-        
-    })
-  
-    
-}
-    onDateChange=(date)=> {
-        if(date<new Date())
-        {
-            Alert.alert(
-                'Alert',
-                `Can't Book Appointment for a Past Date`,
-                [ 
-                  { text: 'OK', onPress: () => console.log('OK Pressed') }
-                ],
-                { cancelable: true }
-              );
-        }
-        else
-        {
-            console.log(this.props.appointments_whole);
-           
+        } 
+    }) 
+} 
+    openBookingModal=()=>
+    { 
+        console.log("Booking")
+            this.setState({ modalVisible: true});
+    }
+    onDateChange=(date)=> { 
+            if(this.state.selectedStartDate&&date.toString()==this.state.selectedStartDate.toString())
+            {
+                if(date<new Date())
+                {
+                    Alert.alert(
+                        'Alert',
+                        `Can't Book Appointment for a Past Date`,
+                        [
+                            { text: 'OK', onPress: () => console.log('OK Pressed') }
+                        ],
+                            { cancelable: true }
+                    );
+                }else
+                {
+                    this.openBookingModal();
+                } 
+            }else
+            {
+
+                if(!(date<new Date()))
+                {
+                    Toast.show('Press Again To Book Appointment', Toast.LONG);
+                }
+                
+            }
             this.setState({
-                selectedStartDate: date,
-                modalVisible: true,
+                selectedStartDate: date, 
                 today_appointments: this.props.appointments_whole?this.makeApointmentStructure(date):null
-            });
-        }
-        
+            }); 
     }
 
     makeApointmentStructure = (date) => {
@@ -87,7 +96,8 @@ componentDidMount() {
             }) 
             var arr={}; 
             var temp_arr = [];
-            today_appointments.map((item)=>{ 
+            today_appointments.map((item)=>{  
+                
                 var hour  = item.time.split(":")[0];
                 if(!arr[hour])
                 {
@@ -100,14 +110,15 @@ componentDidMount() {
                     
                     arr[hour] =[];     
                 } 
-                arr[hour].push(item); 
+                arr[hour].push({...item,element:"appoint"}); 
                 return arr;
-            }) 
+            })
             if(Object.keys(arr).length)
             {
                 temp_arr.push(arr);
                 arr={};
             }
+           
            return temp_arr;
     }
     onDateChange = this.onDateChange.bind(this);
@@ -118,8 +129,7 @@ componentDidMount() {
     }
     customDatesStylesCallback = date => { 
         var d = new Date(date);
-        var formatted_date = d.getFullYear()+"-"+(this.makeTwoDigits(d.getMonth()+1))+"-"+this.makeTwoDigits(d.getDate());
-      
+        var formatted_date = d.getFullYear()+"-"+(this.makeTwoDigits(d.getMonth()+1))+"-"+this.makeTwoDigits(d.getDate()); 
         // console.log(formatted_date)
         // console.log(this.props.appointment)
         if(this.state.appointment.includes(formatted_date))
@@ -314,7 +324,7 @@ componentDidMount() {
                                         <View style={styles.nameHeader}>
                                         <View style={{flex:1,flexDirection: 'row'}}> 
                                     <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}>
-                                    {/* <Image 
+                                    {/* <Image
                                         style={{marginLeft:50,height:90,width:150}}
                                         source={LOGO}
                                             />   */}
@@ -329,8 +339,12 @@ componentDidMount() {
                                                 <View style={{color: "#721c24",
                                                     backgroundColor:"#f8d7da",
                                                     borderColor: "#f5c6cb",
-                                                    borderWidth:2,fontSize:15,flex:1,flexDirection:"column",paddingLeft:10,paddingRight:10}}>
-                                           
+                                                    borderWidth:2,
+                                                    fontSize:15,
+                                                    flex:1,
+                                                    flexDirection:"column",
+                                                    paddingLeft:10,
+                                                    paddingRight:10}}>
                                                 {this.displayErrors(this.state.errors)}
                                                 </View>
                                             )}
@@ -382,14 +396,14 @@ componentDidMount() {
                                                                 <Isao
                                                                     label={'Name*'}
                                                                     // this is applied as active border and label color
-                                                                    activeColor={'#da7071'}
+                                                                    activeColor={'#000'}
                                                                     // active border height
                                                                     borderHeight={2}
                                                                     inputPadding={16}
                                                                     onChangeText={(text)=>{this.setState({name: text})}}
                                                                     labelHeight={24}
                                                                     // this is applied as passive border and label color
-                                                                    passiveColor={'#dadada'}
+                                                                    passiveColor={'#000'}
                                                                 />
                                                              
                                     
@@ -415,14 +429,14 @@ componentDidMount() {
                                                                 <Isao
                                                                     label={'Phone*'}
                                                                     // this is applied as active border and label color
-                                                                    activeColor={'#da7071'}
+                                                                    activeColor={'#000'}
                                                                     // active border height
                                                                     borderHeight={2}
                                                                     inputPadding={16}
                                                                     onChangeText={(text)=>{this.setState({phone: text})}}
                                                                     labelHeight={24}
                                                                     // this is applied as passive border and label color
-                                                                    passiveColor={'#dadada'}
+                                                                    passiveColor={'#000'}
                                                                 />
                                                              
                                     
@@ -442,14 +456,14 @@ componentDidMount() {
                                                              <Isao
                                                                     label={'Service'}
                                                                     // this is applied as active border and label color
-                                                                    activeColor={'#da7071'}
+                                                                    activeColor={'#000'}
                                                                     // active border height
                                                                     borderHeight={2}
                                                                     inputPadding={16}
                                                                     onChangeText={(text)=>{this.setState({service: text})}}
                                                                     labelHeight={24}
                                                                     // this is applied as passive border and label color
-                                                                    passiveColor={'#dadada'}
+                                                                    passiveColor={'#000'}
                                                                 />
                                     
                                                         </View>
@@ -474,14 +488,14 @@ componentDidMount() {
                                                         <Isao
                                                                     label={'Comment'}
                                                                     // this is applied as active border and label color
-                                                                    activeColor={'#da7071'}
+                                                                    activeColor={'#000'}
                                                                     // active border height
                                                                     borderHeight={2}
                                                                     inputPadding={16}
                                                                     onChangeText={(text)=>{this.setState({comment: text})}}
                                                                     labelHeight={24}
                                                                     // this is applied as passive border and label color
-                                                                    passiveColor={'#dadada'}
+                                                                    passiveColor={'#000'}
                                                                 />
                                                              
                                     
