@@ -25,7 +25,7 @@ class ViewImage extends React.Component {
                 onBackdropPress={this.props.closeModal}>
                     <View style={{flex: 1}}>
                             <Image source={{uri:this.props.image}} style={{flex:1}}/>
-                            <View style={{position: "absolute", right:10,top:10}}>
+                            <View style={{position: "absolute", right:10,top:40}}>
                             <Icon
                                 style={{flex: 0.1}}
                                 size={20}
