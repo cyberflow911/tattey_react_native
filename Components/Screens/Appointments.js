@@ -238,6 +238,9 @@ class Appointments extends React.Component {
       });
   };
 
+  openAppointmentModal=()=> {
+    this.setState({isVisible:true});
+  }
   closeEditModal = ()=>
   {
       this.setState({editModalVisible:false})
@@ -354,8 +357,7 @@ class Appointments extends React.Component {
                       color="red"
                       style={{margin: 5}}
                       onPress={() => {
-                        this.setState({editModalVisible:true})
-                        
+                        this.setState({editModalVisible:true,isVisible:false}) 
                         console.log("setEditCalled",this.state.editModalVisible);
                       }}
                     />
@@ -479,7 +481,7 @@ class Appointments extends React.Component {
           </Modal>
         </View>
         {this.state.editModalVisible?(
-
+                    
                     <EditAppointment 
                         closeFunction={this.closeEditModal} 
                         date={this.state.date} 
@@ -491,7 +493,9 @@ class Appointments extends React.Component {
                         appoint_id={this.state.cur_appointment_id}
                         updateStateAppointment={this.updateStateAppointment}
                         appoint_func={this.props.functionAppointments}
-                        isVisible={this.state.editModalVisible} 
+                        isVisible={this.state.editModalVisible}
+                        appoint_modalOpenFunc = {this.openAppointmentModal}
+                        appoint_modalCloseFunc ={this.closeModal}
                         
                     />
 

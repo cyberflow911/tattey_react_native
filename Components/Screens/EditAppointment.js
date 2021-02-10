@@ -117,6 +117,7 @@ updateAppointment = () => {
                   this.props.updateStateAppointment(this.state.name,this.state.phone,this.state.comment,this.state.service,this.state.time,this.state.date)
                   this.props.appoint_func() 
                   this.props.closeFunction();
+                  this.props.appoint_modalOpenFunc();
             }
 
         })
