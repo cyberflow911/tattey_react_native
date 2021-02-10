@@ -41,7 +41,7 @@ class Appointments extends React.Component {
     isVisible: false,
     loading: true,
     cur_appointment_id: null,
-    editModalVisible: false,
+    editModalVisible: true,
   };
 
   display_no_appointmentMessage = () => {
