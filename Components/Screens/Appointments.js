@@ -24,24 +24,24 @@ import EditAppointment from './EditAppointment';
 
 class Appointments extends React.Component {
   state = {
-    item: {
-      id: '',
+      item: {
+        id: '',
+        date: '',
+        time: '',
+        status: '',
+        loader: 'notloading',
+      },
       date: '',
-      time: '',
+      time:'',
+      h: '',
+      m: '',
+      name: '',
+      phone: '',
       status: '',
-      loader: 'notloading',
-    },
-    date: '',
-    time:'',
-    h: '',
-    m: '',
-    name: '',
-    phone: '',
-    status: '',
-    isVisible: false,
-    loading: true,
-    cur_appointment_id: null,
-    editModalVisible: true,
+      isVisible: false,
+      loading: true,
+      cur_appointment_id: null,
+      editModalVisible:false,
   };
 
   display_no_appointmentMessage = () => {
@@ -108,7 +108,7 @@ class Appointments extends React.Component {
       isVisible: false,
     });
   };
-  showAppointmentDetails = (item) => { 
+  showAppointmentDetails = (item) => {
     this.setState({
       date: item.date,
       status: item.status,
@@ -353,7 +353,11 @@ class Appointments extends React.Component {
                       size={20}
                       color="red"
                       style={{margin: 5}}
-                      onPress={() => this.setState({editModalVisible: true})}
+                      onPress={() => {
+                        this.setState({editModalVisible:true})
+                        
+                        console.log("setEditCalled",this.state.editModalVisible);
+                      }}
                     />
 
                 </View>
