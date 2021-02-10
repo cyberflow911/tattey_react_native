@@ -341,23 +341,28 @@ class Appointments extends React.Component {
                     {this.capitalizeFirstLetter(this.state.status)}
                   </Text>
                 </View>
-                <Text
-                  style={{
-                    marginLeft: 10,
-                    color: '#000',
-                    fontSize: 25,
-                    textAlign: 'center',
-                    marginTop: 20,
-                    fontWeight: 'bold',
-                  }}>
-                  Appointment Details{' '}
+                <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
+                  <Text
+                    style={{
+                      marginLeft: 10,
+                      color: '#000',
+                      fontSize: 25,
+                      textAlign: 'center', 
+                      fontWeight: 'bold',
+                    }}>
+                    Appointment Details{' '}
+                    
+                  </Text>
                   <Icon
-                    name="edit"
-                    size={20}
-                    color="red"
-                    onPress={() => this.setState({editModalVisible: true})}
-                  />
-                </Text>
+                      name="edit"
+                      size={20}
+                      color="red"
+                      style={{margin: 5}}
+                      onPress={() => this.setState({editModalVisible: true})}
+                    />
+
+                </View>
+                
               </View>
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
