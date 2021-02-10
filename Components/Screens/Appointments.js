@@ -392,7 +392,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.19,
+                    flex: 0.21,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
@@ -407,7 +407,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.18,
+                    flex: 0.2,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
@@ -422,7 +422,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.18,
+                    flex: 0.2,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
@@ -437,7 +437,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.25,
+                    flex: 0.26,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
