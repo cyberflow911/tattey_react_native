@@ -31,6 +31,7 @@ class Appointments extends React.Component {
         status: '',
         loader: 'notloading',
       },
+      
       date: '',
       time:'',
       h: '',
@@ -38,10 +39,12 @@ class Appointments extends React.Component {
       name: '',
       phone: '',
       status: '',
+      email:"",
       isVisible: false,
       loading: true,
       cur_appointment_id: null,
       editModalVisible:false,
+      paymentStatus:''
   };
 
   display_no_appointmentMessage = () => {
@@ -117,8 +120,10 @@ class Appointments extends React.Component {
       phone: item.m_number,
       service: item.service,
       comment: item.comment,
+      email:item.email,
       isVisible: true,
       cur_appointment_id: item.id,
+      paymentStatus:item.payment_status
     });
   };
 
@@ -128,6 +133,14 @@ class Appointments extends React.Component {
         return 'Confirm Appointment';
       case 'confirmed':
         return 'Mark Pending';
+    }
+  };
+  renderStatusPayButton = (status) => {
+    switch (status) {
+      case '0':
+        return 'Confirm Deposit';
+      case '1':
+        return 'Not Deposited';
     }
   };
   CustomRow = (item) => (
@@ -229,8 +242,73 @@ class Appointments extends React.Component {
           Alert.alert('Request Processed Successfully');
           this.props.functionAppointments();
           this.setState({status: tempMSG.status});
+          console.log(tempMSG.status)
         } else {
           Alert.alert(tempMSG.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  processAppointmentPaymentRequest = () => { 
+    RNFetchBlob.fetch(
+      'POST',
+      'https://www.tattey.com/tattey_app/appapis/appointment.php',
+      {
+        Authorization: 'Bearer access-token',
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      [
+        {name: 'processAppointmentPaymentRequest', data: 'true'},
+        {name: 'appointment_idProcess', data: this.state.cur_appointment_id},
+        {name: 'appoint_status', data: this.state.paymentStatus},
+      ],
+    )
+      .then((resp) => { 
+        var tempMSG = JSON.parse(resp.data); 
+        if (tempMSG.msg === 'success') {
+          Alert.alert('Request Processed Successfully');
+          this.props.functionAppointments();
+          this.setState({paymentStatus: tempMSG.status});
+        } else {
+          Alert.alert(tempMSG.msg);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  
+  sendReminder = () => { 
+    RNFetchBlob.fetch(
+      'POST',
+      'https://www.tattbooking.com/tattey_app/appapis/appointment.php',
+      {
+        Authorization: 'Bearer access-token',
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+      },
+      [
+        {name: 'sendReminder', data: 'true'},
+        {name: 'name', data: this.state.name},
+        {name: 'phone', data: this.state.phone},
+        {name: 'date', data: this.state.date},
+        {name: 'time', data: this.state.time},
+        {name: 'email', data: ""+this.state.email},
+      ],
+    )
+      .then((resp) => { 
+        console.log(resp)
+        var tempMSG = JSON.parse(resp.data);
+     
+        if (tempMSG.msg === 'success') {
+          Alert.alert('Reminder Sent  Successfully');
+          this.props.functionAppointments(); 
+        } else {
+          Alert.alert("Unable to Send notification");
         }
       })
       .catch((err) => {
@@ -245,9 +323,9 @@ class Appointments extends React.Component {
   {
       this.setState({editModalVisible:false})
   }
-  updateStateAppointment = (name,phone,comment,service,time,date)=>
+  updateStateAppointment = (name,phone,comment,service,time,date,email)=>
   {
-        this.setState({name:name,phone:phone,comment:comment,service:service,time:time,date:date})
+        this.setState({name:name,phone:phone,comment:comment,service:service,time:time,date:date,email:email})
   }
   render() {
     return (
@@ -354,7 +432,7 @@ class Appointments extends React.Component {
                   <Icon
                       name="edit"
                       size={20}
-                      color="red"
+                      color="black"
                       style={{margin: 5}}
                       onPress={() => {
                         this.setState({editModalVisible:true,isVisible:false}) 
@@ -428,6 +506,22 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
+                    flex: 0.21,
+                    flexDirection: 'column',
+                    color: 'black',
+                    fontSize: 18,
+                  }}>
+                  Email :{' '}
+                </Text>
+                <Text
+                  style={{flex: 0.8, flexDirection: 'column', fontSize: 18}}>
+                  {this.state.email}
+                </Text>
+              </View>
+              
+              <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
+                <Text
+                  style={{
                     flex: 0.2,
                     flexDirection: 'column',
                     color: 'black',
@@ -458,7 +552,7 @@ class Appointments extends React.Component {
               <View
                 style={{
                   flex: 1,
-                  flexDirection: 'row',
+                  flexDirection: 'column',
                   margin: 10,
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -469,11 +563,46 @@ class Appointments extends React.Component {
                     color: 'white',
                     padding: 10,
                     borderRadius: 5,
+                    alignSelf:"stretch",
                     marginTop: 10,
                   }}
                   onPress={() => this.processAppointmentRequest()}>
-                  <Text style={{color: 'white', margin: 5}}>
+                  <Text style={{color: 'white', margin: 5,textAlign: 'center'}}>
                     {this.renderStatusButton(this.state.status)}{' '}
+                  </Text>
+                </TouchableOpacity>
+                {this.props.deposits==1?(
+
+
+                        <TouchableOpacity
+                        style={{
+                          backgroundColor: '#000',
+                          color: 'white', 
+                          alignSelf:"stretch",
+                          padding: 10,
+                          borderRadius: 5,
+                          marginTop: 10, 
+                        }}
+                        onPress={() => this.processAppointmentPaymentRequest()}>
+                        <Text style={{color: 'white', margin: 5,textAlign: 'center'}}>
+                          {this.renderStatusPayButton(this.state.paymentStatus)}{' '} 
+                        </Text>
+                        </TouchableOpacity>
+
+                ):(null)}
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#000',
+                    color: 'white',
+                    padding: 10,
+                    borderRadius: 5,
+                    marginTop: 10, 
+                    alignSelf:"stretch", 
+                    marginBottom: 20,
+                  }}
+                  onPress={() => this.sendReminder()}>
+                  <Text style={{color: 'white', margin: 5,textAlign: 'center'}}>
+                      Send Reminder
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -488,7 +617,8 @@ class Appointments extends React.Component {
                         name={this.state.name}
                         time={this.state.time} 
                         phone={this.state.phone} 
-                        comment={this.state.comment} 
+                        comment={this.state.comment}
+                        email={this.state.email} 
                         service={this.state.service}
                         appoint_id={this.state.cur_appointment_id}
                         updateStateAppointment={this.updateStateAppointment}

@@ -155,8 +155,7 @@ class profile extends React.Component {
     }
      
 
-    render() {
-      console.log(this.props.appMode);
+    render() { 
         return (
            <SafeAreaView style={styles.AndroidSafeArea}>
              {(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android"))?( 
@@ -171,7 +170,7 @@ class profile extends React.Component {
                         
                         <View style={{flex:1,flexDirection:"row",}}> 
                             <View style={{flex:0.9,flexDirection:"column",alignItems:"center" }}>
-                                <Text style={{color:"white",fontSize:25,marginTop:5}} onPress={this.open}>{this.props.detail.name}   <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} /></Text>   
+                                <Text style={{color:"white",fontSize:25,marginTop:5}} onPress={this.open}>{this.props.detail.name.replace(/-/g,' ')}   <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} /></Text>   
                             </View> 
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white",marginTop:15}}>

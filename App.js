@@ -6,10 +6,12 @@ import DefaultPreference from 'react-native-default-preference';
 import Appointments from './Components/Screens/Appointments'
 import Icon from 'react-native-vector-icons/dist/Feather';
 import Profile from './Components/Screens/profile';
+import Deposits from './Components/Screens/Deposits';
 import BottomNavigation, {
   FullTab
 } from 'react-native-material-bottom-navigation'
 import SplashScreen from 'react-native-splash-screen';
+ 
 class App extends React.Component {
   
   state={
@@ -47,6 +49,7 @@ class App extends React.Component {
       barColor: 'black',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
+     
     
   ]
 
@@ -107,8 +110,7 @@ fetch_use_make=(user_id)=>{
                 {   
                   var appoint_date =[];
                   if(result.rowCount!='0')
-                  {
-                    
+                  {  
                     result.result.map(item=>{   
                        appoint_date.push(item.date)
                     });
@@ -156,6 +158,7 @@ fetch_use_make=(user_id)=>{
                      
                      imgs.push({id:"add",image:'',user_id:""});
                     this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name}); 
+            
                     this.fetch_user_appointments();
                   }else
                   {
@@ -225,7 +228,16 @@ fetch_use_make=(user_id)=>{
         this.getUser();
       } 
     });
-    
+    if(!(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android")))
+    {
+      this.tabs.push({
+        key: 'deposits',
+        icon: 'dollar-sign',
+        label: 'Deposit',
+        barColor: 'black',
+        pressColor: 'rgba(255, 255, 255, 0.16)'
+      })
+    }
   }
   
 
@@ -235,29 +247,29 @@ fetch_use_make=(user_id)=>{
   renderTabView=(tab)=>{
     switch(tab)
     {
-      case 'book':
-
+      case 'book': 
         return (<Book user={this.state.user_id} appointment={this.state.appoint_date} appoint_func={this.fetch_user_appointments} counter={1} appointments_whole={this.state.appointments} user_name={this.state.name} />)
       case 'appoint': 
             // this.fetch_user_appointments();
-        return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} /> )
+        return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} deposits={this.state.u_details.deposits} /> )
         case 'profile':
           return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs} appMode={this.state.appMode}/>)
+        case 'deposits':
+          return(<Deposits user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details}   appMode={this.state.appMode}/>)
     }
   }
   render() { 
     return ( 
           <View style={{ flex: 1 }}>
-          <View style={{ flex: 1 }}>  
-            {this.renderTabView(this.state.activeTab)} 
-          
-          </View>
-          <BottomNavigation
-            activeTab={this.state.activeTab}
-            onTabPress={newTab => this.setState({ activeTab: newTab.key })}
-            renderTab={this.renderTab}
-            tabs={this.tabs}
-          />
+            <View style={{ flex: 1 }}>  
+              {this.renderTabView(this.state.activeTab)}
+            </View>
+            <BottomNavigation
+              activeTab={this.state.activeTab}
+              onTabPress={newTab => this.setState({ activeTab: newTab.key })}
+              renderTab={this.renderTab}
+              tabs={this.tabs}
+            />
         </View>
       
     );

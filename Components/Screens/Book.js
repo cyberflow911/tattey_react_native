@@ -25,6 +25,7 @@ class Book extends React.Component {
         time: '',
         service:'',
         comment:"",
+        email:"",
         isDatePickerVisible: false,
         isBooking: false,
         errors:[],
@@ -51,7 +52,7 @@ componentDidMount() {
 } 
     openBookingModal=()=>
     { 
-        console.log("Booking")
+         
             this.setState({ modalVisible: true});
     }
     onDateChange=(date)=> { 
@@ -86,8 +87,7 @@ componentDidMount() {
             }); 
     }
 
-    makeApointmentStructure = (date) => {
-        console.log("called",date);
+    makeApointmentStructure = (date) => { 
            var d  = new Date(date); 
            var new_date_string = d.getFullYear()+"-"+(this.makeTwoDigits(d.getMonth()+1))+"-"+this.makeTwoDigits(d.getDate()) 
             
@@ -180,7 +180,8 @@ componentDidMount() {
         return time.join (''); // return adjusted time or original string
       }
     bookAppointment = () => {
-        this.setState({ isBooking: true }) 
+        this.setState({ isBooking: true })
+        console.log(this.state.email)
         fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
             method: 'POST',
             headers: {
@@ -195,7 +196,8 @@ componentDidMount() {
                 time: this.state.time,
                 temp_user: this.props.user_name,
                 service: this.state.service,
-                comment: this.state.comment
+                comment: this.state.comment,
+                email: this.state.email
             })
         })
             .then((response) => response.json())
@@ -354,18 +356,8 @@ componentDidMount() {
                                         <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
                                             {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Phone </Text></View>     */}
                                             <View style={{flex:1,flexDirection: "column",marginTop:10}}>
-                                                    <View style={{flex:1,flexDirection: "column"}}>
-
-                                                    {/* <View style={{flex:0.3,flexDirection: "column"}}>
-                                                            <Text>
-                                                                Time
-                                                            </Text>
-                                                        </View> */}
-                                                        
-
-                                                        <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center"}}>
-
-                                                               
+                                                    <View style={{flex:1,flexDirection: "column"}}>   
+                                                        <View style={{flex:1,flexDirection: "column",justifyContent: "center",alignItems: "center"}}> 
                                                                 <TouchableOpacity
                                                                     style={{backgroundColor:"#000",color:"white",padding:10,borderRadius:5,marginTop:10}}
                                                                     onPress={() => this.setState({isDatePickerVisible:true})}>
@@ -446,6 +438,36 @@ componentDidMount() {
                                             </View>    
                                             
                                         </View>
+                                        <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                                            {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Service </Text></View>     */}
+                                            <View style={{flex:1,flexDirection: "column"}}>
+                                                    <View style={{flex:1,flexDirection: "row"}}>
+                                                        <View style={{flex:1,flexDirection: "column"}}>
+                                                             <Isao
+                                                                    label={'Email'}
+                                                                    // this is applied as active border and label color
+                                                                    activeColor={'#000'}
+                                                                    // active border height
+                                                                    borderHeight={2}
+                                                                    inputPadding={16}
+                                                                    onChangeText={(text)=>{this.setState({email: text})}}
+                                                                    labelHeight={24}
+                                                                    // this is applied as passive border and label color
+                                                                    passiveColor={'#000'}
+                                                                /> 
+                                                        </View>
+                                                        {/* <View style={{flex:0.35,flexDirection: "column",alignText:"center"}}>
+                                                             
+                                                            <TouchableOpacity
+                                                            style={{backgroundColor:"#000",color:"white",padding:5,borderRadius:5,marginRight:10}}
+                                                            onPress={() => this.setState({ isDatePickerVisible: true })}>
+                                                                <Text style={{color:"white",margin:5,alignText:"center"}}>Select Time</Text>
+                                                            </TouchableOpacity>
+                                                        </View>     */}
+                                                    </View>    
+                                            </View>    
+                                            
+                                        </View>
                                          <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
                                             {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Service </Text></View>     */}
                                             <View style={{flex:1,flexDirection: "column"}}>
@@ -479,6 +501,7 @@ componentDidMount() {
                                             </View>    
                                             
                                         </View>
+                                        
                                         <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
                                             {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Comment </Text></View>     */}
                                             <View style={{flex:1,flexDirection: "column"}}>

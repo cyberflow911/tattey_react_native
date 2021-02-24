@@ -24,6 +24,7 @@ class EditAppointment extends React.Component {
     phone:this.props.phone,
     comment:this.props.comment,
     service:this.props.service,
+    email:this.props.email,
     errors:[],
     isDatePickerVisible:false,
     datePickerMode:'',
@@ -100,7 +101,8 @@ updateAppointment = () => {
             date: this.state.date,
             time: this.state.time, 
             service: this.state.service,
-            comment: this.state.comment
+            comment: this.state.comment,
+            email: this.state.email
         })
     })
         .then((response) => {console.log(response);return response.json()})
@@ -114,7 +116,7 @@ updateAppointment = () => {
                     ],
                     { cancelable: true }
                   ); 
-                  this.props.updateStateAppointment(this.state.name,this.state.phone,this.state.comment,this.state.service,this.state.time,this.state.date)
+                  this.props.updateStateAppointment(this.state.name,this.state.phone,this.state.comment,this.state.service,this.state.time,this.state.date,this.state.email)
                   this.props.appoint_func() 
                   this.props.closeFunction();
                   this.props.appoint_modalOpenFunc();
@@ -386,6 +388,37 @@ isFormValid = () => {
                       passiveColor={'#000'}
                       
                       defaultValue={this.state.phone}
+                    />
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                marginLeft: 20,
+                marginRight: 20,
+              }}>
+              {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Phone </Text></View>     */}
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <View style={{flex: 1, flexDirection: 'column'}}>
+                    <Isao
+                      label={'Email*'}
+                      // this is applied as active border and label color
+                      activeColor={'#000'}
+                      // active border height
+                      borderHeight={2}
+                      inputPadding={16}
+                      onChangeText={(text) => {
+                        this.setState({email: text});
+                      }}
+                      labelHeight={24}
+                      // this is applied as passive border and label color
+                      passiveColor={'#000'}
+                      
+                      defaultValue={this.state.email}
                     />
                   </View>
                 </View>
