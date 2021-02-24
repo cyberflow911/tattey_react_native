@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch,StyleSheet,View,TouchableOpacity,Text, Platform, StatusBar ,SafeAreaView,Alert} from 'react-native';
 import { Isao } from 'react-native-textinput-effects';
 import RNFetchBlob from 'rn-fetch-blob'; 
+import UpgradeNotice from './UpgradeNotice';
 
 class Deposits extends React.Component {
     state = { 
@@ -111,90 +112,93 @@ class Deposits extends React.Component {
     render() {
         return (
           <SafeAreaView style={styles.AndroidSafeArea}>
-              <View style={styles.container}>
+            {(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android"))?( 
+                  <UpgradeNotice upgradeToPro={this.upgradeToPro} error={this.state.error}/>
+             ):( <View style={styles.container}>
               {this.state.errors.length > 0 && (
-                        <View style={{color: "#721c24",
-                            backgroundColor:"#f8d7da",
-                            borderColor: "#f5c6cb",
-                            borderWidth:2,
-                            fontSize:15,
-                            flex:0.1,
-                            flexDirection:"column",
-                            paddingLeft:10,
-                            paddingRight:10}}>
-                        {this.displayErrors(this.state.errors)}
-                        </View>
-                            )}
-                  <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
-                        <View style={{flex:1,flexDirection: "column"}}>
-                                <View style={{flex:1,flexDirection: "row"}}>
-                                    <View style={{flex:1,flexDirection: "column"}}>
-                                          <Text style={{textAlign: "center", fontSize:25,fontWeight: "bold"}}>Deposits</Text>
-                                    </View> 
-                                </View>    
-                        </View>     
-                  </View>
-                  <Switch
-                    trackColor={{ false: "#767577", true: "black" }}
-                    thumbColor={this.state.isEnabled ? "red" : "#f4f3f4"}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={this.toggleSwitch}
-                    value={this.state.isEnabled}
-                  />
-                  <Text>{this.renderDepositText(this.state.isEnabled)}</Text>
-                  <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
-                        <View style={{flex:1,flexDirection: "column"}}>
-                                <View style={{flex:1,flexDirection: "row"}}>
-                                    <View style={{flex:1,flexDirection: "column"}}>
-                                          <Isao
-                                                label={'Paypal Email'} 
-                                                activeColor={'#000'} 
-                                                borderHeight={2}
-                                                inputPadding={16}
-                                                onChangeText={(text)=>{this.setState({email: text})}}
-                                                labelHeight={24} 
-                                                defaultValue={this.state.email}
-                                                passiveColor={'#000'}
-                                            /> 
-                                    </View> 
-                                </View>    
-                        </View>     
-                  </View>
-                  <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
-                        <View style={{flex:1,flexDirection: "column"}}>
-                                <View style={{flex:1,flexDirection: "row"}}>
-                                    <View style={{flex:1,flexDirection: "column"}}>
-                                          <Isao
-                                                label={'Amount'} 
-                                                activeColor={'#000'} 
-                                                borderHeight={2}
-                                                inputPadding={16}
-                                                onChangeText={(text)=>{this.setState({amount: text})}}
-                                                labelHeight={24} 
-                                                defaultValue={this.state.amount}
-                                                passiveColor={'#000'}
-                                            /> 
-                                    </View> 
-                                </View>    
-                        </View>     
-                  </View>
-                  {this.state.isEnabled?(
-                    <TouchableOpacity
-                      style={{
-                        backgroundColor: '#000',
-                        color: 'white',
-                        padding: 10,
-                        borderRadius: 5,
-                        marginTop: 10,
-                      }}
-                      onPress={() =>this.isFormValid()?this.updateDepositsDetail():null}>
-                      <Text style={{color: 'white', margin: 5}}>
-                              Update Deposits Amount
-                      </Text>
-                    </TouchableOpacity>
-                  ):(null)} 
+                      <View style={{color: "#721c24",
+                          backgroundColor:"#f8d7da",
+                          borderColor: "#f5c6cb",
+                          borderWidth:2,
+                          fontSize:15,
+                          flex:0.1,
+                          flexDirection:"column",
+                          paddingLeft:10,
+                          paddingRight:10}}>
+                      {this.displayErrors(this.state.errors)}
+                      </View>
+                          )}
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                      <View style={{flex:1,flexDirection: "column"}}>
+                              <View style={{flex:1,flexDirection: "row"}}>
+                                  <View style={{flex:1,flexDirection: "column"}}>
+                                        <Text style={{textAlign: "center", fontSize:25,fontWeight: "bold"}}>Deposits</Text>
+                                  </View> 
+                              </View>    
+                      </View>     
                 </View>
-
+                <Switch
+                  trackColor={{ false: "#767577", true: "black" }}
+                  thumbColor={this.state.isEnabled ? "red" : "#f4f3f4"}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={this.toggleSwitch}
+                  value={this.state.isEnabled}
+                />
+                <Text>{this.renderDepositText(this.state.isEnabled)}</Text>
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                      <View style={{flex:1,flexDirection: "column"}}>
+                              <View style={{flex:1,flexDirection: "row"}}>
+                                  <View style={{flex:1,flexDirection: "column"}}>
+                                        <Isao
+                                              label={'Paypal Email'} 
+                                              activeColor={'#000'} 
+                                              borderHeight={2}
+                                              inputPadding={16}
+                                              onChangeText={(text)=>{this.setState({email: text})}}
+                                              labelHeight={24} 
+                                              defaultValue={this.state.email}
+                                              passiveColor={'#000'}
+                                          /> 
+                                  </View> 
+                              </View>    
+                      </View>     
+                </View>
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                      <View style={{flex:1,flexDirection: "column"}}>
+                              <View style={{flex:1,flexDirection: "row"}}>
+                                  <View style={{flex:1,flexDirection: "column"}}>
+                                        <Isao
+                                              label={'Amount'} 
+                                              activeColor={'#000'} 
+                                              borderHeight={2}
+                                              inputPadding={16}
+                                              onChangeText={(text)=>{this.setState({amount: text})}}
+                                              labelHeight={24} 
+                                              defaultValue={this.state.amount}
+                                              passiveColor={'#000'}
+                                          /> 
+                                  </View> 
+                              </View>    
+                      </View>     
+                </View>
+                {this.state.isEnabled?(
+                  <TouchableOpacity
+                    style={{
+                      backgroundColor: '#000',
+                      color: 'white',
+                      padding: 10,
+                      borderRadius: 5,
+                      marginTop: 10,
+                    }}
+                    onPress={() =>this.isFormValid()?this.updateDepositsDetail():null}>
+                    <Text style={{color: 'white', margin: 5}}>
+                            Update Deposits Amount
+                    </Text>
+                  </TouchableOpacity>
+                ):(null)} 
+              </View>
+)}
+             
           </SafeAreaView>
                      );
     }

@@ -120,37 +120,7 @@ class profile extends React.Component {
           }
         }).catch((err) => {
           console.log(err)
-        })
-
-
-
-    //   fetch('https://tattey.com/tattey_app/appapis/appointment.php', {
-    //     method: 'POST',
-    //     headers: {
-    //         Accept: 'application/json',
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({
-    //       token_verification: true,
-    //       token:code,
-    //       user_id:this.props.user 
-    //     })
-    // })
-    //     .then((response) => response.json())
-    //     .then(result => { 
-    //         if (result.msg=="success") { 
-    //           
-               
-    //         }else
-    //         {
-    //          
-    //         }
-
-    //     })
-    //     .catch((error) => {
-    //         console.error(error);
-    //     });
-           
+        })          
           
     }
      

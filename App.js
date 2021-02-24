@@ -50,7 +50,13 @@ class App extends React.Component {
       barColor: 'black',
       pressColor: 'rgba(255, 255, 255, 0.16)'
     },
-     
+    {
+      key: 'deposits',
+      icon: 'dollar-sign',
+      label: 'Deposit',
+      barColor: 'black',
+      pressColor: 'rgba(255, 255, 255, 0.16)'
+    }
     
   ]
 
@@ -240,13 +246,7 @@ fetch_use_make=(user_id)=>{
     console.log(this.state.u_details.pro)
         if(!this.state.tabUpdated &&!(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android")) )
         {
-          this.tabs.push({
-            key: 'deposits',
-            icon: 'dollar-sign',
-            label: 'Deposit',
-            barColor: 'black',
-            pressColor: 'rgba(255, 255, 255, 0.16)'
-          })
+          this.tabs.push()
           this.setState({tabUpdated:true})
         }
   }
