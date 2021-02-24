@@ -153,12 +153,21 @@ fetch_use_make=(user_id)=>{
                      if(result.imgs && result.imgs.length>0)
                      {
                       imgs.push(...result.imgs);
-                      console.log("hidesplash")
+                      
                      }
                      
                      imgs.push({id:"add",image:'',user_id:""});
                     this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name}); 
-            
+                    if(this.state.u_details.pro=="1" && (this.state.appMode=="0"||Platform.OS=="android"))
+                    {
+                      this.tabs.push({
+                        key: 'deposits',
+                        icon: 'dollar-sign',
+                        label: 'Deposit',
+                        barColor: 'black',
+                        pressColor: 'rgba(255, 255, 255, 0.16)'
+                      })
+                    }
                     this.fetch_user_appointments();
                   }else
                   {
@@ -175,6 +184,7 @@ fetch_use_make=(user_id)=>{
   hidesplash = ()=>{
      
     SplashScreen.hide()
+    
   }
   saveUser=()=>{
     fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
@@ -228,17 +238,8 @@ fetch_use_make=(user_id)=>{
         this.getUser();
       } 
     });
-    console.log(!(this.state.u_details.pro=="0" && (this.state.appMode=="0"||Platform.OS=="android")));
-    if(!(this.state.u_details.pro=="0" && (this.state.appMode=="0"||Platform.OS=="android")))
-    {
-      this.tabs.push({
-        key: 'deposits',
-        icon: 'dollar-sign',
-        label: 'Deposit',
-        barColor: 'black',
-        pressColor: 'rgba(255, 255, 255, 0.16)'
-      })
-    }
+    
+    
   }
   
 
