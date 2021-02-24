@@ -158,7 +158,7 @@ fetch_use_make=(user_id)=>{
                      
                      imgs.push({id:"add",image:'',user_id:""});
                     this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name}); 
-                    if(this.state.u_details.pro=="1" && (this.state.appMode=="0"||Platform.OS=="android"))
+                    if(this.state.u_details.pro=="1" && (this.state.appMode=="1"||Platform.OS=="android"))
                     {
                       this.tabs.push({
                         key: 'deposits',
