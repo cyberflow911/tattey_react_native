@@ -9,6 +9,7 @@ class Deposits extends React.Component {
         isEnabled:this.props.detail.deposits==0?false:true,
         amount:this.props.detail.amount,
         email:this.props.detail.paypal_email,
+        pro:this.props.detail.pro,
         errors:[]
      }
 
