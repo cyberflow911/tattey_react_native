@@ -228,7 +228,7 @@ fetch_use_make=(user_id)=>{
         this.getUser();
       } 
     });
-    if(!(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android")))
+    if(!(this.state.u_details.pro=="0" && (this.state.appMode=="0"||Platform.OS=="android")))
     {
       this.tabs.push({
         key: 'deposits',
