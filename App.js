@@ -237,6 +237,7 @@ fetch_use_make=(user_id)=>{
 
   componentDidUpdate()
   {
+    console.log(this.state.tabUpdated)
         if(!this.state.tabUpdated && this.state.u_details.pro=="1" && (this.state.appMode=="1"||Platform.OS=="android") )
         {
           this.tabs.push({
