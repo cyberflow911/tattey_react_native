@@ -25,6 +25,7 @@ class App extends React.Component {
     rowCountD:0,
     appMode:1,
     name:null,
+    tabUpdated:false
   }
 
   tabs = [
@@ -116,6 +117,7 @@ fetch_use_make=(user_id)=>{
                     });
                   }
                   this.setState({appointments:result.result,appoint_date:appoint_date,rowCount:result.rowCount,appMode:result.appMode});        
+                  
                   this.hidesplash();
                   // console.log(this.state.appointments)
                   //  appoint_date.push(result.result)
@@ -158,16 +160,7 @@ fetch_use_make=(user_id)=>{
                      
                      imgs.push({id:"add",image:'',user_id:""});
                     this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name}); 
-                    if(this.state.u_details.pro=="1" && (this.state.appMode=="1"||Platform.OS=="android"))
-                    {
-                      this.tabs.push({
-                        key: 'deposits',
-                        icon: 'dollar-sign',
-                        label: 'Deposit',
-                        barColor: 'black',
-                        pressColor: 'rgba(255, 255, 255, 0.16)'
-                      })
-                    }
+                    
                     this.fetch_user_appointments();
                   }else
                   {
@@ -240,6 +233,21 @@ fetch_use_make=(user_id)=>{
     });
     
     
+  }
+
+  componentDidUpdate()
+  {
+        if(!this.state.tabUpdated && this.state.u_details.pro=="1" && (this.state.appMode=="1"||Platform.OS=="android") )
+        {
+          this.tabs.push({
+            key: 'deposits',
+            icon: 'dollar-sign',
+            label: 'Deposit',
+            barColor: 'black',
+            pressColor: 'rgba(255, 255, 255, 0.16)'
+          })
+          this.setState({tabUpdated:true})
+        }
   }
   
 
