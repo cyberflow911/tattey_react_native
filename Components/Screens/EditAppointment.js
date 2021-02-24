@@ -102,7 +102,7 @@ updateAppointment = () => {
             time: this.state.time, 
             service: this.state.service,
             comment: this.state.comment,
-            email: this.state.email
+            email: this.state.email.toLowerCase()
         })
     })
         .then((response) => {console.log(response);return response.json()})

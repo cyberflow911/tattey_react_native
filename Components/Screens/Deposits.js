@@ -38,7 +38,7 @@ class Deposits extends React.Component {
         'Content-Type': 'multipart/form-data',
       }, [
           { name: 'updateDepositsStatus', data: !this.state.isEnabled?("1"):("0")},     
-          { name: 'paypalEmail',data:this.state.email},
+          { name: 'paypalEmail',data:this.state.email.toLowerCase()},
           { name: 'amount',data:""+this.state.amount},
           { name: 'temp_user',data:""+this.props.user}
         ]).then((resp) => { 
@@ -65,7 +65,7 @@ class Deposits extends React.Component {
         'Content-Type': 'multipart/form-data',
       }, [
           { name: 'updateDepositsDetail', data: this.state.isEnabled?("1"):("0")},     
-          { name: 'paypalEmail',data:this.state.email},
+          { name: 'paypalEmail',data:this.state.email.toLowerCase()},
           { name: 'amount',data:""+this.state.amount},
           { name: 'temp_user',data:""+this.props.user}
         ]).then((resp) => { 

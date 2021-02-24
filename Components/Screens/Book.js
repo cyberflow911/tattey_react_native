@@ -197,7 +197,7 @@ componentDidMount() {
                 temp_user: this.props.user_name,
                 service: this.state.service,
                 comment: this.state.comment,
-                email: this.state.email
+                email: this.state.email.toLowerCase()
             })
         })
             .then((response) => response.json())
