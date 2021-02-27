@@ -141,12 +141,11 @@ isFormValid = () => {
     }
   };
 
-  isFormEmpty = ({ time, date, name, phone }) => {
+  isFormEmpty = ({ time, date, name }) => {
     return (
       !time ||
       !date  ||
-      !name.length ||
-      !phone.length
+      !name.length  
     );
   };
   displayErrors = errors =>
@@ -374,7 +373,7 @@ isFormValid = () => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
                     <Isao
-                      label={'Phone*'}
+                      label={'Phone'}
                       // this is applied as active border and label color
                       activeColor={'#000'}
                       // active border height
@@ -405,7 +404,7 @@ isFormValid = () => {
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
                     <Isao
-                      label={'Email*'}
+                      label={'Email'}
                       // this is applied as active border and label color
                       activeColor={'#000'}
                       // active border height

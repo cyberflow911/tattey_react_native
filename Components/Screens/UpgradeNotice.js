@@ -16,7 +16,7 @@ class UpgradeNotice extends React.Component {
                 </View>
                 
                 <View style={{flex:1,flexDirection:"column",alignItems:"center",margin:10,backgroundColor:"#000"}}>
-                     <Text style={{fontWeight:"bold",color: 'white',fontSize:20,marginTop:10}}>Visit Profile Section TO Upgrade </Text>
+                     <Text style={{fontWeight:"bold",color: 'white',fontSize:20,marginTop:10}}>Visit Profile Section To Upgrade </Text>
                      {this.props.error?(
                                             <View style={{color: "#721c24",
                                                 backgroundColor:"#f8d7da",

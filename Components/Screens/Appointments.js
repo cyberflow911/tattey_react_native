@@ -143,12 +143,34 @@ class Appointments extends React.Component {
         return 'Not Deposited';
     }
   };
-  CustomRow = (item) => (
-    <TouchableWithoutFeedback onPress={() => this.showAppointmentDetails(item)}>
-      <View style={styles.container}>
+  CustomRow = (item) => {
+    var backgroundcolor = "";  
+    var color ='';
+    switch (item.status)
+    {
+        case"pending":
+        backgroundcolor = "#FFFF0080"; 
+         
+            break;
+        case "complete":
+          backgroundcolor = "#39FF1480";
+         
+            break;
+        case "confirmed":
+          backgroundcolor = "#39FF1480";
+        
+            break;
+        case "cancelled":    
+        backgroundcolor = "#FF000080";
+    
+            break;
+    }
+    color="#000";
+    return(<TouchableWithoutFeedback onPress={() => this.showAppointmentDetails(item)}>
+      <View style={{...styles.container,backgroundColor:backgroundcolor}}>
         <View style={styles.container_text}>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text style={styles.heading}>
+            <Text style={{...styles.heading,color:color}}>
               {this.capitalizeFirstLetter(item.name)}
             </Text>
             <Icon
@@ -167,7 +189,7 @@ class Appointments extends React.Component {
             />
           </View>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text style={styles.title}>Date : {item.date}</Text>
+            <Text style={{...styles.title,color:color}}>Date : {item.date}</Text>
             <Text
               style={{
                 marginRight: 10,
@@ -175,16 +197,17 @@ class Appointments extends React.Component {
                 flex: 1,
                 color: 'white',
                 textAlign: 'right',
+                color:color
               }}>
               Status : {this.capitalizeFirstLetter(item.status)}
             </Text>
           </View>
-          <Text style={styles.description}>Time : {item.time}</Text>
+          <Text style={{...styles.description,color:color}}>Time : {item.time}</Text>
         </View>
         <View></View>
       </View>
-    </TouchableWithoutFeedback>
-  );
+    </TouchableWithoutFeedback>);
+  }
   componentDidMount() {
     this.props.functionAppointments();
     setTimeout(() => {

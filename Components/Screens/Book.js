@@ -249,12 +249,11 @@ componentDidMount() {
           return true;
         }
       };
-      isFormEmpty = ({ time, selectedStartDate, name, phone }) => {
+      isFormEmpty = ({ time, selectedStartDate, name }) => {
         return (
           !time.length ||
           !selectedStartDate  ||
-          !name.length ||
-          !phone.length
+          !name.length
         );
       };
       displayErrors = errors =>
@@ -419,7 +418,7 @@ componentDidMount() {
                                                         <View style={{flex:1,flexDirection: "column"}}>
 
                                                                 <Isao
-                                                                    label={'Phone*'}
+                                                                    label={'Phone'}
                                                                     // this is applied as active border and label color
                                                                     activeColor={'#000'}
                                                                     // active border height
