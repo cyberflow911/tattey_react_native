@@ -93,7 +93,7 @@ class Deposits extends React.Component {
   
       if (this.isFormEmpty(this.state)) 
       {
-        error = { message: "Fill in all fields" };
+        error = { message: "Fill all fields" };
         this.setState({ errors: errors.concat(error) });
         return false;
       } else {
@@ -103,7 +103,7 @@ class Deposits extends React.Component {
     isFormEmpty = ({ email, amount }) => {
       return (
         !email.length ||
-        !amount  
+        !amount
       );
     };
     displayErrors = errors =>
@@ -117,7 +117,8 @@ class Deposits extends React.Component {
                   <UpgradeNotice upgradeToPro={this.upgradeToPro} error={this.state.error}/>
              ):( <View style={styles.container}>
               {this.state.errors.length > 0 && (
-                      <View style={{color: "#721c24",
+                      <View style={{
+                          color: "#721c24",
                           backgroundColor:"#f8d7da",
                           borderColor: "#f5c6cb",
                           borderWidth:2,
@@ -125,7 +126,10 @@ class Deposits extends React.Component {
                           flex:0.1,
                           flexDirection:"column",
                           paddingLeft:10,
-                          paddingRight:10}}>
+                          paddingRight:10,
+                          paddingTop:15,
+                          margin:30
+                          }}>
                       {this.displayErrors(this.state.errors)}
                       </View>
                           )}
@@ -164,7 +168,7 @@ class Deposits extends React.Component {
                               </View>    
                       </View>     
                 </View>
-                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginTop:30,marginRight:20}}>  
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginTop:60,marginRight:20}}>  
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
@@ -189,7 +193,7 @@ class Deposits extends React.Component {
                       color: 'white',
                       padding: 10,
                       borderRadius: 5,
-                      marginTop: 10,
+                      marginTop: 70,
                     }}
                     onPress={() =>this.isFormValid()?this.updateDepositsDetail():null}>
                     <Text style={{color: 'white', margin: 5}}>
