@@ -10,12 +10,12 @@ import { Isao } from 'react-native-textinput-effects';
 import DefaultPreference from 'react-native-default-preference';
 import Icon from 'react-native-vector-icons/dist/Feather'; 
 import TodayAppointment from './TodayAppointment';
-import Toast from 'react-native-simple-toast';
-
+import Toast from 'react-native-simple-toast'; 
 const LOGO = require('../../assets/img/logo_black.png')
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import moment from 'moment';
+
 class Book extends React.Component {
     state = {
         selectedStartDate: null,
@@ -215,17 +215,17 @@ componentDidMount() {
                         { cancelable: true }
                       );
                     // console.log(new Date(new Date(this.state.selectedStartDate).getDate()+` ${this.state.time}`).toLocaleDateString())
-                    var d = new Date(this.state.selectedStartDate);
-                    var t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-1)+" 12:00 PM"; 
-                    var tt = moment(t, "YYYY-MM-DD HH:mm a");  
-                    var formatted_oneDay = new Date(tt); 
-                    var times = this.state.time.split(":");
-                    var hours  = times[0]-2;
-                    t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())+" "+`${hours}:${times[1]}`;     
-                      tt = moment(t, "YYYY-MM-DD HH:mm a");  
-                    var formatted_2hour = new Date(tt); 
-                    Notification(new Date().getTime(), "Tatt Booking", `Appointment  Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
-                    Notification(formatted_oneDay.getTime(), "Tatt Booking", `Appointment Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
+                    // var d = new Date(this.state.selectedStartDate);
+                    // var t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()-1)+" 12:00 PM"; 
+                    // var tt = moment(t, "YYYY-MM-DD HH:mm a");  
+                    // var formatted_oneDay = new Date(tt); 
+                    // var times = this.state.time.split(":");
+                    // var hours  = times[0]-2;
+                    // t = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())+" "+`${hours}:${times[1]}`;     
+                    //   tt = moment(t, "YYYY-MM-DD HH:mm a");  
+                    // var formatted_2hour = new Date(tt); 
+                    // Notification(new Date().getTime(), "Tatt Booking", `Appointment  Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
+                    // Notification(formatted_oneDay.getTime(), "Tatt Booking", `Appointment Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     // Notification(formatted_2hour.getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     this.setState({ name:"",phone:"",time:"",service:"",comment:"",selectedStartDate:"",isBooking: false, modalVisible: false,counter:1,appointment:[] })
                     this.props.appoint_func() 

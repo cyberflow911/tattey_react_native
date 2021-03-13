@@ -132,8 +132,8 @@ android {
         applicationId "com.tattey"
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
-        versionName "4.0"
+        versionCode 7
+        versionName "4.1"
     }
     splits {
         abi {
