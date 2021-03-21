@@ -14,7 +14,7 @@ import {
 import { Isao } from 'react-native-textinput-effects';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import config from '../../config'
-import Icon from 'react-native-vector-icons/dist/Feather'; 
+import Icon from 'react-native-vector-icons/dist/Feather';  
 
 class EditAppointment extends React.Component {
   state = {
@@ -126,8 +126,7 @@ updateAppointment = () => {
         .catch((error) => {
             console.error(error);
         });
-}
- 
+} 
 isFormValid = () => {
     let errors = [];
     let error;
@@ -149,7 +148,7 @@ isFormValid = () => {
     );
   };
   displayErrors = errors =>
-  errors.map((error, i) => <Text key={i} style={{fontSize:15}}>{error.message}</Text>);
+  errors.map((error, i) => <Text key={i} style={{fontSize:15,color:'white'}}>{error.message}</Text>);
 
 
   render() {   
@@ -182,7 +181,7 @@ isFormValid = () => {
                 </View>
 
                 <Icon
-                  name="x-circle"
+                  name="x"
                   size={20}
                   color="red"
                   onPress={this.props.closeFunction}
@@ -198,9 +197,9 @@ isFormValid = () => {
               {this.state.errors.length > 0 && (
                 <View
                   style={{
-                    color: '#721c24',
-                    backgroundColor: '#f8d7da',
-                    borderColor: '#f5c6cb',
+                    color: 'white',
+                    backgroundColor: '#000',
+                    borderColor: '#000',
                     borderWidth: 2,
                     fontSize: 15,
                     flex: 1,

@@ -9,7 +9,7 @@ class DetailModel extends React.Component {
 
 
     saveDetail = () => {
-        console.log(this.state.name,this.state.about,this.props.user,this.state.role);
+       
 
         RNFetchBlob.fetch('POST', 'https://www.tattey.com/tattey_app/appapis/appointment.php', {
             Authorization: "Bearer access-token",
@@ -86,7 +86,7 @@ class DetailModel extends React.Component {
 
                 </View>
                     
-                <Icon name="x-circle" size={20} color="red"  onPress={() =>this.props.closeModal()} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} />
+                <Icon name="x" size={20} color="red"  onPress={() =>this.props.closeModal()} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} />
               
             </View>
                         
@@ -108,7 +108,7 @@ class DetailModel extends React.Component {
                                             <Isao
                                                 label={'Name*'}
                                                 // this is applied as active border and label color
-                                                activeColor={'#da7071'}
+                                                activeColor={'#000'}
                                                 // active border height
                                                 borderHeight={2}
                                                 inputPadding={16}
@@ -135,7 +135,7 @@ class DetailModel extends React.Component {
                                             <Isao
                                                 label={'About'}
                                                 // this is applied as active border and label color
-                                                activeColor={'#da7071'}
+                                                activeColor={'#000'}
                                                 // active border height
                                                 borderHeight={2}
                                                 multiline={true}
@@ -159,12 +159,11 @@ class DetailModel extends React.Component {
                         {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Phone </Text></View>     */}
                         <View style={{flex:1,flexDirection: "column"}}>
                                 <View style={{flex:1,flexDirection: "row"}}>
-                                    <View style={{flex:1,flexDirection: "column"}}>
-
+                                    <View style={{flex:1,flexDirection: "column"}}> 
                                             <Isao
                                                 label={'Role'}
                                                 // this is applied as active border and label color
-                                                activeColor={'#da7071'}
+                                                activeColor={'#000'}
                                                 // active border height
                                                 borderHeight={2}
                                                 multiline={true}
@@ -175,9 +174,7 @@ class DetailModel extends React.Component {
                                                 labelHeight={24}
                                                 // this is applied as passive border and label color
                                                 passiveColor={'#dadada'}
-                                            />
-                                         
-                
+                                            /> 
                                     </View>
                                      
                                 </View>    
@@ -190,11 +187,11 @@ class DetailModel extends React.Component {
                                 <View style={{flex:1,flexDirection: "row"}}>
                                     <View style={{flex:1,flexDirection: "column"}}>
                                         {this.state.error?(
-                                            <View style={{color: "#721c24",
-                                                backgroundColor:"#f8d7da",
-                                                borderColor: "#f5c6cb",
+                                            <View style={{color: "white",
+                                                backgroundColor:"#000",
+                                                borderColor: "#000",
                                                 borderWidth:2,fontSize:15,flex:1,flexDirection:"column",paddingLeft:10,paddingRight:10,marginTop:10,paddingTop:5,paddingBottom:5}}>
-                                                <Text style={{fontSize:15}}>{this.state.error}</Text>
+                                                <Text style={{fontSize:15,color: "white"}}>{this.state.error}</Text>
                                             </View> 
                                         ):(null)}
                                     
@@ -203,11 +200,8 @@ class DetailModel extends React.Component {
                                     </View>
                                      
                                 </View>    
-                        </View>    
-                        
-                    </View>
-                     
-                 
+                        </View>     
+                    </View> 
                 <View style={{flex: 1,flexDirection:"row",alignItems: "center",justifyContent: "center",marginTop:5}}> 
                         <TouchableOpacity
                             style={{backgroundColor:"#000",color:"white",padding:10,borderRadius:5,marginTop:10}}

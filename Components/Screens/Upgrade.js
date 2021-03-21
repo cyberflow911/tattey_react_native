@@ -8,6 +8,8 @@ const LOGO = require('../../assets/img/logo.png');
 
 class Upgrade extends React.Component {
     state = {code: ''}
+  
+    
     render() {
         return (
             <View style={{flex:1,flexDirection:"column",backgroundColor:"#111" }}>
@@ -33,6 +35,9 @@ class Upgrade extends React.Component {
                             onPress={() =>  this.props.upgradeToPro(this.state.code)}>
                                 <Text style={{color:"white",margin:5,color:"black",textAlign:"center",fontWeight:"bold",fontSize:20}}>Activate</Text>
                         </TouchableOpacity>
+                        <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.props.logout()}>
+                            <Text style={{color: '#fff',textAlign: 'center',fontSize: 20}}>Logout</Text>
+                        </TouchableOpacity> 
                      </View>
                      <Text style={{fontWeight:"bold",color: 'white',fontSize:15,marginTop:10}}>For More Information Visit :</Text>
                      <TouchableWithoutFeedback style={{marginBottom:20}} onPress={() =>{ 
@@ -40,7 +45,7 @@ class Upgrade extends React.Component {
                                 Linking.openURL("https://www.tattbooking.com/");
                                 Toast.show('Copied to Clipboard', Toast.LONG);}}> 
                                 <Text style={{color:"red",marginBottom:20}}>https://www.tattbooking.com/</Text>
-                            </TouchableWithoutFeedback>
+                        </TouchableWithoutFeedback>
                 </View> 
                 
 
@@ -48,5 +53,22 @@ class Upgrade extends React.Component {
         );
     }
 }
-
+const styles = StyleSheet.create({
+    
+    logoutBtn:
+    {
+        backgroundColor: 'red',
+        borderRadius:10,
+        margin:10,
+        padding: 10,
+        marginTop:30
+    },
+            logoutBtntext:
+                {
+                    color: '#fff', 
+                    textAlign: 'center',
+                    fontSize: 20,
+                },
+  
+  });
 export default Upgrade;

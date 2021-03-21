@@ -177,7 +177,7 @@ class Appointments extends React.Component {
               style={{flex: 0.1}}
               size={20}
               color="red"
-              name="x-circle"
+              name="x"
               onPress={() => {
                 this.cancelAppointmentAlert(
                   item.id,
@@ -222,9 +222,9 @@ class Appointments extends React.Component {
     return (
       <View
         style={{
-          color: '#721c24',
-          backgroundColor: '#f8d7da',
-          borderColor: '#f5c6cb',
+          color: 'white',
+          backgroundColor: '#000',
+          borderColor: '#000',
           borderWidth: 2,
           fontSize: 15,
           flex: 0.5,
@@ -239,7 +239,7 @@ class Appointments extends React.Component {
           alignItems: 'center',
           margin: 30,
         }}>
-        <Text style={{fontSize: 15}}>No Appointments Available</Text>
+        <Text style={{fontSize: 15,color: 'white'}}>No Appointments Available</Text>
       </View>
     );
   };
@@ -408,7 +408,7 @@ class Appointments extends React.Component {
                   </View>
 
                   <Icon
-                    name="x-circle"
+                    name="x"
                     size={20}
                     color="red"
                     onPress={() => this.setState({isVisible: false})}
@@ -423,9 +423,9 @@ class Appointments extends React.Component {
 
                 <View
                   style={{
-                    color: '#721c24',
-                    backgroundColor: '#f8d7da',
-                    borderColor: '#f5c6cb',
+                    color: 'white',
+                    backgroundColor: '#000',
+                    borderColor: '#000',
                     borderWidth: 2,
                     fontSize: 15,
                     flex: 1,
@@ -436,7 +436,7 @@ class Appointments extends React.Component {
                     paddingTop: 5,
                     paddingBottom: 5,
                   }}>
-                  <Text style={{fontSize: 15}}>
+                  <Text style={{fontSize: 15,color: 'white'}}>
                     {this.capitalizeFirstLetter(this.state.status)}
                   </Text>
                 </View>
@@ -452,16 +452,7 @@ class Appointments extends React.Component {
                     Appointment Details{' '}
                     
                   </Text>
-                  <Icon
-                      name="edit"
-                      size={20}
-                      color="black"
-                      style={{margin: 5}}
-                      onPress={() => {
-                        this.setState({editModalVisible:true,isVisible:false}) 
-                        console.log("setEditCalled",this.state.editModalVisible);
-                      }}
-                    />
+                   
 
                 </View>
                 
@@ -620,12 +611,26 @@ class Appointments extends React.Component {
                     padding: 10,
                     borderRadius: 5,
                     marginTop: 10, 
-                    alignSelf:"stretch", 
-                    marginBottom: 20,
+                    alignSelf:"stretch",  
                   }}
                   onPress={() => this.sendReminder()}>
                   <Text style={{color: 'white', margin: 5,textAlign: 'center'}}>
                       Send Reminder
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    backgroundColor: '#000',
+                    color: 'white',
+                    padding: 10,
+                    borderRadius: 5,
+                    marginTop: 10, 
+                    alignSelf:"stretch", 
+                    marginBottom: 20,
+                  }}
+                  onPress={() => {this.setState({editModalVisible:true,isVisible:false})}}>
+                  <Text style={{color: 'white', margin: 5,textAlign: 'center'}}>
+                      Edit Appointment
                   </Text>
                 </TouchableOpacity>
               </View>

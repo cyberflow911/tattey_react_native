@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, Linking,ScrollView, Platform, StatusBar, Image,Modal,TouchableWithoutFeedback,TextInput, Button, ActivityIndicator, Dimensions,Alert } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Linking,ScrollView, Platform, TouchableOpacity,StatusBar, Image,Modal,TouchableWithoutFeedback,TextInput, Button, ActivityIndicator, Dimensions,Alert } from 'react-native';
 import Header from './Header';
 import Gallery from './Gallery';
 import config from '../../config';
@@ -10,6 +10,8 @@ import RNFetchBlob from 'rn-fetch-blob';
 import Clipboard from '@react-native-community/clipboard';
 import Toast from 'react-native-simple-toast';
 import Upgrade from './Upgrade';
+import DefaultPreference from 'react-native-default-preference'; 
+import DeviceInfo from 'react-native-device-info';
 
 class profile extends React.Component {
     state = {
@@ -20,6 +22,7 @@ class profile extends React.Component {
         data: null,
         pro:this.props.detail.pro,
         error:null, 
+        macAddr:'',
       }
 
     closeModal = ()=>{
@@ -58,6 +61,11 @@ class profile extends React.Component {
             this.uploadImageToServer();
           }
         });
+      }
+      componentDidMount() {
+        DeviceInfo.getMacAddress().then((mac) => { 
+          this.setState({macAddr:mac})
+        })
       }
     uploadImageToServer = () => { 
         RNFetchBlob.fetch('POST', 'https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
@@ -123,13 +131,40 @@ class profile extends React.Component {
         })          
           
     }
+
+    logout = () => {
+      DefaultPreference.set('user_id',null);
+      this.props.handleModeChange(0)
+      fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type':'application/json' 
+        },
+        body: JSON.stringify({
+            deviceLogout: "true",
+            macAddr:this.state.macAddr     
+        })
+      })
+      .then((response) => response.json())
+      .then(result=>{  
+         var arr = Object.values(result);
+         if(arr[0]===("sucesss"))
+         {  
+               
+         } 
+      })
+      .catch((error) => {
+         console.error(error);
+      });
+    }
      
 
     render() { 
         return (
            <SafeAreaView style={styles.AndroidSafeArea}>
              {(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android"))?( 
-                  <Upgrade upgradeToPro={this.upgradeToPro} error={this.state.error}/>
+                  <Upgrade upgradeToPro={this.upgradeToPro} error={this.state.error} logout={this.logout}/>
              ):(
                <View style={{flex:1,flexDirection:"column",backgroundColor:"#000" }}>
                     <View style={{flex:0.9,flexDirection:"column" }}>
@@ -175,14 +210,16 @@ class profile extends React.Component {
                         </View> 
                     </View>
                     <View style={{flex:1,flexDirection:"column"}}>
-                       {this.renderinnerTab(this.state.mode)}
+                       {this.renderinnerTab(this.state.mode)} 
+                        <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.logout()}>
+                            <Text style={{color: '#fff',textAlign: 'center',fontSize: 20,}}>Logout</Text>
+                        </TouchableOpacity> 
+                    
                     </View>
+                    
                     <DetailModel modalVisible={this.state.modalVisible} closeModal={this.closeModal} user={this.props.user} user_func={this.props.user_func} name={this.props.detail.name} about={this.props.detail.about} role={this.props.detail.role}/>
                </View>
-             )}
-               
-               
-              
+             )} 
            </SafeAreaView>
         );
     }
@@ -192,5 +229,21 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: config.app.color.primaryColor,
         // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-    }});
+    },
+    logoutBtn:
+            {
+                backgroundColor: 'red',
+                borderRadius:10,
+                margin:10,
+                padding: 10,
+                marginTop:30
+            },
+            logoutBtntext:
+                {
+                    color: '#fff', 
+                    textAlign: 'center',
+                    fontSize: 20,
+                },
+  
+  });
 export default profile;

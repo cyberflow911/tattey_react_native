@@ -58,7 +58,10 @@ componentDidMount() {
     onDateChange=(date)=> { 
             if(this.state.selectedStartDate&&date.toString()==this.state.selectedStartDate.toString())
             {
-                if(date<new Date())
+                var curDATE = new Date();
+                curDATE.setDate(curDATE.getDate()-1)
+
+                if(date< curDATE)
                 {
                     Alert.alert(
                         'Alert',
@@ -75,7 +78,7 @@ componentDidMount() {
             }else
             {
 
-                if(!(date<new Date()))
+                if(!(date<curDATE))
                 {
                     Toast.show('Press Again To Book Appointment', Toast.LONG);
                 }
@@ -257,7 +260,7 @@ componentDidMount() {
         );
       };
       displayErrors = errors =>
-      errors.map((error, i) => <Text key={i} style={{fontSize:15}}>{error.message}</Text>);
+      errors.map((error, i) => <Text key={i} style={{fontSize:15,color: 'white'}}>{error.message}</Text>);
     
 
       componentDidUpdate(prevProps, prevState) { 
@@ -332,14 +335,14 @@ componentDidMount() {
 
                                     </View>
                                         
-                                    <Icon name="x-circle" size={20} color="red"  onPress={() =>this.setState({modalVisible:false})} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} />
+                                    <Icon name="x" size={20} color="red"  onPress={() =>this.setState({modalVisible:false})} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} />
                                   
                                 </View>
                                             
                                             {this.state.errors.length > 0 && (
-                                                <View style={{color: "#721c24",
-                                                    backgroundColor:"#f8d7da",
-                                                    borderColor: "#f5c6cb",
+                                                <View style={{color: "white",
+                                                    backgroundColor:"#000",
+                                                    borderColor: "#000",
                                                     borderWidth:2,
                                                     fontSize:15,
                                                     flex:1,
@@ -471,9 +474,7 @@ componentDidMount() {
                                             {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Service </Text></View>     */}
                                             <View style={{flex:1,flexDirection: "column"}}>
                                                     <View style={{flex:1,flexDirection: "row"}}>
-                                                        <View style={{flex:1,flexDirection: "column"}}>
-
-                                                             
+                                                        <View style={{flex:1,flexDirection: "column"}}> 
                                                              <Isao
                                                                     label={'Service'}
                                                                     // this is applied as active border and label color
