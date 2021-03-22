@@ -2,9 +2,20 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView} from 'react-native'
 import Login from './Login'
 import Signup from './Signup'
+import DefaultPreference from 'react-native-default-preference';  
 
 class Auth extends React.Component {
     state = { mode: 0  }
+
+    componentDidMount() {
+        DefaultPreference.get('user_id').then((value)=>{
+            if(value!=null)
+            {
+                this.setState({mode:1})
+            }
+            
+        })
+    }
 
     handleModeChange = (mode) => {
             this.setState({ mode: mode})

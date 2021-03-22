@@ -60,8 +60,9 @@ class Signup extends React.Component {
               this.setState({userStatus:'new'})
             }else
             {
-              this.setState({user_id:value,userStatus:'old'});    
+              this.setState({user_id:value,userStatus:'old',errors:[{message:'Attach An Email to Your Account'}]});    
               this.saveUserTodb();
+              
             }
             
         })

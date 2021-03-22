@@ -150,7 +150,6 @@ isFormValid = () => {
   displayErrors = errors =>
   errors.map((error, i) => <Text key={i} style={{fontSize:15,color:'white'}}>{error.message}</Text>);
 
-
   render() {   
     return (
       <SafeAreaView style={styles.AndroidSafeArea}>
