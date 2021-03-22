@@ -48,6 +48,12 @@ class Signup extends React.Component {
         // "E5:12:D8:E5:69:97" 
         this.setState({macAddr:mac})
       })
+      DefaultPreference.get('user_id').then((value) => {
+        if(value!=null)
+        {
+          this.setState({errors:[{message:'Attach An Email to Your Account'}]})
+        }
+      })
     }
       getUser=()=>{ 
         if(!this.state.isLoading)
@@ -60,7 +66,7 @@ class Signup extends React.Component {
               this.setState({userStatus:'new'})
             }else
             {
-              this.setState({user_id:value,userStatus:'old',errors:[{message:'Attach An Email to Your Account'}]});    
+              this.setState({user_id:value,userStatus:'old'});    
               this.saveUserTodb();
               
             }
