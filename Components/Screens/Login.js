@@ -74,6 +74,7 @@ class Login extends React.Component {
                         .then((response) => response.json())
                         .then(result=>{  
                             var arr = Object.values(result);
+                            console.log(result);
                             if(arr[0]===("success"))
                             {
                                 DefaultPreference.set('user_id',result.user_id);

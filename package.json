@@ -1,5 +1,5 @@
 {
-  "name": "Tatt Booking",
+  "name": "TattBooking",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,6 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
+    
   },
   "dependencies": {
     "@react-native-community/clipboard": "^1.5.1",
