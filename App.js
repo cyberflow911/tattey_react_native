@@ -235,7 +235,7 @@ fetch_use_make=(user_id)=>{
   getUser=()=>{ 
     DefaultPreference.get('user_id').then((value)=>{ 
       console.log('value: ',value);
-        if(value==null||value=='null'||value=='undefined')
+        if(value==null||value=='null'||value=='undefined'|| value==undefined)
         {   
           this.setState({authMode:0}) 
         }else
@@ -250,13 +250,17 @@ fetch_use_make=(user_id)=>{
   componentDidMount() {
     if (Platform.OS === 'android') DefaultPreference.setName('NativeStorage');
     DefaultPreference.get('isFirstTime').then((value)=> { 
-      if(!value)
+     
+      if(value === null)
       {
-        this.setState({appMode: 0})
+       
+        this.setState({authMode:0})
         // this.saveUser();
+        // this.hidesplash();
       }
       else
       {
+        // this.setState({appMode: 0})
         this.getUser();
       } 
     });
@@ -266,7 +270,7 @@ fetch_use_make=(user_id)=>{
 
   componentDidUpdate()
   {
-    console.log(this.state.u_details.pro)
+     
         if(!this.state.tabUpdated &&!(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android")) )
         {
           this.tabs.push()
