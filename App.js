@@ -234,8 +234,8 @@ fetch_use_make=(user_id)=>{
   
   getUser=()=>{ 
     DefaultPreference.get('user_id').then((value)=>{ 
-      console.log(value);
-        if(value==null||value=='null')
+      console.log('value: ',value);
+        if(value==null||value=='null'||value=='undefined')
         {   
           this.setState({authMode:0}) 
         }else
@@ -250,14 +250,13 @@ fetch_use_make=(user_id)=>{
   componentDidMount() {
     if (Platform.OS === 'android') DefaultPreference.setName('NativeStorage');
     DefaultPreference.get('isFirstTime').then((value)=> { 
-      if(value==null)
+      if(!value)
       {
         this.setState({appMode: 0})
         // this.saveUser();
       }
       else
       {
-        
         this.getUser();
       } 
     });
