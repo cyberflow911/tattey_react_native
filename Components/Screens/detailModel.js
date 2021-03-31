@@ -105,18 +105,14 @@ class DetailModel extends React.Component {
                                 <View style={{flex:1,flexDirection: "row"}}>
                                     <View style={{flex:1,flexDirection: "column"}}>
 
-                                            <Isao
-                                                label={'Name*'}
+                                            <TextInput
+                                                placeholder={'Name*'}
                                                 // this is applied as active border and label color
-                                                activeColor={'#000'}
-                                                // active border height
-                                                borderHeight={2}
-                                                inputPadding={16}
+                                                
                                                 onChangeText={(text)=>{this.setState({name: text})}}
-                                                labelHeight={24}
+                                                 
                                                 defaultValue={this.state.name}
-                                                // this is applied as passive border and label color
-                                                passiveColor={'#dadada'}
+                                                style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                                             />
                                          
                 
@@ -132,20 +128,13 @@ class DetailModel extends React.Component {
                                 <View style={{flex:1,flexDirection: "row"}}>
                                     <View style={{flex:1,flexDirection: "column"}}>
 
-                                            <Isao
-                                                label={'About'}
-                                                // this is applied as active border and label color
-                                                activeColor={'#000'}
-                                                // active border height
-                                                borderHeight={2}
-                                                multiline={true}
-                                                style={{textAlignVertical: 'top'}}
-                                                inputPadding={16}
+                                            <TextInput
+                                                placeholder={'About'}
+                                                 
+                                                multiline={true} 
                                                 defaultValue={this.state.about}
                                                 onChangeText={(text)=>{this.setState({about: text})}}
-                                                labelHeight={24}
-                                                // this is applied as passive border and label color
-                                                passiveColor={'#dadada'}
+                                                style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5,textAlignVertical: 'top'}}
                                             />
                                          
                 
@@ -160,20 +149,16 @@ class DetailModel extends React.Component {
                         <View style={{flex:1,flexDirection: "column"}}>
                                 <View style={{flex:1,flexDirection: "row"}}>
                                     <View style={{flex:1,flexDirection: "column"}}> 
-                                            <Isao
-                                                label={'Role'}
-                                                // this is applied as active border and label color
-                                                activeColor={'#000'}
-                                                // active border height
-                                                borderHeight={2}
+                                            <TextInput
+                                                placeholder={'Role'}
+                                                 
                                                 multiline={true}
-                                                style={{textAlignVertical: 'top'}}
-                                                inputPadding={16}
+                                                style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5,textAlignVertical: 'top'}}
+                                          
+                                                 
                                                 defaultValue={this.state.role}
                                                 onChangeText={(text)=>{this.setState({role: text})}}
-                                                labelHeight={24}
-                                                // this is applied as passive border and label color
-                                                passiveColor={'#dadada'}
+                                                 
                                             /> 
                                     </View>
                                      

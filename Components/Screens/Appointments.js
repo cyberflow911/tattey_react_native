@@ -490,7 +490,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.21,
+                    flex: 0.23,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,

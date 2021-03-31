@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Image,Text,TouchableOpacity,ActivityIndicator } from 'react-native';
+import { StyleSheet,View,Image,Text,TouchableOpacity,ActivityIndicator ,TextInput} from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import DefaultPreference from 'react-native-default-preference'; 
 import Toast from 'react-native-simple-toast'; 
@@ -142,7 +142,7 @@ class Login extends React.Component {
         return (
              <View style={styles.main}>
                  <View style={styles.header}>
-                    <Image source={LOGO} style={{height:120,width:300}}/>
+                    <Image source={LOGO} style={{height:145,width:300}}/>
                     <Text style={styles.headerText}>Login</Text>
                  </View>
                  {this.state.errors.length > 0 && (
@@ -156,32 +156,27 @@ class Login extends React.Component {
                                                     flexDirection:"column",
                                                     paddingLeft:10,
                                                     paddingRight:10}}>
-                                                {this.displayErrors(this.state.errors)}
+                                                    {this.displayErrors(this.state.errors)}
                                                 </View>
                                             )}
                  <View style={styles.form}> 
-                    <Hoshi
-                            label={'Email'} 
-                            borderColor={this.handleInputError(this.state.errors,'email')}
+                    <TextInput
+                            placeholder={'Email'} 
+                            
                             // active border height
-                            borderHeight={3}
-                            labelStyle={{color:this.handleInputError(this.state.errors,'email')}}
-                            inputPadding={16} 
+                            style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                             onChangeText={(text)=>this.setState({email:text})}
-                            backgroundColor={'#F9F7F6'}
+                            
                         />
-                    <Hoshi
-                            label={'Password'}
+                    <TextInput
+                            placeholder={'Password'}
                             // this is used as active border color
-                            borderColor="#000" 
-                            labelStyle={{color:"#000"}}
-                            borderHeight={3}
-                            inputPadding={16}
+                            
                             secureTextEntry={true}
                             onChangeText={(text)=>this.setState({password:text})}
                             // this is used to set backgroundColor of label mask.
                             // please pass the backgroundColor of your TextInput container.
-                            backgroundColor={'#F9F7F6'}
+                            style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                         />
                         <TouchableOpacity style={styles.loginBtn} onPress={() =>this.isFormValid()?this.fetch_user():null}>
                             <View style={styles.loginBtnView}>
@@ -259,21 +254,24 @@ const styles = StyleSheet.create({
                         fontSize: 20,
                     },
         loginMessage:{
-            flex:1,
-            flexDirection:"row"
+                flex:1,
+                flexDirection:"row",
+                alignContent: 'center',
+                textAlign: 'center',
+                justifyContent: 'center'
         },
                 loginMessageText:
                 {
                     fontSize:15,
-                    flex:0.4, 
-                    textAlign: 'right'
+                    // flex:1, 
+                    // textAlign: 'right'
                 },
                 loginRedirectText:
                 {
                     color: 'blue',  
-                    flex:1,
+                    // flex:1,
                     fontSize:15,
-                    textAlign: 'left',
+                    // textAlign: 'left',
                 }
 })
 export default Login;

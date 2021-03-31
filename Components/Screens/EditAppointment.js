@@ -15,6 +15,7 @@ import { Isao } from 'react-native-textinput-effects';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import config from '../../config'
 import Icon from 'react-native-vector-icons/dist/Feather';  
+import { TextInput } from 'react-native';
 
 class EditAppointment extends React.Component {
   state = {
@@ -269,6 +270,7 @@ isFormValid = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       marginTop: 15,
+                      marginBottom:15,
                       fontSize: 20,
                     }}>
                     <Text>{this.state.date}</Text>
@@ -314,6 +316,7 @@ isFormValid = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       marginTop: 15,
+                      marginBottom:15,
                       fontSize: 20,
                     }}>
                     <Text>{this.state.time}</Text>
@@ -332,20 +335,17 @@ isFormValid = () => {
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <Isao
-                      label={'Name*'}
-                      // this is applied as active border and label color
-                      activeColor={'#000'}
-                      // active border height
-                      borderHeight={2}
-                      inputPadding={16}
+                    <TextInput
+                      placeholder={'Name*'}
+                       
+                      // active border height 
                       onChangeText={(text) => {
                         this.setState({name: text});
                       }}
-                      labelHeight={24}
-                      // this is applied as passive border and label color
-                      passiveColor={'#000'}
+                       
+                     
                       defaultValue={this.state.name}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                     />
                   </View>
                   {/* <View style={{flex:0.35,flexDirection: "column",alignText:"center"}}>
@@ -370,21 +370,13 @@ isFormValid = () => {
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <Isao
-                      label={'Phone'}
-                      // this is applied as active border and label color
-                      activeColor={'#000'}
-                      // active border height
-                      borderHeight={2}
-                      inputPadding={16}
+                    <TextInput
+                      placeholder={'Phone'} 
                       onChangeText={(text) => {
                         this.setState({phone: text});
-                      }}
-                      labelHeight={24}
-                      // this is applied as passive border and label color
-                      passiveColor={'#000'}
-                      
+                      }} 
                       defaultValue={this.state.phone}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                     />
                   </View>
                 </View>
@@ -401,20 +393,13 @@ isFormValid = () => {
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <Isao
-                      label={'Email'}
-                      // this is applied as active border and label color
-                      activeColor={'#000'}
-                      // active border height
-                      borderHeight={2}
-                      inputPadding={16}
+                    <TextInput
+                      placeholder={'Email'} 
                       onChangeText={(text) => {
                         this.setState({email: text});
                       }}
-                      labelHeight={24}
-                      // this is applied as passive border and label color
-                      passiveColor={'#000'}
-                      
+                     
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                       defaultValue={this.state.email}
                     />
                   </View>
@@ -432,20 +417,13 @@ isFormValid = () => {
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <Isao
-                      label={'Service'}
-                      // this is applied as active border and label color
-                      activeColor={'#000'}
-                      // active border height
-                      borderHeight={2}
-                      inputPadding={16}
+                    <TextInput
+                      placeholder={'Service'}
+                      
                       onChangeText={(text) => {
                         this.setState({service: text});
                       }}
-                      labelHeight={24}
-                      // this is applied as passive border and label color
-                      passiveColor={'#000'}
-                      
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                       defaultValue={this.state.service}
                     />
                   </View>
@@ -471,19 +449,13 @@ isFormValid = () => {
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <Isao
-                      label={'Comment'}
-                      // this is applied as active border and label color
-                      activeColor={'#000'}
-                      // active border height
-                      borderHeight={2}
-                      inputPadding={16}
+                    <TextInput
+                      placeholder={'Comment'}
+                    
                       onChangeText={(text) => {
                         this.setState({comment: text});
                       }}
-                      labelHeight={24}
-                      // this is applied as passive border and label color
-                      passiveColor={'#000'}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                       
                       defaultValue={this.state.comment}
                     />

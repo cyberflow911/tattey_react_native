@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet,View,Image,Text,TouchableOpacity,ActivityIndicator } from 'react-native';
+import { StyleSheet,View,Image,Text,TouchableOpacity,ActivityIndicator,TextInput } from 'react-native';
 import { Hoshi } from 'react-native-textinput-effects';
 import DefaultPreference from 'react-native-default-preference';  
 
@@ -153,7 +153,7 @@ class Signup extends React.Component {
         return (
              <View style={styles.main}>
                  <View style={styles.header}>
-                    <Image source={LOGO} style={{height:120,width:300}}/>
+                    <Image source={LOGO} style={{height:145,width:300}}/>
                     <Text style={styles.headerText}>Signup </Text>
                  </View>
                  {this.state.errors.length > 0 && (
@@ -171,24 +171,18 @@ class Signup extends React.Component {
                                                 </View>
                                             )}
                  <View style={styles.form}> 
-                    <Hoshi
-                            label={'Email'} 
-                            borderColor="#000" 
-                            borderHeight={3}
-                            labelStyle={{color:"#000"}}
-                            inputPadding={16} 
-                            onChangeText={(text)=>this.setState({email:text})}
-                            backgroundColor={'#F9F7F6'}
+                    <TextInput
+                            placeholder={'Email'} 
+                             
+                            onChangeText={(text)=>this.setState({email:text})} 
+                            style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                         />
-                    <Hoshi
-                            label={'Password'} 
-                            borderColor="#000" 
-                            borderHeight={3}
-                            secureTextEntry={true}
-                            labelStyle={{color:"#000"}}
-                            inputPadding={16} 
-                            onChangeText={(text)=>this.setState({password:text})}
-                            backgroundColor={'#F9F7F6'}
+                    <TextInput
+                            placeholder={'Password'} 
+                            
+                            secureTextEntry={true}  
+                            onChangeText={(text)=>this.setState({password:text})} 
+                            style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
                         />
                         <TouchableOpacity style={styles.signupBtn} onPress={() =>this.isFormValid()?this.getUser():null}>
                         <View style={styles.signupBtnView}>
@@ -258,21 +252,25 @@ const styles = StyleSheet.create({
                       fontSize: 20,
                   },
         loginMessage:{
-            flex:1,
-            flexDirection:"row"
+          flex:1,
+          flexDirection:"row",
+          alignContent: 'center',
+          textAlign: 'center',
+          justifyContent: 'center'
+
         },
                 loginMessageText:
                 {
                     fontSize:15,
-                    flex:0.4, 
-                    textAlign: 'right'
+                    // flex:1, 
+                    // textAlign: 'right'
                 },
                 loginRedirectText:
                 {
                     color: 'blue',  
-                    flex:1,
+                    // flex:1,
                     fontSize:15,
-                    textAlign: 'left',
+                    // textAlign: 'left',
                 }
 })
 export default Signup;

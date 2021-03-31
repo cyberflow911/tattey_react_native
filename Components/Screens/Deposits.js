@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch,StyleSheet,View,TouchableOpacity,Text, Platform, StatusBar ,SafeAreaView,Alert} from 'react-native';
+import { Switch,StyleSheet,View,TouchableOpacity,Text, Platform, StatusBar ,TextInput,SafeAreaView,Alert} from 'react-native';
 import { Isao } from 'react-native-textinput-effects';
 import RNFetchBlob from 'rn-fetch-blob'; 
 import UpgradeNotice from './UpgradeNotice';
@@ -154,15 +154,13 @@ class Deposits extends React.Component {
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
-                                        <Isao
-                                              label={'Paypal Email'} 
-                                              activeColor={'#000'} 
-                                              borderHeight={2}
-                                              inputPadding={16}
+                                        <TextInput
+                                              placeholder={'Paypal Email'} 
+                                              
                                               onChangeText={(text)=>{this.setState({email: text})}}
-                                              labelHeight={24} 
+                                            
                                               defaultValue={this.state.email}
-                                              passiveColor={'#000'}
+                                              style={{borderColor:"#000",borderWidth:1,paddingLeft:10,borderRadius:5}}
                                           /> 
                                   </View> 
                               </View>    
@@ -172,15 +170,13 @@ class Deposits extends React.Component {
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
-                                        <Isao
-                                              label={'Amount'} 
-                                              activeColor={'#000'} 
-                                              borderHeight={2}
-                                              inputPadding={16}
+                                        <TextInput
+                                              placeholder={'Amount'} 
+                                              style={{borderColor:"#000",borderWidth:1,paddingLeft:10,borderRadius:5}}
                                               onChangeText={(text)=>{this.setState({amount: text})}}
-                                              labelHeight={24} 
+                                              
                                               defaultValue={this.state.amount}
-                                              passiveColor={'#000'}
+                                             
                                           /> 
                                   </View> 
                               </View>    
