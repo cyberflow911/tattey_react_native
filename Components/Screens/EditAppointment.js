@@ -345,7 +345,10 @@ isFormValid = () => {
                        
                      
                       defaultValue={this.state.name}
-                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+    marginTop:15,
+    padding:10,
+    paddingLeft:15,borderRadius:5}}
                     />
                   </View>
                   {/* <View style={{flex:0.35,flexDirection: "column",alignText:"center"}}>
@@ -376,7 +379,10 @@ isFormValid = () => {
                         this.setState({phone: text});
                       }} 
                       defaultValue={this.state.phone}
-                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+    marginTop:15,
+    padding:10,
+    paddingLeft:15,borderRadius:5}}
                     />
                   </View>
                 </View>
@@ -399,7 +405,10 @@ isFormValid = () => {
                         this.setState({email: text});
                       }}
                      
-                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+    marginTop:15,
+    padding:10,
+    paddingLeft:15,borderRadius:5}}
                       defaultValue={this.state.email}
                     />
                   </View>
@@ -423,7 +432,10 @@ isFormValid = () => {
                       onChangeText={(text) => {
                         this.setState({service: text});
                       }}
-                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+    marginTop:15,
+    padding:10,
+    paddingLeft:15,borderRadius:5}}
                       defaultValue={this.state.service}
                     />
                   </View>
@@ -455,7 +467,10 @@ isFormValid = () => {
                       onChangeText={(text) => {
                         this.setState({comment: text});
                       }}
-                      style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+    marginTop:15,
+    padding:10,
+    paddingLeft:15,borderRadius:5}}
                       
                       defaultValue={this.state.comment}
                     />

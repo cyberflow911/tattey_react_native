@@ -79,7 +79,7 @@ class DetailModel extends React.Component {
                 
                 onSwipe={this.closeModal}
                 onBackdropPress={this.closeModal}>
-                <ScrollView style={{backgroundColor:"#fff"}}>
+                <ScrollView style={{backgroundColor:"#fff",paddingTop:25}}>
                     <View style={styles.nameHeader}>
                     <View style={{flex:1,flexDirection: 'row'}}> 
                 <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}> 
@@ -112,7 +112,11 @@ class DetailModel extends React.Component {
                                                 onChangeText={(text)=>{this.setState({name: text})}}
                                                  
                                                 defaultValue={this.state.name}
-                                                style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                                                style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+                                                    marginTop:15,
+                                                    padding:10,
+                                                    paddingLeft:15,
+                                                    borderRadius:5}}
                                             />
                                          
                 
@@ -134,7 +138,10 @@ class DetailModel extends React.Component {
                                                 multiline={true} 
                                                 defaultValue={this.state.about}
                                                 onChangeText={(text)=>{this.setState({about: text})}}
-                                                style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5,textAlignVertical: 'top'}}
+                                                style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+        marginTop:15,
+        padding:15,
+        paddingLeft:15,borderRadius:5,textAlignVertical: 'top'}}
                                             />
                                          
                 
@@ -153,7 +160,10 @@ class DetailModel extends React.Component {
                                                 placeholder={'Role'}
                                                  
                                                 multiline={true}
-                                                style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5,textAlignVertical: 'top'}}
+                                                style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+        marginTop:15,
+        padding:15,
+        paddingLeft:15,borderRadius:5,textAlignVertical: 'top'}}
                                           
                                                  
                                                 defaultValue={this.state.role}

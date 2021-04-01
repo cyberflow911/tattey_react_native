@@ -150,7 +150,7 @@ class Deposits extends React.Component {
                   value={this.state.isEnabled}
                 />
                 <Text style={{marginTop:10,marginBottom:20}}>{this.renderDepositText(this.state.isEnabled)}</Text>
-                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20,marginTop:40}}>  
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
@@ -160,19 +160,25 @@ class Deposits extends React.Component {
                                               onChangeText={(text)=>{this.setState({email: text})}}
                                             
                                               defaultValue={this.state.email}
-                                              style={{borderColor:"#000",borderWidth:1,paddingLeft:10,borderRadius:5}}
+                                              style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+             marginTop:15,
+             padding:10,
+             paddingLeft:15,borderRadius:5}}
                                           /> 
                                   </View> 
                               </View>    
                       </View>     
                 </View>
-                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginTop:60,marginRight:20}}>  
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginTop:40,marginRight:20}}>
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
                                         <TextInput
                                               placeholder={'Amount'} 
-                                              style={{borderColor:"#000",borderWidth:1,paddingLeft:10,borderRadius:5}}
+                                              style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+             marginTop:15,
+             padding:10,
+             paddingLeft:15,borderRadius:5}}
                                               onChangeText={(text)=>{this.setState({amount: text})}}
                                               
                                               defaultValue={this.state.amount}

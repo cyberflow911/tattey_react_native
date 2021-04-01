@@ -391,7 +391,10 @@ componentDidMount() {
                                                                     placeholder={'Name*'}
                                                                    
                                                                     onChangeText={(text)=>{this.setState({name: text})}}
-                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+                marginTop:15,
+                padding:10,
+                paddingLeft:15,borderRadius:5}}
                                                                 />
                                                              
                                     
@@ -418,7 +421,10 @@ componentDidMount() {
                                                                     placeholder={'Phone'}
                                                                      
                                                                     onChangeText={(text)=>{this.setState({phone: text})}}
-                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+                marginTop:15,
+                padding:10,
+                paddingLeft:15,borderRadius:5}}
                                                                 />
                                                              
                                     
@@ -437,7 +443,10 @@ componentDidMount() {
                                                                     placeholder={'Email'}
                                                                      
                                                                     onChangeText={(text)=>{this.setState({email: text})}}
-                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+                marginTop:15,
+                padding:10,
+                paddingLeft:15,borderRadius:5}}
                                                                 /> 
                                                         </View>
                                                         {/* <View style={{flex:0.35,flexDirection: "column",alignText:"center"}}>
@@ -461,7 +470,10 @@ componentDidMount() {
                                                                     placeholder={'Service'}
                                                                      
                                                                     onChangeText={(text)=>{this.setState({service: text})}}
-                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+                marginTop:15,
+                padding:10,
+                paddingLeft:15,borderRadius:5}}
                                                                 />
                                     
                                                         </View>
@@ -488,7 +500,10 @@ componentDidMount() {
                                                                     placeholder={'Comment'}
                                                                      
                                                                     onChangeText={(text)=>{this.setState({comment: text})}}
-                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                                                                    style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+                marginTop:15,
+                padding:10,
+                paddingLeft:15,borderRadius:5}}
                                                                 />
                                                              
                                     

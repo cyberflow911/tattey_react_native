@@ -164,7 +164,10 @@ class Login extends React.Component {
                             placeholder={'Email'} 
                             
                             // active border height
-                            style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                            style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+        marginTop:15,
+        padding:10,
+        paddingLeft:15,borderRadius:5}}
                             onChangeText={(text)=>this.setState({email:text})}
                             
                         />
@@ -176,7 +179,10 @@ class Login extends React.Component {
                             onChangeText={(text)=>this.setState({password:text})}
                             // this is used to set backgroundColor of label mask.
                             // please pass the backgroundColor of your TextInput container.
-                            style={{borderColor:"#000",borderWidth:1,marginBottom:10,paddingLeft:10,borderRadius:5}}
+                            style={{borderColor:"#000",borderWidth:1,marginBottom:15,
+        marginTop:15,
+        padding:10,
+        paddingLeft:15,borderRadius:5}}
                         />
                         <TouchableOpacity style={styles.loginBtn} onPress={() =>this.isFormValid()?this.fetch_user():null}>
                             <View style={styles.loginBtnView}>
@@ -215,7 +221,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'column',  
         alignItems: 'center',
-        margin:10
+        margin:10,
+        marginTop:30
     },  
         header: {
                 

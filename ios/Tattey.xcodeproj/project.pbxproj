@@ -811,7 +811,7 @@
 				);
 				INFOPLIST_FILE = Tattey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.4;
+				MARKETING_VERSION = 4.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -819,7 +819,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tattey-app";
 				PRODUCT_NAME = "Tattey Booking";
-				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "TattBook TattooLV Distribution";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -878,7 +878,7 @@
 				);
 				INFOPLIST_FILE = Tattey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 4.4;
+				MARKETING_VERSION = 4.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -886,7 +886,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.tattey-app";
 				PRODUCT_NAME = "Tattey Booking";
-				PROVISIONING_PROFILE_SPECIFIER = "App Store";
+				PROVISIONING_PROFILE_SPECIFIER = "TattBook TattooLV Distribution";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
