@@ -35,9 +35,9 @@ class Upgrade extends React.Component {
                             onPress={() =>  this.props.upgradeToPro(this.state.code)}>
                                 <Text style={{color:"white",margin:5,color:"black",textAlign:"center",fontWeight:"bold",fontSize:20}}>Activate</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.props.logout()}>
+                        {/* <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.props.logout()}>
                             <Text style={{color: '#fff',textAlign: 'center',fontSize: 20}}>Logout</Text>
-                        </TouchableOpacity> 
+                        </TouchableOpacity>  */}
                      </View>
                      <Text style={{fontWeight:"bold",color: 'white',fontSize:15,marginTop:10}}>For More Information Visit :</Text>
                      <TouchableWithoutFeedback style={{marginBottom:20}} onPress={() =>{ 

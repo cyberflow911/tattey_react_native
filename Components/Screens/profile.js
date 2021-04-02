@@ -211,10 +211,10 @@ class profile extends React.Component {
                     </View>
                     <View style={{flex:1,flexDirection:"column"}}>
                        {this.renderinnerTab(this.state.mode)} 
-                        <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.logout()}>
+                        {/* <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.logout()}>
                             <Text style={{color: '#fff',textAlign: 'center',fontSize: 20,}}>Logout</Text>
                         </TouchableOpacity> 
-                    
+                     */}
                     </View>
                     
                     <DetailModel modalVisible={this.state.modalVisible} closeModal={this.closeModal} user={this.props.user} user_func={this.props.user_func} name={this.props.detail.name} about={this.props.detail.about} role={this.props.detail.role}/>

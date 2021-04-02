@@ -1,5 +1,5 @@
 {
-  "name": "TattBooking",
+  "name": "",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "build:ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'",
-    "build:android":"react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res"
+    "build:android": "react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --assets-dest ./android/app/src/main/res"
   },
   "dependencies": {
     "@react-native-community/clipboard": "^1.5.1",
@@ -27,6 +27,7 @@
     "react-native-fast-image": "^8.3.4",
     "react-native-gesture-handler": "~1.8.0",
     "react-native-image-picker": "^1.1.0",
+    "react-native-keyboard-aware-scroll-view": "^0.9.3",
     "react-native-material-bottom-navigation": "^1.0.5",
     "react-native-modal-datetime-picker": "^9.1.0",
     "react-native-push-notification": "^7.0.0",

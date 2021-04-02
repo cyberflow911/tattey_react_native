@@ -3,6 +3,7 @@ import { Switch,StyleSheet,View,TouchableOpacity,Text, Platform, StatusBar ,Text
 import { Isao } from 'react-native-textinput-effects';
 import RNFetchBlob from 'rn-fetch-blob'; 
 import UpgradeNotice from './UpgradeNotice';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class Deposits extends React.Component {
     state = { 
@@ -112,6 +113,7 @@ class Deposits extends React.Component {
      renderDepositText=status=>status?("Deposits Are Turned ON"):("Deposits Are Turned OFF")
     render() {
         return (
+          <KeyboardAwareScrollView>
           <SafeAreaView style={styles.AndroidSafeArea}>
             {(this.state.pro=="0" && (this.props.appMode=="0"||Platform.OS=="android"))?( 
                   <UpgradeNotice upgradeToPro={this.upgradeToPro} error={this.state.error}/>
@@ -143,14 +145,14 @@ class Deposits extends React.Component {
                       </View>     
                 </View>
                 <Switch
-                  trackColor={{ false: "#767577", true: "black" }}
-                  thumbColor={this.state.isEnabled ? "red" : "#f4f3f4"}
+                  trackColor={{ false: "#767577", true: "green" }}
+                  thumbColor={this.state.isEnabled ? "green" : "#f4f3f4"}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={this.toggleSwitch}
                   value={this.state.isEnabled}
                 />
                 <Text style={{marginTop:10,marginBottom:20}}>{this.renderDepositText(this.state.isEnabled)}</Text>
-                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20,marginTop:40}}>  
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20,marginTop:20}}>  
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
@@ -160,16 +162,19 @@ class Deposits extends React.Component {
                                               onChangeText={(text)=>{this.setState({email: text})}}
                                             
                                               defaultValue={this.state.email}
-                                              style={{borderColor:"#000",borderWidth:1,marginBottom:15,
-             marginTop:15,
-             padding:10,
-             paddingLeft:15,borderRadius:5}}
+                                              style={{
+                                                      borderColor:"#000",
+                                                      borderWidth:1,
+                                                      marginBottom:15,
+                                                      marginTop:15,
+                                                      padding:10,
+                                                      paddingLeft:15,borderRadius:5}}
                                           /> 
                                   </View> 
                               </View>    
                       </View>     
                 </View>
-                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginTop:40,marginRight:20}}>
+                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginTop:10,marginRight:20}}>
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
@@ -207,7 +212,9 @@ class Deposits extends React.Component {
 )}
              
           </SafeAreaView>
+          </KeyboardAwareScrollView>
                      );
+                     
     }
 
 }
