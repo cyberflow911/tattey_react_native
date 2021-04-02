@@ -145,7 +145,7 @@ class Deposits extends React.Component {
                       </View>     
                 </View>
                 <Switch
-                  trackColor={{ false: "#767577", true: "green" }}
+                  trackColor={{ false: "#767577", true: "black" }}
                   thumbColor={this.state.isEnabled ? "green" : "#f4f3f4"}
                   ios_backgroundColor="#3e3e3e"
                   onValueChange={this.toggleSwitch}
