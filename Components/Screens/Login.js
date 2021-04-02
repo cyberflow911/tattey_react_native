@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
                         fontSize: 20,
                     },
         loginMessage:{
-                flex:1,
+                flex:0.25,
                 flexDirection:"row",
                 alignContent: 'center',
                 textAlign: 'center',
