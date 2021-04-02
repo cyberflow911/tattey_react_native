@@ -135,7 +135,7 @@ class Deposits extends React.Component {
                       {this.displayErrors(this.state.errors)}
                       </View>
                           )}
-                <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                <View style={{flex:0.3,flexDirection: "row",margin:20}}>  
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
                                   <View style={{flex:1,flexDirection: "column"}}>
@@ -151,7 +151,7 @@ class Deposits extends React.Component {
                   onValueChange={this.toggleSwitch}
                   value={this.state.isEnabled}
                 />
-                <Text style={{marginTop:10,marginBottom:20}}>{this.renderDepositText(this.state.isEnabled)}</Text>
+                <Text style={{marginTop:20,marginBottom:20}}>{this.renderDepositText(this.state.isEnabled)}</Text>
                 <View style={{flex:0.2,flexDirection: "row",marginLeft:20,marginRight:20,marginTop:20}}>  
                       <View style={{flex:1,flexDirection: "column"}}>
                               <View style={{flex:1,flexDirection: "row"}}>
