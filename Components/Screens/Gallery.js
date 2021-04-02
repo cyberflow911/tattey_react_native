@@ -33,7 +33,7 @@ class Gallery extends React.Component {
             <TouchableWithoutFeedback onPress={() =>this.setState({image:image.image,imageModalVisible:true})} >
               <View style={{flex:1/3,flexDirection: "row",margin:3}}>
                   <Image source={{uri:image.image}} key={image.id} style={{ height: 90, flex:1}}/> 
-                  <Icon name="x-circle" size={20} color="red"  onPress={() =>this.deletePhotoAlert(image.id)} style={{flex:0.2,flexDirection: 'column',textAlign:"center"}} />
+                  <Icon name="x" size={20} color="red"  onPress={() =>this.deletePhotoAlert(image.id)} style={{flex:0.2,flexDirection: 'column',textAlign:"center"}} />
               </View>
             </TouchableWithoutFeedback>
           );
