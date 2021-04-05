@@ -265,7 +265,8 @@ const styles = StyleSheet.create({
                 flexDirection:"row",
                 alignContent: 'center',
                 textAlign: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                
         },
                 loginMessageText:
                 {
