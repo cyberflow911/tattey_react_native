@@ -189,12 +189,12 @@ class Appointments extends React.Component {
             />
           </View>
           <View style={{flex: 1, flexDirection: 'row'}}>
-            <Text style={{...styles.title,color:color}}>Date : {item.date}</Text>
+            <Text style={{...styles.title,color:color}}>Date: { new Date(item.date+"T"+item.time).toDateString()}</Text>
             <Text
               style={{
                 marginRight: 10,
                 flexDirection: 'column',
-                flex: 1,
+                flex: 0.7,
                 color: 'white',
                 textAlign: 'right',
                 color:color
@@ -469,7 +469,8 @@ class Appointments extends React.Component {
                 </Text>
                 <Text
                   style={{flex: 0.8, flexDirection: 'column', fontSize: 18}}>
-                  {new Date(this.state.date).toDateString()}
+                  {new Date(this.state.date+"T"+this.state.time).toDateString()}
+            {console.log(this.state.date)}
                 </Text>
               </View>
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
@@ -490,7 +491,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.23,
+                    flex: 0.26,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
@@ -536,7 +537,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.2,
+                    flex: 0.3,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
@@ -551,7 +552,7 @@ class Appointments extends React.Component {
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
                 <Text
                   style={{
-                    flex: 0.26,
+                    flex: 0.3,
                     flexDirection: 'column',
                     color: 'black',
                     fontSize: 18,
@@ -586,8 +587,6 @@ class Appointments extends React.Component {
                   </Text>
                 </TouchableOpacity>
                 {this.props.deposits==1?(
-
-
                         <TouchableOpacity
                         style={{
                           backgroundColor: '#000',
