@@ -34,6 +34,8 @@ class UpgradeNotice extends React.Component {
                                 <Text style={{color:"white",margin:5,color:"black",textAlign:"center",fontWeight:"bold",fontSize:20}}>Activate</Text>
                         </TouchableOpacity>
                      </View> */}
+                      
+                    
                      <Text style={{fontWeight:"bold",color: 'white',fontSize:15,marginTop:10}}>For More Information Visit :</Text>
                      <TouchableWithoutFeedback style={{marginBottom:20}} onPress={() =>{ 
                                 Clipboard.setString("https://www.tattbooking.com/")
