@@ -211,9 +211,9 @@ class profile extends React.Component {
                     </View>
                     <View style={{flex:1,flexDirection:"column"}}>
                        {this.renderinnerTab(this.state.mode)} 
-                        <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.logout()}>
+                        {/* <TouchableOpacity style={styles.logoutBtn} onPress={() =>this.logout()}>
                             <Text style={{color: '#fff',textAlign: 'center',fontSize: 20,}}>Logout</Text>
-                        </TouchableOpacity> 
+                        </TouchableOpacity>  */}
                     
                     </View>
                     
