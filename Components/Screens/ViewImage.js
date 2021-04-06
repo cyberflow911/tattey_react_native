@@ -11,7 +11,7 @@ class ViewImage extends React.Component {
     render() {
         return (
             <View>
-            <Modal
+            <Modal  
                 style={styles.Model}
                 animationType="slide"
                 transparent={false}

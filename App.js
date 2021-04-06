@@ -253,7 +253,7 @@ fetch_use_make=(user_id)=>{
      
       if(value === null)
       {
-       
+        DefaultPreference.set('isFirstTime',"no");
         this.setState({authMode:0})
         // this.saveUser();
         // this.hidesplash();

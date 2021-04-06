@@ -9,6 +9,7 @@ class Auth extends React.Component {
 
     componentDidMount() {
         DefaultPreference.get('user_id').then((value)=>{
+            console.log(value)
             if(value!=null)
             {
                 this.setState({mode:1})

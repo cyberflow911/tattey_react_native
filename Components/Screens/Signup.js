@@ -49,6 +49,7 @@ class Signup extends React.Component {
         this.setState({macAddr:mac})
       })
       DefaultPreference.get('user_id').then((value) => {
+
         if(value!=null)
         {
           this.setState({errors:[{message:'Attach An Email to Your Account'}]})
@@ -87,12 +88,12 @@ class Signup extends React.Component {
                 })
                 .then((response) => response.json())
                 .then(result=>{  
-                   var arr = Object.values(result);
+                   var arr = Object.values(result); 
                    if(arr[0]===("sucesss"))
                    {  
                         var user_id = (parseInt(arr[1])+1)+""+new Date().getTime(); 
                         DefaultPreference.set('user_id',user_id); 
-                        DefaultPreference.set('isFirstTime',"false");
+                        DefaultPreference.set('isFirstTime',"no");
                         this.setState({user_id:user_id}); 
                         this.saveUserTodb(); 
                    } 
@@ -106,7 +107,7 @@ class Signup extends React.Component {
                   method: 'POST',
                   headers: {
                     Accept: 'application/json',
-                    'Content-Type':'application/json' 
+                    'Content-Type':'application/json'
                   },
                   body: JSON.stringify({
                       email: this.state.email,
@@ -122,7 +123,7 @@ class Signup extends React.Component {
                   console.log(result);
                    if(result.msg==="success")
                    {  
-                       
+                        
                         this.props.setStateFunction(this.state.user_id)
                         this.props.user_detailsFunction();
                    }
