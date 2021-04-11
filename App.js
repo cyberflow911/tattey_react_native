@@ -27,7 +27,8 @@ class App extends React.Component {
     appMode:1,
     name:null,
     tabUpdated:false,
-    authMode:1 
+    authMode:1,
+    slots:[]
   }
 
   tabs = [
@@ -143,7 +144,7 @@ fetch_use_make=(user_id)=>{
   {
     this.setState({user_id:user_id});
   }
-  fetch_user_details = ()=>{ 
+  fetch_user_details = ()=>{
   
     fetch('https://www.tattbooking.com/tattey_app/appapis/appointment.php', {
               method: 'POST',
@@ -158,7 +159,7 @@ fetch_use_make=(user_id)=>{
             })
             .then((response) => response.json())
             .then(result=>{  
-              console.log("user_id",this.state.user_id,"user_deatil : ",result.result)
+              console.log("user_id",this.state.user_id,"user_deatil : ",result.slots)
                 if(result.msg=="success")
                 {   
                   if(result.rowCount!='0')
@@ -179,7 +180,7 @@ fetch_use_make=(user_id)=>{
                           imgs.push(...result.imgs); 
                         } 
                         imgs.push({id:"add",image:'',user_id:""});
-                        this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name,authMode:1});  
+                        this.setState({u_details:result.result ,imgs:imgs,rowCountD:result.rowCount,name:result.result.name,authMode:1,slots:result.slots});  
                
                         this.fetch_user_appointments(); 
                     }
@@ -280,7 +281,10 @@ fetch_use_make=(user_id)=>{
   
 
 
-
+updateSlots =(slots)=>
+{
+  this.setState({slots:slots})
+}
   
   renderTabView=(tab)=>{
     switch(tab)
@@ -291,7 +295,7 @@ fetch_use_make=(user_id)=>{
             // this.fetch_user_appointments();
         return (<Appointments appointments={this.state.appointments} functionAppointments={this.fetch_user_appointments} rowCount={this.state.rowCount} deposits={this.state.u_details.deposits} /> )
         case 'profile':
-          return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs} appMode={this.state.appMode} handleModeChange={this.handleModeChange}/>)
+          return(<Profile user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details} imgs={this.state.imgs} appMode={this.state.appMode} handleModeChange={this.handleModeChange} slots={this.state.slots} slotUpdate={this.updateSlots}/>)
         case 'deposits':
           return(<Deposits user={this.state.user_id} user_func={this.fetch_user_details} detail={this.state.u_details}   appMode={this.state.appMode}/>)
     }

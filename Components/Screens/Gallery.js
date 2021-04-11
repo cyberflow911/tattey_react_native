@@ -145,7 +145,7 @@ class Gallery extends React.Component {
     render() {  
         return (
           <>
-            <FlatList data={this.props.imgs} renderItem={({item})=>this.renderItem(item)}  keyExtractor={item => item.id} numColumns={3}/> 
+            <FlatList data={this.props.imgs} renderItem={({item})=>this.renderItem(item)}  keyExtractor={(item) => item.id} numColumns={3}/> 
             {this.state.imageModalVisible?(<ViewImage image={this.state.image} isVisible={this.state.imageModalVisible} closeModal={this.closeModal}/>):(null)  }
           </>
         );

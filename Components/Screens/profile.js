@@ -12,7 +12,7 @@ import Toast from 'react-native-simple-toast';
 import Upgrade from './Upgrade';
 import DefaultPreference from 'react-native-default-preference'; 
 import DeviceInfo from 'react-native-device-info';
-
+import About from './About'
 class profile extends React.Component {
     state = {
         modalVisible:false,
@@ -23,6 +23,7 @@ class profile extends React.Component {
         pro:this.props.detail.pro,
         error:null, 
         macAddr:'',
+        about:this.props.detail.about
       }
 
     closeModal = ()=>{
@@ -31,6 +32,14 @@ class profile extends React.Component {
     open = ()=>{
         this.setState({modalVisible:true})
     }
+    updateBioInState = (text)=>
+    {
+      this.setState({about:text})
+    }
+
+
+
+
     selectPhotoTapped() {
         const options = {
           quality: 1.0,
@@ -87,22 +96,28 @@ class profile extends React.Component {
           console.log(err)
         })
       }
-
+updateAllChilds = () => {
+  this.setState({
+    about:this.props.detail.about
+  })
+}
     renderinnerTab = (mode)=>
-    {
+    { 
         switch(mode)
         {
             case 1:
                 return  (<Gallery user={this.props.user} imgs={this.props.imgs} user_func={this.props.user_func} name={this.props.detail.name}/>);
             case 2: 
-                return (<View style={{flex:1,flexDirection:"row"}}>
-                            <View style={{flex:0.9,flexDirection:"column" }}>
-                                <Text style={{color: 'white',fontWeight: 'bold',fontSize:15}}>{this.props.detail.about}</Text>
-                            </View>
-                            <View style={{flex:0.05,flexDirection:"column" }}>
-                                   <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} />
-                            </View>
-                        </View>
+                return (
+                <About user={this.props.user} user_func={this.props.user_func} bio={this.props.detail.about} updateBioInState={this.updateBioInState} slots={this.props.slots} slotUpdate={this.props.slotUpdate}/>
+                //<View style={{flex:1,flexDirection:"row"}}>
+      //             <View style={{flex:0.9,flexDirection:"column" }}>
+      //                 <Text style={{color: 'white',fontWeight: 'bold',fontSize:15}}>{this.props.detail.about}</Text>
+      //             </View>
+      //             <View style={{flex:0.05,flexDirection:"column" }}>
+      //                    <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} />
+      //             </View>
+                //</View>
                 )
         }
     }
@@ -117,6 +132,7 @@ class profile extends React.Component {
           { name: 'user_id', data: this.state.user_id },
           { name: 'token', data: code },
         ]).then((resp) => { 
+         
           var tempMSG = JSON.parse(resp.data);
          
           if (tempMSG.msg === "success") {
@@ -159,7 +175,9 @@ class profile extends React.Component {
       });
     }
      
-
+    changeTabMode = (mode) => {
+        this.setState({mode: mode});
+    }
     render() { 
         return (
            <SafeAreaView style={styles.AndroidSafeArea}>
@@ -216,8 +234,20 @@ class profile extends React.Component {
                         </TouchableOpacity>  */}
                     
                     </View>
+                    {this.state.modalVisible?(
+
+                        <DetailModel 
+                          modalVisible={this.state.modalVisible} 
+                          closeModal={this.closeModal}
+                          user={this.props.user} 
+                          user_func={this.props.user_func} 
+                          name={this.props.detail.name} 
+                          about={this.props.detail.about} 
+                          role={this.props.detail.role} 
+                          changeTabMode={this.changeTabMode}
+                      />
+                    ):(null)}
                     
-                    <DetailModel modalVisible={this.state.modalVisible} closeModal={this.closeModal} user={this.props.user} user_func={this.props.user_func} name={this.props.detail.name} about={this.props.detail.about} role={this.props.detail.role}/>
                </View>
              )} 
            </SafeAreaView>

@@ -18,8 +18,8 @@ class DetailModel extends React.Component {
           }, [ 
             { name: 'userName', data: this.state.name },
             { name: 'temp_id', data: this.props.user },
-            { name: 'role', data: this.state.role },
-            { name: 'about', data: this.state.about },
+            { name: 'role', data: this.state.role }, 
+            {name: 'about', data: this.state.about}
 
           ]).then((resp) => {
             console.log(resp);
@@ -28,6 +28,8 @@ class DetailModel extends React.Component {
             if (tempMSG.msg === "success") { 
                 this.setState({error:""});
                 this.props.user_func()
+                this.props.changeTabMode(1)
+                
                 this.props.closeModal()
                
             } else if(tempMSG.msg === "usernameError")
@@ -72,26 +74,21 @@ class DetailModel extends React.Component {
                 animationType="slide"
                 transparent={false}
                 visible={this.props.modalVisible}
-                onRequestClose={this.closeModal} // Used to handle the Android Back Button
+                onRequestClose={this.props.closeModal} // Used to handle the Android Back Button
                 backdropOpacity={0}
                 swipeToClose={true}
                 // swipeDirection="left"
                 
-                onSwipe={this.closeModal}
-                onBackdropPress={this.closeModal}>
+                onSwipe={this.props.closeModal}
+                onBackdropPress={this.props.closeModal}>
                 <ScrollView style={{backgroundColor:"#fff",paddingTop:25}}>
                     <View style={styles.nameHeader}>
-                    <View style={{flex:1,flexDirection: 'row'}}> 
-                <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}> 
+                        <View style={{flex:1,flexDirection: 'row'}}> 
+                            <View style={{flex:1,flexDirection: 'column',alignItems: 'center'}}> 
 
-                </View>
-                    
-                <Icon name="x" size={20} color="red"  onPress={() =>this.props.closeModal()} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} />
-              
-            </View>
-                        
-                        
-                        
+                            </View> 
+                                    <Icon name="x" size={20} color="red"  onPress={() =>this.props.closeModal()} style={{flex:0.1,flexDirection: 'column',textAlign:"right",margin:10}} /> 
+                        </View>  
                         <Text style={{ marginLeft: 10, color: "#000", fontSize: 25,textAlign: "center",marginTop:10,fontWeight: "bold"}}>Profile Details</Text>
                     </View>
                     <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
@@ -139,9 +136,9 @@ class DetailModel extends React.Component {
                                                 defaultValue={this.state.about}
                                                 onChangeText={(text)=>{this.setState({about: text})}}
                                                 style={{borderColor:"#000",borderWidth:1,marginBottom:15,
-        marginTop:15,
-        padding:15,
-        paddingLeft:15,borderRadius:5,textAlignVertical: 'top'}}
+                                                marginTop:15,
+                                                padding:15,
+                                                paddingLeft:15,borderRadius:5,textAlignVertical: 'top'}}
                                             />
                                          
                 

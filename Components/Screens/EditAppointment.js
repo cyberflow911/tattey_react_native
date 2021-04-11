@@ -26,6 +26,7 @@ class EditAppointment extends React.Component {
     comment:this.props.comment,
     service:this.props.service,
     email:this.props.email,
+    serviceDuration:this.props.serviceDuration,
     errors:[],
     isDatePickerVisible:false,
     datePickerMode:'',
@@ -102,6 +103,7 @@ updateAppointment = () => {
             date: this.state.date,
             time: this.state.time, 
             service: this.state.service,
+            serviceDuration:this.state.serviceDuration,
             comment: this.state.comment,
             email: this.state.email.toLowerCase()
         })
@@ -117,7 +119,7 @@ updateAppointment = () => {
                     ],
                     { cancelable: true }
                   ); 
-                  this.props.updateStateAppointment(this.state.name,this.state.phone,this.state.comment,this.state.service,this.state.time,this.state.date,this.state.email)
+                  this.props.updateStateAppointment(this.state.name,this.state.phone,this.state.comment,this.state.service,this.state.time,this.state.date,this.state.email,this.state.serviceDuration)
                   this.props.appoint_func() 
                   this.props.closeFunction();
                   this.props.appoint_modalOpenFunc();
@@ -165,7 +167,7 @@ isFormValid = () => {
           // swipeDirection="left"
           onSwipe={this.props.closeFunction}
           onBackdropPress={this.props.closeFunction}>
-          <ScrollView style={{backgroundColor: '#fff', paddingTop: 25}}>
+          <ScrollView style={{backgroundColor: '#fff', paddingTop: 25,paddingBottom:25}}>
             <View style={styles.nameHeader}>
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <View
@@ -457,6 +459,35 @@ isFormValid = () => {
                 marginLeft: 20,
                 marginRight: 20,
               }}>
+              {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Service </Text></View>     */}
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <View style={{flex: 1, flexDirection: 'column'}}>
+                    <TextInput
+                      placeholder={'Service Duration'} 
+                      onChangeText={(text) => {this.setState({serviceDuration: text});}}
+                      style={{borderColor:"#000",borderWidth:1,marginBottom:15,marginTop:15,padding:10,paddingLeft:15,borderRadius:5}}
+                      defaultValue={this.state.serviceDuration}
+                    />
+                  </View>
+                  {/* <View style={{flex:0.35,flexDirection: "column",alignText:"center"}}>
+                                                             
+                                                            <TouchableOpacity
+                                                            style={{backgroundColor:"#000",color:"white",padding:5,borderRadius:5,marginRight:10}}
+                                                            onPress={() => this.setState({ isDatePickerVisible: true })}>
+                                                                <Text style={{color:"white",margin:5,alignText:"center"}}>Select Time</Text>
+                                                            </TouchableOpacity>
+                                                        </View>     */}
+                </View>
+              </View>
+            </View>
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                marginLeft: 20,
+                marginRight: 20,
+              }}>
               {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Comment </Text></View>     */}
               <View style={{flex: 1, flexDirection: 'column'}}>
                 <View style={{flex: 1, flexDirection: 'row'}}>
@@ -508,6 +539,7 @@ isFormValid = () => {
                   padding: 10,
                   borderRadius: 5,
                   marginTop: 10,
+                  marginBottom:35
                 }}
                 onPress={() =>
                   this.isFormValid() ? this.updateAppointment() : null

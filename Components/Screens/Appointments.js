@@ -123,7 +123,8 @@ class Appointments extends React.Component {
       email:item.email,
       isVisible: true,
       cur_appointment_id: item.id,
-      paymentStatus:item.payment_status
+      paymentStatus:item.payment_status,
+      serviceDuration: item.serviceDuration
     });
   };
 
@@ -346,11 +347,12 @@ class Appointments extends React.Component {
   {
       this.setState({editModalVisible:false})
   }
-  updateStateAppointment = (name,phone,comment,service,time,date,email)=>
+  updateStateAppointment = (name,phone,comment,service,time,date,email,serviceDuration)=>
   {
-        this.setState({name:name,phone:phone,comment:comment,service:service,time:time,date:date,email:email})
+        this.setState({name:name,phone:phone,comment:comment,service:service,time:time,date:date,email:email,serviceDuration:serviceDuration})
   }
   render() {
+    console.log(this.props.appointments)
     return (
       <SafeAreaView style={styles.AndroidSafeArea}>
         {this.state.loading ? (
@@ -470,7 +472,7 @@ class Appointments extends React.Component {
                 <Text
                   style={{flex: 0.8, flexDirection: 'column', fontSize: 18}}>
                   {new Date(this.state.date+"T"+this.state.time).toDateString()}
-            {console.log(this.state.date)}
+             
                 </Text>
               </View>
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
@@ -547,6 +549,21 @@ class Appointments extends React.Component {
                 <Text
                   style={{flex: 0.8, flexDirection: 'column', fontSize: 18}}>
                   {this.capitalizeFirstLetter(this.state.service)}
+                </Text>
+              </View>
+              <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
+                <Text
+                  style={{
+                    flex: 0.4,
+                    flexDirection: 'column',
+                    color: 'black',
+                    fontSize: 18,
+                  }}>
+                  Duration(Hrs) :{' '}
+                </Text>
+                <Text
+                  style={{flex: 0.8, flexDirection: 'column', fontSize: 18}}>
+                  {this.state.serviceDuration}
                 </Text>
               </View>
               <View style={{flex: 1, flexDirection: 'row', margin: 10}}>
@@ -647,6 +664,7 @@ class Appointments extends React.Component {
                         comment={this.state.comment}
                         email={this.state.email} 
                         service={this.state.service}
+                        serviceDuration = {this.state.serviceDuration}
                         appoint_id={this.state.cur_appointment_id}
                         updateStateAppointment={this.updateStateAppointment}
                         appoint_func={this.props.functionAppointments}

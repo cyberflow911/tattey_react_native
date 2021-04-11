@@ -30,6 +30,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
     "react-native-material-bottom-navigation": "^1.0.5",
     "react-native-modal-datetime-picker": "^9.1.0",
+    "react-native-modal-dropdown": "git+https://github.com/siemiatj/react-native-modal-dropdown.git",
     "react-native-push-notification": "^7.0.0",
     "react-native-reanimated": "~1.13.0",
     "react-native-screens": "~2.15.0",

@@ -26,6 +26,7 @@ class Book extends React.Component {
         service:'',
         comment:"",
         email:"",
+        serviceDuration:'',
         isDatePickerVisible: false,
         isBooking: false,
         errors:[],
@@ -200,7 +201,8 @@ componentDidMount() {
                 temp_user: this.props.user_name,
                 service: this.state.service,
                 comment: this.state.comment,
-                email: this.state.email.toLowerCase()
+                email: this.state.email.toLowerCase(),
+                serviceDuration: this.state.serviceDuration
             })
         })
             .then((response) => response.json())
@@ -230,7 +232,7 @@ componentDidMount() {
                     // Notification(new Date().getTime(), "Tatt Booking", `Appointment  Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     // Notification(formatted_oneDay.getTime(), "Tatt Booking", `Appointment Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
                     // Notification(formatted_2hour.getTime(), "Tattey", `Appointment at Tattey Booked on ${new Date(this.state.selectedStartDate).toDateString()} at ${this.state.time}`)
-                    this.setState({ name:"",phone:"",time:"",service:"",comment:"",selectedStartDate:"",isBooking: false, modalVisible: false,counter:1,appointment:[] })
+                    this.setState({ name:"",phone:"",time:"",service:"",comment:"",selectedStartDate:"",isBooking: false, modalVisible: false,counter:1,appointment:[],serviceDuration:'' })
                     this.props.appoint_func() 
                 }
 
@@ -462,7 +464,6 @@ componentDidMount() {
                                             
                                         </View>
                                          <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
-                                            {/* <View style={{flex:0.2,flexDirection: "column"}}><Text style={{ fontSize:15,color:"black",marginTop:35}}>Service </Text></View>     */}
                                             <View style={{flex:1,flexDirection: "column"}}>
                                                     <View style={{flex:1,flexDirection: "row"}}>
                                                         <View style={{flex:1,flexDirection: "column"}}> 
@@ -471,20 +472,26 @@ componentDidMount() {
                                                                      
                                                                     onChangeText={(text)=>{this.setState({service: text})}}
                                                                     style={{borderColor:"#000",borderWidth:1,marginBottom:15,
-                marginTop:15,
-                padding:10,
-                paddingLeft:15,borderRadius:5}}
+                                                                                                                marginTop:15,
+                                                                                                                padding:10,
+                                                                                                                paddingLeft:15,borderRadius:5}}
                                                                 />
                                     
                                                         </View>
-                                                        {/* <View style={{flex:0.35,flexDirection: "column",alignText:"center"}}>
-                                                             
-                                                            <TouchableOpacity
-                                                            style={{backgroundColor:"#000",color:"white",padding:5,borderRadius:5,marginRight:10}}
-                                                            onPress={() => this.setState({ isDatePickerVisible: true })}>
-                                                                <Text style={{color:"white",margin:5,alignText:"center"}}>Select Time</Text>
-                                                            </TouchableOpacity>
-                                                        </View>     */}
+                                                        
+                                                    </View>    
+                                            </View>    
+                                            
+                                        </View>
+                                        <View style={{flex:1,flexDirection: "row",marginLeft:20,marginRight:20}}>  
+                                              <View style={{flex:1,flexDirection: "column"}}>
+                                                    <View style={{flex:1,flexDirection: "row"}}>
+                                                        <View style={{flex:1,flexDirection: "column"}}> 
+                                                             <TextInput
+                                                                placeholder={'Service  duration(Hrs)'} 
+                                                                onChangeText={(text)=>{this.setState({serviceDuration: text})}}
+                                                                style={{borderColor:"#000",borderWidth:1,marginBottom:15,marginTop:15,padding:10,paddingLeft:15,borderRadius:5}}/>
+                                                        </View> 
                                                     </View>    
                                             </View>    
                                             
@@ -530,7 +537,7 @@ componentDidMount() {
                                      
                                     <View style={{flex: 1,flexDirection:"row",alignItems: "center",justifyContent: "center",marginTop:5}}> 
                                             <TouchableOpacity
-                                                style={{backgroundColor:"#000",color:"white",padding:10,borderRadius:5,marginTop:10}}
+                                                style={{backgroundColor:"#000",color:"white",padding:10,borderRadius:5,marginTop:10,marginBottom:35}}
                                                 onPress={() => this.isFormValid()?this.bookAppointment():(null)}>
                                                     <Text style={{color:"white",margin:5}}>Book Appointment</Text>
                                             </TouchableOpacity>
