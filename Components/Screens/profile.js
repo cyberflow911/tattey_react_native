@@ -193,7 +193,7 @@ updateAllChilds = () => {
                         
                         <View style={{flex:1,flexDirection:"row",}}> 
                             <View style={{flex:0.9,flexDirection:"column",alignItems:"center" }}>
-                                <Text style={{color:"white",fontSize:25,marginTop:5}} onPress={this.open}>{this.props.detail.name.replace(/-/g,' ')}   <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} /></Text>   
+                                <Text style={{color:"white",fontSize:25,marginTop:5,marginBottom:5}} onPress={this.open}>{this.props.detail.name.replace(/-/g,' ')}   <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} /></Text>   
                             </View> 
                         </View>
                         <View style={{flex:1,flexDirection:"column",color:"white",marginTop:10}}>
