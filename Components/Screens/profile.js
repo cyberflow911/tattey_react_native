@@ -196,8 +196,8 @@ updateAllChilds = () => {
                                 <Text style={{color:"white",fontSize:25,marginTop:5}} onPress={this.open}>{this.props.detail.name.replace(/-/g,' ')}   <Icon name="edit" size={20} color="red"  onPress={() =>this.setState({modalVisible:true})} /></Text>   
                             </View> 
                         </View>
-                        <View style={{flex:1,flexDirection:"column",color:"white",marginTop:15}}>
-                            <Text style={{color:"white",fontSize:20,color:"red"}}>{this.props.detail.role}</Text>
+                        <View style={{flex:1,flexDirection:"column",color:"white",marginTop:10}}>
+                            <Text style={{color:"white",fontSize:18,color:"red"}}>{this.props.detail.role}</Text>
                         </View> 
                         <View style={{flex:1,flexDirection:"column",marginTop:10,alignItems:"center"}}>
                             <TouchableWithoutFeedback onPress={() =>{ 
