@@ -109,7 +109,7 @@ updateAllChilds = () => {
                 return  (<Gallery user={this.props.user} imgs={this.props.imgs} user_func={this.props.user_func} name={this.props.detail.name}/>);
             case 2: 
                 return (
-                <About user={this.props.user} user_func={this.props.user_func} bio={this.props.detail.about} updateBioInState={this.updateBioInState} slots={this.props.slots} slotUpdate={this.props.slotUpdate}/>
+                <About user={this.props.user} user_func={this.props.user_func} bio={this.props.detail.about} updateBioInState={this.updateBioInState} openBioModal={this.open} slots={this.props.slots} slotUpdate={this.props.slotUpdate}/>
                 //<View style={{flex:1,flexDirection:"row"}}>
       //             <View style={{flex:0.9,flexDirection:"column" }}>
       //                 <Text style={{color: 'white',fontWeight: 'bold',fontSize:15}}>{this.props.detail.about}</Text>

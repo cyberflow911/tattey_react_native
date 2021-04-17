@@ -142,9 +142,9 @@ class AddSlotModal extends React.Component {
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
                 
-                <View style={styles.sectionHeader}> 
+                <View style={styles.sectionHeader}>   
                     <View style={styles.sectionHeading}> 
-                        <Text style={styles.sectionHeadingText}>Add New Time Slot</Text>
+                        <Text style={styles.sectionHeadingText}>Add Hours</Text>
                     </View> 
                     <Icon name="x" size={20} color="red"  onPress={() =>this.props.closeModal()} style={styles.modalCloseIcon} />
                 </View>
@@ -165,7 +165,7 @@ class AddSlotModal extends React.Component {
                 </View>                        
                 <View style={styles.mainSection}>
                     <View style={styles.addField}>
-                        <Text style={styles.fieldLabel}>Week Day : </Text>
+                        <Text style={styles.fieldLabel}>Week Day : {'      '}</Text>
                         <View style={styles.selectContainer}>
                             <ModalDropdown 
                                 options={this.weekDays} 
@@ -185,7 +185,7 @@ class AddSlotModal extends React.Component {
                         
                     </View>
                     <View style={styles.addField}>
-                        <Text style={styles.fieldLabel}>Start Time: </Text>
+                        <Text style={styles.fieldLabel}>Opening Hour: </Text>
                         <View style={styles.selectContainer}> 
                                 <TouchableOpacity onPress={()=>{this.setState({isDatePickerVisible: true,datePickerMode:"start"})}}>
                                             <Text style={{color: 'white',fontSize:18,fontWeight: "bold"}}>{this.state.startTime!=''?(this.state.startTime):('Select')}</Text>
@@ -194,7 +194,7 @@ class AddSlotModal extends React.Component {
                         </View> 
                     </View>
                     <View style={styles.addField}>
-                        <Text style={styles.fieldLabel}>End Time: {' '} </Text>
+                        <Text style={styles.fieldLabel}>Closing Hour: {' '} </Text>
                         <View style={styles.selectContainer}> 
                             <TouchableOpacity onPress={()=>{this.setState({isDatePickerVisible: true,datePickerMode:"end"})}}>
                                         <Text style={{color: 'white',fontSize:18,fontWeight: "bold"}}>{this.state.endTime!=''?(this.state.endTime):('Select')}</Text>
@@ -210,7 +210,7 @@ class AddSlotModal extends React.Component {
                             size="large"
                             color="white"  />
                                 ):(
-                                    <Text style={{color: 'white',fontSize:18,fontWeight: "bold"}}>Add Time Slot</Text>
+                                    <Text style={{color: 'white',fontSize:18,fontWeight: "bold"}}>Add </Text>
                             )}
                            
                         </View>    
